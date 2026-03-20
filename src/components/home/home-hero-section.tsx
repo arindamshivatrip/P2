@@ -17,10 +17,13 @@ export function HomeHeroSection() {
           <div className="md:col-span-8 lg:col-span-8">
             <Reveal amount={0.2}>
               <Eyebrow>{heroContent.eyebrow}</Eyebrow>
-              <DisplayHeading className="mt-4 max-w-[13.5ch] text-5xl leading-[0.95] md:text-7xl lg:text-[5.2rem]">
-                {heroContent.headlineLineOne}
+              <DisplayHeading className="mt-4 max-w-[14ch] text-5xl leading-[0.95] md:text-7xl lg:text-[5.2rem]">
+                I&apos;m Arindam.
                 <br />
-                <span className="font-serif italic text-accent">systems</span> for people.
+                I <span className="font-serif italic text-accent">design</span> and{" "}
+                <span className="font-serif italic text-accent">build</span>
+                <br />
+                systems for people.
               </DisplayHeading>
               <BodyText tone="secondary" className="mt-8 max-w-[58ch] text-[1.02rem]">
                 {heroContent.supporting}

@@ -20,9 +20,9 @@ export const homeHeader = {
 
 export const heroContent = {
   eyebrow: "Builder · Researcher · Technologist",
-  headlineLineOne: "Ideating, designing, and building",
+  headlineLineOne: "I'm Arindam, and I design and build",
   supporting:
-    "A builder and researcher working across AI systems, interaction design, and spatial computing. I design and ship products where clarity, performance, and human judgment matter.",
+    "My work sits at the intersection of AI systems, interaction design, and spatial computing - building products where clarity, performance, and human judgment matter.",
   primaryCta: "Start a conversation",
   secondaryCta: "View selected work",
   panel: [
