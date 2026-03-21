@@ -2,6 +2,7 @@ import { BodyText } from "@/components/typography/body-text";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 import type { Project } from "@/types/project";
+import { getExperimentMetaLine } from "@/components/experiments/experiment-meta";
 
 type ExperimentHeroTileProps = {
   project: Project;
@@ -13,13 +14,11 @@ export function ExperimentHeroTile({ project, hasCoverAsset }: ExperimentHeroTil
   const fallbackCover = getFallbackCoverImage(project, "flagship");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
   const outputNote = project.highlights?.[1] ?? project.highlights?.[0] ?? project.summary;
+  const metaLine = getExperimentMetaLine(project);
 
   return (
     <article className="group h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_rgba(38,31,24,0.13)] md:p-6">
-      <div className="flex items-center justify-between font-body text-[0.64rem] uppercase tracking-[0.13em] text-text-muted">
-        <span>{project.status}</span>
-        <span>{project.meta.year}</span>
-      </div>
+      <p className="font-body text-[0.64rem] uppercase tracking-[0.13em] text-text-muted">{metaLine}</p>
 
       <div
         className="relative mt-4 min-h-[220px] overflow-hidden rounded-[0.85rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[320px]"

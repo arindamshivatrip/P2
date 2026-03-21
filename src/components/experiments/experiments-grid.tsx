@@ -61,11 +61,7 @@ export async function ExperimentsGrid() {
 
             {artifact ? (
               <Reveal className="lg:col-span-5" delay={0.06}>
-                <ExperimentArtifactTile
-                  project={artifact}
-                  hasCoverAsset={hasCover(artifact)}
-                  artifactLabel="Field Artifact"
-                />
+                <ExperimentArtifactTile project={artifact} hasCoverAsset={hasCover(artifact)} />
               </Reveal>
             ) : null}
 
@@ -77,11 +73,7 @@ export async function ExperimentsGrid() {
 
             {hybrid ? (
               <Reveal className="lg:col-span-7" delay={0.14}>
-                <ExperimentArtifactTile
-                  project={hybrid}
-                  hasCoverAsset={hasCover(hybrid)}
-                  artifactLabel="Iteration Artifact"
-                />
+                <ExperimentArtifactTile project={hybrid} hasCoverAsset={hasCover(hybrid)} />
               </Reveal>
             ) : null}
           </div>

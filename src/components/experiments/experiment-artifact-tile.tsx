@@ -2,30 +2,24 @@ import { BodyText } from "@/components/typography/body-text";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 import type { Project } from "@/types/project";
+import { getExperimentMetaLine } from "@/components/experiments/experiment-meta";
 
 type ExperimentArtifactTileProps = {
   project: Project;
   hasCoverAsset: boolean;
-  artifactLabel?: string;
 };
 
-export function ExperimentArtifactTile({
-  project,
-  hasCoverAsset,
-  artifactLabel
-}: ExperimentArtifactTileProps) {
+export function ExperimentArtifactTile({ project, hasCoverAsset }: ExperimentArtifactTileProps) {
   const cover = getProjectCoverSrc(project);
   const fallbackCover = getFallbackCoverImage(project, "standard");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
   const tested = project.highlights?.[0] ?? project.oneLiner;
-  const caption = project.meta.org ?? project.categories[0] ?? "Prototype artifact";
+  const caption = project.meta.org ?? "Independent";
+  const metaLine = getExperimentMetaLine(project);
 
   return (
     <article className="group h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(38,31,24,0.12)] md:p-6">
-      <div className="flex items-center justify-between font-body text-[0.64rem] uppercase tracking-[0.13em] text-text-muted">
-        <span>{artifactLabel ?? project.contributionTag ?? "Artifact"}</span>
-        <span>{project.meta.year}</span>
-      </div>
+      <p className="font-body text-[0.64rem] uppercase tracking-[0.13em] text-text-muted">{metaLine}</p>
 
       <h3 className="mt-4 font-display text-4xl leading-tight tracking-tight">{project.title}</h3>
 
