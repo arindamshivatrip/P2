@@ -1,11 +1,11 @@
-import { RoutePlaceholder } from "@/components/layout/route-placeholder";
+import { ExperimentsGrid } from "@/components/experiments/experiments-grid";
+import { ExperimentsHeader } from "@/components/experiments/experiments-header";
 
 export default function ExperimentsPage() {
   return (
-    <RoutePlaceholder
-      eyebrow="Experiments"
-      title="Exploration module scaffold."
-      description="Ready for modular experiment cards with richer hover and motion behavior."
-    />
+    <>
+      <ExperimentsHeader />
+      <ExperimentsGrid />
+    </>
   );
 }
