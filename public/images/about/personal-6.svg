@@ -1,0 +1,8 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="960" viewBox="0 0 1200 960" fill="none">
+  <rect width="1200" height="960" fill="#E2DDCF"/>
+  <rect x="84" y="84" width="1032" height="792" rx="32" fill="#CBC3B2"/>
+  <circle cx="360" cy="420" r="170" fill="#B3A997"/>
+  <circle cx="760" cy="520" r="210" fill="#A79D8B"/>
+  <circle cx="920" cy="300" r="90" fill="#CFC8B7"/>
+  <text x="600" y="820" text-anchor="middle" fill="#776E5F" font-family="Arial, sans-serif" font-size="30" letter-spacing="2">PERSONAL PHOTO SLOT 06</text>
+</svg>

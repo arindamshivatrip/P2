@@ -1,11 +1,13 @@
-import { RoutePlaceholder } from "@/components/layout/route-placeholder";
+import { AboutHero } from "@/components/about/about-hero";
+import { AboutPersonalStrip } from "@/components/about/about-personal-strip";
+import { AboutSnapshot } from "@/components/about/about-snapshot";
 
 export default function AboutPage() {
   return (
-    <RoutePlaceholder
-      eyebrow="About"
-      title="Narrative scaffold."
-      description="Prepared for a concise throughline across engineering, HCI, AI systems, XR, and accessibility."
-    />
+    <>
+      <AboutHero />
+      <AboutSnapshot />
+      <AboutPersonalStrip />
+    </>
   );
 }

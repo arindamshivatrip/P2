@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="960" viewBox="0 0 1200 960" fill="none">
+  <rect width="1200" height="960" fill="#E0DBCC"/>
+  <rect x="96" y="96" width="1008" height="768" rx="30" fill="#C9C1B0"/>
+  <rect x="180" y="190" width="840" height="580" rx="24" fill="#B8AF9D"/>
+  <path d="M240 300H960M240 420H960M240 540H960M240 660H960" stroke="#8C826F" stroke-width="6"/>
+  <text x="600" y="820" text-anchor="middle" fill="#766D5E" font-family="Arial, sans-serif" font-size="30" letter-spacing="2">PERSONAL PHOTO SLOT 05</text>
+</svg>

@@ -1,11 +1,11 @@
-import { RoutePlaceholder } from "@/components/layout/route-placeholder";
+import { ContactHero } from "@/components/contact/contact-hero";
+import { ContactMethods } from "@/components/contact/contact-methods";
 
 export default function ContactPage() {
   return (
-    <RoutePlaceholder
-      eyebrow="Contact"
-      title="Contact scaffold."
-      description="Reserved for minimal-friction contact pathways and action-oriented CTA patterns."
-    />
+    <>
+      <ContactHero />
+      <ContactMethods />
+    </>
   );
 }
