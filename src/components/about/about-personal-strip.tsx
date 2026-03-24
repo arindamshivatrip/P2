@@ -37,11 +37,13 @@ export function AboutPersonalStrip() {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 17rem"
+                      sizes="(max-width: 768px) 72vw, (max-width: 1280px) 28vw, 17.25rem"
+                      quality={93}
+                      unoptimized
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.01]"
                     />
                   </div>
-                  <p className="mt-2 font-body text-[0.62rem] uppercase tracking-[0.11em] text-text-muted">
+                  <p className="mt-2 font-body text-[0.72rem] tracking-[0.04em] text-text-muted">
                     {image.label}
                   </p>
                 </article>

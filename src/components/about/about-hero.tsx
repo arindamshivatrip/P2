@@ -16,8 +16,10 @@ export function AboutHero() {
               src={aboutContent.portrait.src}
               alt={aboutContent.portrait.alt}
               fill
-              sizes="(max-width: 1024px) 100vw, 24rem"
-              className="object-cover"
+              sizes="(max-width: 768px) 92vw, (max-width: 1280px) 38vw, 24rem"
+              quality={95}
+              unoptimized
+              className="scale-[1.46] object-cover object-[60%_34%]"
               priority
             />
           </div>
