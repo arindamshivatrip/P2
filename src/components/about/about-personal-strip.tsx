@@ -5,7 +5,7 @@ import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Eyebrow } from "@/components/typography/eyebrow";
 import { HorizontalRail } from "@/components/ui/horizontal-rail";
-import { aboutContent } from "@/data/about";
+import { aboutContent, aboutGalleryItems } from "@/data/about";
 
 export function AboutPersonalStrip() {
   return (
@@ -27,9 +27,9 @@ export function AboutPersonalStrip() {
               trackClassName="gap-3 px-3 pb-2"
               loop
             >
-              {aboutContent.personalImages.map((image) => (
+              {aboutGalleryItems.map((image) => (
                 <article
-                  key={image.src}
+                  key={image.assetName}
                   className="group w-[16.5rem] shrink-0 snap-start rounded-[1rem] bg-surface p-2.5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(38,31,24,0.11)] md:w-[17.25rem]"
                 >
                   <div className="relative aspect-[5/4] overflow-hidden rounded-[0.75rem] bg-background/70">
@@ -43,9 +43,11 @@ export function AboutPersonalStrip() {
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.01]"
                     />
                   </div>
-                  <p className="mt-2 font-body text-[0.72rem] tracking-[0.04em] text-text-muted">
-                    {image.label}
-                  </p>
+                  {image.caption ? (
+                    <p className="mt-2 font-body text-[0.72rem] tracking-[0.04em] text-text-muted">
+                      {image.caption}
+                    </p>
+                  ) : null}
                 </article>
               ))}
             </HorizontalRail>

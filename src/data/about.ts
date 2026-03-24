@@ -1,4 +1,50 @@
-﻿export const aboutContent = {
+﻿export type AboutGalleryItem = {
+  assetName: string;
+  src: string;
+  caption: string;
+  alt: string;
+};
+
+export const aboutGalleryItems: AboutGalleryItem[] = [
+  {
+    assetName: "camera-process",
+    src: "/images/about/camera-process.jpg",
+    caption: "Looking Closer",
+    alt: "using camera on a cliffside"
+  },
+  {
+    assetName: "snow-hike",
+    src: "/images/about/snow-hike.jpg",
+    caption: "Higher Ground",
+    alt: "hiking in snow-covered mountains"
+  },
+  {
+    assetName: "loreal-professional",
+    src: "/images/about/loreal-professional.jpg",
+    caption: "At Work",
+    alt: "professional portrait at a work event"
+  },
+  {
+    assetName: "astrophotography",
+    src: "/images/about/astrophotography.jpg",
+    caption: "Night Sky",
+    alt: "night sky over mountain peaks"
+  },
+  {
+    assetName: "rainy-city-lights",
+    src: "/images/about/rainy-city-lights.jpg",
+    caption: "After Rain",
+    alt: "rainy city street with red light trails"
+  },
+  {
+    assetName: "rock-plane-silhouette",
+    src: "/images/about/rock-plane-silhouette.jpg",
+    caption: "In Transit",
+    alt: "airplane crossing dusk above rock formations"
+  }
+];
+
+export const aboutContent = {
   openingIdea:
     "I design and build human-centered systems that balance technical rigor with real human needs.",
   introParagraphs: [
@@ -35,41 +81,9 @@
     }
   ],
   personal:
-    "Outside of tech, I spend a lot of time doing photography. It is one of the ways I practice slowing down, noticing details, and thinking about composition and storytelling - habits that quietly shape how I approach interfaces, interaction, and research.",
+    "Outside of work, I spend a lot of time hiking, photographing, and reconnecting with nature. A lot of how I think about observation, atmosphere, and design comes from moving between cities, landscapes, and quieter moments outdoors.",
   portrait: {
     src: "/images/about/brooklyn-main-portrait.jpg",
     alt: "standing portrait by brooklyn waterfront"
-  },
-  personalImages: [
-    {
-      src: "/images/about/camera-process.jpg",
-      alt: "using camera on a cliffside",
-      label: "Camera Process"
-    },
-    {
-      src: "/images/about/snow-hike.jpg",
-      alt: "hiking in snow-covered mountains",
-      label: "Snow Hike"
-    },
-    {
-      src: "/images/about/loreal-professional.jpg",
-      alt: "professional portrait at a work event",
-      label: "L’Oréal"
-    },
-    {
-      src: "/images/about/astrophotography.jpg",
-      alt: "night sky over mountain peaks",
-      label: "Astrophotography"
-    },
-    {
-      src: "/images/about/rainy-city-lights.jpg",
-      alt: "rainy city street with red light trails",
-      label: "Rainy City Lights"
-    },
-    {
-      src: "/images/about/rock-plane-silhouette.jpg",
-      alt: "airplane crossing dusk above rock formations",
-      label: "Rock Plane Silhouette"
-    }
-  ]
+  }
 } as const;
