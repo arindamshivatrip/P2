@@ -1,10 +1,9 @@
-﻿import Image from "next/image";
-import { Container } from "@/components/layout/container";
+﻿import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Eyebrow } from "@/components/typography/eyebrow";
-import { HorizontalRail } from "@/components/ui/horizontal-rail";
+import { AboutParallaxRail } from "@/components/about/about-parallax-rail";
 import { aboutContent, aboutGalleryItems } from "@/data/about";
 
 export function AboutPersonalStrip() {
@@ -21,36 +20,11 @@ export function AboutPersonalStrip() {
           </BodyText>
 
           <div className="mt-6 md:mt-7">
-            <HorizontalRail
+            <AboutParallaxRail
               id="about-personal-rail"
+              items={aboutGalleryItems}
               railLabel="personal images"
-              trackClassName="gap-3 px-3 pb-2"
-              loop
-            >
-              {aboutGalleryItems.map((image) => (
-                <article
-                  key={image.assetName}
-                  className="group w-[16.5rem] shrink-0 snap-start rounded-[1rem] bg-surface p-2.5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(38,31,24,0.11)] md:w-[17.25rem]"
-                >
-                  <div className="relative aspect-[5/4] overflow-hidden rounded-[0.75rem] bg-background/70">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="(max-width: 768px) 72vw, (max-width: 1280px) 28vw, 17.25rem"
-                      quality={93}
-                      unoptimized
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.01]"
-                    />
-                  </div>
-                  {image.caption ? (
-                    <p className="mt-2 font-body text-[0.72rem] tracking-[0.04em] text-text-muted">
-                      {image.caption}
-                    </p>
-                  ) : null}
-                </article>
-              ))}
-            </HorizontalRail>
+            />
           </div>
         </div>
       </Container>
