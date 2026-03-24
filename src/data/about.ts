@@ -37,39 +37,39 @@
   personal:
     "Outside of tech, I spend a lot of time doing photography. It is one of the ways I practice slowing down, noticing details, and thinking about composition and storytelling - habits that quietly shape how I approach interfaces, interaction, and research.",
   portrait: {
-    src: "/images/about/portrait-placeholder.svg",
-    alt: "Portrait placeholder to replace with a personal photo"
+    src: "/images/about/brooklyn-main-portrait.jpg",
+    alt: "standing portrait by brooklyn waterfront"
   },
   personalImages: [
     {
-      src: "/images/about/personal-1.svg",
-      alt: "Placeholder frame for a personal street photography image",
-      label: "Street light study"
+      src: "/images/about/camera-process.jpg",
+      alt: "using camera on a cliffside",
+      label: "Camera Process"
     },
     {
-      src: "/images/about/personal-2.svg",
-      alt: "Placeholder frame for a personal composition study",
-      label: "Frame and rhythm"
+      src: "/images/about/snow-hike.jpg",
+      alt: "hiking in snow-covered mountains",
+      label: "Snow Hike"
     },
     {
-      src: "/images/about/personal-3.svg",
-      alt: "Placeholder frame for a personal texture and light study",
-      label: "Texture notes"
+      src: "/images/about/loreal-professional.jpg",
+      alt: "professional portrait at a work event",
+      label: "L’Oréal"
     },
     {
-      src: "/images/about/personal-4.svg",
-      alt: "Placeholder frame for a personal travel observation photo",
-      label: "Transit moments"
+      src: "/images/about/astrophotography.jpg",
+      alt: "night sky over mountain peaks",
+      label: "Astrophotography"
     },
     {
-      src: "/images/about/personal-5.svg",
-      alt: "Placeholder frame for a personal architecture and line photo",
-      label: "City geometry"
+      src: "/images/about/rainy-city-lights.jpg",
+      alt: "rainy city street with red light trails",
+      label: "Rainy City Lights"
     },
     {
-      src: "/images/about/personal-6.svg",
-      alt: "Placeholder frame for a personal ambient mood photo",
-      label: "Quiet scenes"
+      src: "/images/about/rock-plane-silhouette.jpg",
+      alt: "airplane crossing dusk above rock formations",
+      label: "Rock Plane Silhouette"
     }
   ]
 } as const;
