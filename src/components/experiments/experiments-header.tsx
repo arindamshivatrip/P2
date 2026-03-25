@@ -5,14 +5,13 @@ import { DisplayHeading } from "@/components/typography/display-heading";
 
 export function ExperimentsHeader() {
   return (
-    <Section spacing="compact" className="pb-6 md:pb-8">
+    <Section spacing="compact" className="pt-5 pb-2 md:pt-6 md:pb-3">
       <Container>
         <DisplayHeading as="h1" className="text-5xl md:text-7xl">
           Experiments
         </DisplayHeading>
-        <BodyText tone="secondary" className="mt-4 max-w-3xl">
-          Prototypes, side quests, and technical explorations in AI, interaction, and spatial
-          computing.
+        <BodyText tone="secondary" className="mt-2 max-w-[62ch] text-[1rem] leading-[1.55]">
+          Prototypes and technical studies in AI, interaction, and spatial systems.
         </BodyText>
       </Container>
     </Section>

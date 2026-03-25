@@ -20,8 +20,8 @@ export const contactContent = {
     label: "View CV",
     href: "/cv"
   },
-  methodsHeading: "Ways to reach me",
-  personalLine: "Reach out directly by email, or connect through LinkedIn and GitHub.",
+  methodsHeading: "Reach me directly",
+  personalLine: "Email is best for conversation, with LinkedIn and GitHub for profile and work.",
   methods: [
     {
       id: "email",

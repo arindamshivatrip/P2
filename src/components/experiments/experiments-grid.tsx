@@ -51,7 +51,7 @@ export async function ExperimentsGrid() {
   return (
     <Section spacing="compact" className="pt-0 pb-7 md:pb-9">
       <Container>
-        <div className="border-t border-border/55 pt-5 md:pt-6">
+        <div className="border-t border-border/55 pt-2 md:pt-2.5">
           <div className="grid gap-3.5 md:gap-4 lg:grid-cols-12">
             {hero ? (
               <Reveal className="lg:col-span-7">

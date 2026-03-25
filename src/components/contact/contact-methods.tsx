@@ -63,16 +63,16 @@ export function ContactMethods() {
   return (
     <Section spacing="compact" className="pt-0 pb-10 md:pb-12">
       <Container>
-        <div className="pt-2 md:pt-3">
+        <div className="pt-1 md:pt-2">
           <Eyebrow>Methods</Eyebrow>
           <DisplayHeading as="h2" className="mt-2 text-4xl md:text-5xl">
             {contactContent.methodsHeading}
           </DisplayHeading>
-          <BodyText tone="secondary" className="mt-4 max-w-3xl">
+          <BodyText tone="secondary" className="mt-3 max-w-[62ch]">
             {contactContent.personalLine}
           </BodyText>
 
-          <div className="mt-7 max-w-5xl">
+          <div className="mt-6 max-w-5xl">
             <div className="grid gap-5 md:grid-cols-3 md:gap-0">
             {contactContent.methods.map((method) => (
               <article
@@ -83,7 +83,7 @@ export function ContactMethods() {
                   <ContactIcon id={method.id} />
                 </div>
 
-                <div className="mt-3.5 min-h-[3.35rem] min-w-0">
+                <div className="mt-3 min-h-[3.35rem] min-w-0">
                   {method.id === "email" ? (
                     <div className="flex min-w-0 items-center gap-1.5">
                       <p className="truncate font-body text-[1.04rem] text-foreground/95">{method.primaryLine}</p>
@@ -104,15 +104,17 @@ export function ContactMethods() {
                     <p className="truncate font-body text-[1.04rem] text-foreground/95">{method.primaryLine}</p>
                   ) : null}
                   {method.id === "email" && method.secondaryLine ? (
-                    <p className="mt-1 truncate font-body text-xs text-text-muted">{method.secondaryLine}</p>
+                    <p className="mt-1 truncate font-body text-[0.72rem] tracking-[0.025em] text-text-muted/90">
+                      {method.secondaryLine}
+                    </p>
                   ) : (
-                    <p className="mt-1 truncate font-body text-xs text-transparent" aria-hidden="true">
+                    <p className="mt-1 truncate font-body text-[0.72rem] text-transparent" aria-hidden="true">
                       spacer
                     </p>
                   )}
                 </div>
 
-                <div className="mt-4.5 flex flex-wrap items-center gap-2.5">
+                <div className="mt-4 flex flex-wrap items-center gap-2.5">
                   {method.id === "email" ? (
                     <Button asChild className="px-4 py-2.5 text-[0.86rem]">
                       <Link href={method.href}>{method.ctaLabel}</Link>

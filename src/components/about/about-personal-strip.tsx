@@ -10,7 +10,7 @@ export function AboutPersonalStrip() {
   return (
     <Section spacing="compact" className="pt-0 pb-9 md:pb-10">
       <Container>
-        <div className="border-t border-border/60 pt-5 md:pt-6">
+        <div className="border-t border-border/60 pt-4 md:pt-5">
           <Eyebrow>Personal</Eyebrow>
           <DisplayHeading as="h2" className="text-4xl md:text-5xl">
             Life outside the <span className="font-serif italic">screen</span>
