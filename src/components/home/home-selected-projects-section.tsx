@@ -23,7 +23,7 @@ export function HomeSelectedProjectsSection() {
   }
 
   return (
-    <Section className="bg-background">
+    <Section className="bg-background pt-3 md:pt-5 pb-8 md:pb-10">
       <Container>
         <div className="flex items-end justify-between gap-4">
           <Reveal>

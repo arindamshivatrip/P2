@@ -9,7 +9,7 @@ import { closingCtaContent } from "@/data/home";
 
 export function HomeCtaSection() {
   return (
-    <Section>
+    <Section className="pt-6 md:pt-8">
       <Container>
         <Reveal>
           <div className="max-w-4xl text-left">
