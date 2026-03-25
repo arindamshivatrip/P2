@@ -1,5 +1,4 @@
 import { BodyText } from "@/components/typography/body-text";
-import { Eyebrow } from "@/components/typography/eyebrow";
 import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
@@ -42,8 +41,7 @@ export function ProjectCard({
           visualClassName
         )}
       />
-      <Eyebrow className="mt-4">Selected project</Eyebrow>
-      <h3 className="mt-2 font-display text-2xl tracking-tight">{title}</h3>
+      <h3 className="mt-4 font-display text-2xl tracking-tight">{title}</h3>
       <BodyText tone="secondary" className="mt-3">
         {summary}
       </BodyText>

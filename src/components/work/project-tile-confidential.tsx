@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
 import type { Project } from "@/types/project";
 
@@ -7,7 +7,7 @@ type ProjectTileConfidentialProps = {
 };
 
 export function ProjectTileConfidential({ project }: ProjectTileConfidentialProps) {
-  const statusLabel = "Selected Details";
+  const statusLabel = project.status;
 
   return (
     <Link

@@ -1,30 +1,17 @@
-export type HomeProject = {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  visualTone: "featured" | "supportingA" | "supportingB";
-  featured?: boolean;
-};
-
-export type LensItem = {
+﻿export type LensItem = {
   id: string;
   title: string;
   body: string;
 };
 
 export const homeHeader = {
-  wordmark: "Arindam Shiva Tripathi",
-  cta: "Get in touch"
+  wordmark: "Arindam Shiva Tripathi"
 };
 
 export const heroContent = {
-  eyebrow: "Builder · Researcher · Technologist",
-  headlineLineOne: "I'm Arindam, and I design and build",
   supporting:
-    "My work sits at the intersection of AI systems, interaction design, and spatial computing - building products where clarity, performance, and human judgment matter.",
+    "I work across AI systems, interaction design, and spatial computing — building tools and experiences that stay clear under complexity and keep human judgment in the loop.",
   primaryCta: "Start a conversation",
-  secondaryCta: "View selected work",
   panel: [
     "Builder, researcher, technologist",
     "HCIM @ UMD",
@@ -33,37 +20,8 @@ export const heroContent = {
 };
 
 export const projectsContent = {
-  label: "Section 01",
   title: "Selected Work"
 };
-
-export const homeProjects: HomeProject[] = [
-  {
-    id: "proj-1",
-    title: "Applied ML Planning Studio",
-    description:
-      "An internal planning platform combining machine learning, forecasting, and interaction design to support decision-making across APAC markets.",
-    tags: ["AI Systems", "Product", "L'Oréal"],
-    visualTone: "featured",
-    featured: true
-  },
-  {
-    id: "proj-2",
-    title: "ShooT_IT",
-    description:
-      "An augmented reality laser-tag experience combining real-time feedback, connected play, and physical interaction design.",
-    tags: ["AR", "Systems", "Prototyping"],
-    visualTone: "supportingA"
-  },
-  {
-    id: "proj-3",
-    title: "Phone Case Study",
-    description:
-      "A human-centered product case study focused on how everyday physical objects can be redesigned through research, usability thinking, and interaction insight.",
-    tags: ["Research", "Product", "Interaction"],
-    visualTone: "supportingB"
-  }
-];
 
 export const lensesContent = {
   label: "Section 02",
@@ -102,13 +60,11 @@ export const lensItems: LensItem[] = [
 ];
 
 export const closingCtaContent = {
-  label: "Section 03",
-  heading: "Still curious?",
+  heading: "Still Curious?",
   supporting:
-    "There's more here — in the work, the details, and the systems behind them.",
+    "There’s more here in the work, the details, and the systems behind them.",
   primaryCta: "Explore the work",
-  secondaryCta: "Say hello",
-  contactLine: "arindamtrip@gmail.com"
+  secondaryCta: "Say hello"
 };
 
 export const footerContent = {

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
 import type { Project } from "@/types/project";
 
@@ -10,8 +10,7 @@ export function ProjectTileResearch({ project }: ProjectTileResearchProps) {
   const participantsMetric = project.metrics?.find((metric) =>
     metric.label.toLowerCase().includes("participant")
   );
-  const statusLabel =
-    project.visibility === "confidential-summary" ? "Selected Details" : project.status;
+  const statusLabel = project.status;
   const outcomeMetric = project.metrics?.find((metric) =>
     metric.label.toLowerCase().includes("result") ||
     metric.label.toLowerCase().includes("outcome")

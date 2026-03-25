@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { Project } from "@/types/project";
 import { ProjectTileRail } from "@/components/work/project-tile-rail";
@@ -21,7 +21,7 @@ export function WorkArchiveRail({ items }: WorkArchiveRailProps) {
   return (
     <div className="mt-10 border-t border-border/60 pt-8">
       <div className="mb-5 flex items-end justify-between gap-4">
-        <h2 className="font-display text-3xl tracking-tight md:text-4xl">Selected Archive</h2>
+        <h2 className="font-display text-3xl tracking-tight md:text-4xl">Project Archive</h2>
       </div>
 
       <HorizontalRail id="selected-archive-rail" railLabel="archive">

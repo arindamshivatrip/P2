@@ -3,7 +3,6 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
-import { Eyebrow } from "@/components/typography/eyebrow";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { heroContent } from "@/data/home";
@@ -16,7 +15,6 @@ export function HomeHeroSection() {
           <div className="absolute -left-4 top-20 -z-10 hidden h-56 w-56 rounded-full bg-accent/6 blur-3xl md:block" />
           <div className="md:col-span-8 lg:col-span-8">
             <Reveal amount={0.2}>
-              <Eyebrow>{heroContent.eyebrow}</Eyebrow>
               <DisplayHeading className="mt-4 max-w-[14ch] text-5xl leading-[0.95] md:text-7xl lg:text-[5.2rem]">
                 I&apos;m Arindam.
                 <br />
