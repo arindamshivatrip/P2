@@ -8,7 +8,7 @@ import { lensItems, lensesContent } from "@/data/home";
 
 export function HomeLensesSection() {
   return (
-    <Section>
+    <Section className="pt-5 md:pt-6 pb-8 md:pb-10">
       <Container>
         <div className="rounded-[1.25rem] bg-surface p-6 shadow-card md:p-10">
           <Reveal>

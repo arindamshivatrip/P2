@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
 import { getProjectCoverSrc } from "@/data/projects";
 import type { Project } from "@/types/project";
@@ -13,8 +13,7 @@ export function ProjectTileFeatured({ project, hasCoverAsset = false }: ProjectT
   const cover = getProjectCoverSrc(project);
   const fallbackCover = getFallbackCoverImage(project, "flagship");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
-  const statusLabel =
-    project.visibility === "confidential-summary" ? "Selected Details" : project.status;
+  const statusLabel = project.status;
 
   return (
     <Link

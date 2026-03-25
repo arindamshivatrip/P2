@@ -11,10 +11,10 @@ export function ContactHero() {
   const [beforeThoughtful, afterThoughtful] = contactContent.heading.split("thoughtful");
 
   return (
-    <Section spacing="compact" className="pb-5 md:pb-6">
+    <Section spacing="compact" className="pb-2 md:pb-3">
       <Container>
         <Eyebrow>{contactContent.eyebrow}</Eyebrow>
-        <DisplayHeading as="h1" className="mt-3 max-w-[16ch] text-5xl leading-[0.98] md:text-7xl">
+        <DisplayHeading as="h1" className="mt-2.5 max-w-[16ch] text-5xl leading-[0.98] md:text-7xl">
           {afterThoughtful !== undefined ? (
             <>
               {beforeThoughtful}
@@ -25,11 +25,11 @@ export function ContactHero() {
             contactContent.heading
           )}
         </DisplayHeading>
-        <BodyText tone="secondary" className="mt-5 max-w-3xl text-[1.02rem]">
+        <BodyText tone="secondary" className="mt-4.5 max-w-3xl text-[1.02rem]">
           {contactContent.supporting}
         </BodyText>
 
-        <div className="mt-8 flex flex-wrap items-center gap-2.5">
+        <div className="mt-7 flex flex-wrap items-center gap-2.5">
           <Button asChild variant="ghost" className="px-3 py-1.5 text-[0.68rem] md:text-xs">
             <Link href={contactContent.secondaryCta.href}>{contactContent.secondaryCta.label}</Link>
           </Button>

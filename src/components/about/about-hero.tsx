@@ -8,7 +8,7 @@ import { aboutContent } from "@/data/about";
 
 export function AboutHero() {
   return (
-    <Section spacing="compact" className="pb-6 md:pb-8">
+    <Section spacing="compact" className="pb-4 md:pb-5">
       <Container>
         <div className="grid gap-6 md:gap-8 lg:grid-cols-[minmax(18rem,24rem)_minmax(0,1fr)] lg:gap-10 lg:items-start">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[0.95rem] bg-surface/65">

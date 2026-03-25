@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
@@ -13,8 +13,7 @@ export function ProjectTileRail({ project, hasCoverAsset }: ProjectTileRailProps
   const cover = getProjectCoverSrc(project);
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
   const fallbackCover = getFallbackCoverImage(project, "standard");
-  const statusLabel =
-    project.visibility === "confidential-summary" ? "Selected Details" : project.status;
+  const statusLabel = project.status;
 
   return (
     <Link

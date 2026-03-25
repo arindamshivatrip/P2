@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
 import { getProjectCoverSrc } from "@/data/projects";
 import type { Project } from "@/types/project";
@@ -13,8 +13,7 @@ export function ProjectTileImmersive({ project, hasCoverAsset = false }: Project
   const cover = getProjectCoverSrc(project);
   const fallbackCover = getFallbackCoverImage(project, "immersive");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
-  const statusLabel =
-    project.visibility === "confidential-summary" ? "Selected Details" : project.status;
+  const statusLabel = project.status;
 
   return (
     <Link
@@ -35,7 +34,7 @@ export function ProjectTileImmersive({ project, hasCoverAsset = false }: Project
 
         <div className="relative z-10">
           <span className="font-body text-[0.66rem] uppercase tracking-[0.13em] text-[#f5f4ed]/80">
-            {statusLabel} · {project.meta.year}
+            {statusLabel} Â· {project.meta.year}
           </span>
           <h3 className="mt-3 max-w-[18ch] font-display text-5xl leading-[0.94] tracking-tight text-[#f5f4ed]">
             {project.title}

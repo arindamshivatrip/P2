@@ -11,8 +11,8 @@ export function Section({ children, className, spacing = "default", ...props }: 
     <section
       className={cn(
         spacing === "default" && "py-section",
-        spacing === "compact" && "py-10 md:py-14",
-        spacing === "hero" && "pt-12 pb-12 md:pt-[4.5rem] md:pb-14",
+        spacing === "compact" && "py-8 md:py-10",
+        spacing === "hero" && "pt-10 pb-10 md:pt-14 md:pb-12",
         className
       )}
       {...props}

@@ -860,11 +860,26 @@ export const experimentProjects = projects
 export const featuredWorkProjects = workProjects.filter((project) => project.featured);
 export const featuredExperimentProjects = experimentProjects.filter((project) => project.featured);
 
+const homeFeaturedProjectSlugs = [
+  "loreal-ml-planning-suite",
+  "shoot-it-ar-laser-tag-system",
+  "revamping-shopeepay"
+] as const;
+
 const byPriority = (a: Project, b: Project) => a.priority - b.priority;
 
 const projectBySlug = new Map(projects.map((project) => [project.slug, project] as const));
 
 export const getProjectBySlug = (slug: string): Project | undefined => projectBySlug.get(slug);
+
+export const getProjectDestinationHref = (project: Project): string => {
+  const internalLink = project.links?.find((link) => link.kind === "internal")?.href;
+  if (internalLink) {
+    return internalLink;
+  }
+
+  return project.section === "work" ? "/work" : "/experiments";
+};
 
 export const getProjectThumbnailSrc = (project: Project): string =>
   project.thumbnail ?? PROJECT_PLACEHOLDER_THUMBNAIL;
@@ -888,6 +903,14 @@ export const getFeaturedProjectsBySection = (section: ProjectSection): Project[]
   projects
     .filter((project) => project.section === section && project.visible && project.featured)
     .sort(byPriority);
+
+export const getHomeFeaturedProjects = (): Project[] => {
+  const bySlug = new Map(workProjects.map((project) => [project.slug, project] as const));
+
+  return homeFeaturedProjectSlugs
+    .map((slug) => bySlug.get(slug))
+    .filter((project): project is Project => Boolean(project));
+};
 
 export const getVisibleProjects = (): Project[] =>
   projects.filter((project) => project.visible).sort(byPriority);
