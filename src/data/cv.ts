@@ -6,50 +6,50 @@ export type CvVersion = {
 };
 
 export const cvPageContent = {
-  eyebrow: "RESUME / CV",
+  eyebrow: "Resume / CV",
   title: "CV",
   intro:
-    "A focused overview of my work across AI systems, interaction design, and engineering.",
-  primaryLabel: "PRIMARY VERSION",
+    "A focused view of my work across AI systems, interaction design, and engineering.",
+  primaryLabel: "Primary version",
   primaryTitle: "Human-Centered AI Systems",
   primaryDescription:
-    "The clearest snapshot of how I work across machine learning, product thinking, and interaction design.",
+    "The version I use most often for AI systems, product thinking, and interaction design work.",
   primaryHref: "/files/arindam-tripathi-main-cv.pdf",
-  primaryCta: "Download main CV",
+  primaryCta: "Download CV",
   contactCta: "Contact me",
-  secondaryLabel: "OTHER VERSIONS",
+  secondaryLabel: "Other versions",
   secondaryIntro:
-    "Role-specific versions, kept simple.",
+    "Alternate versions for different kinds of roles.",
   footerNote:
-    "Need something more tailored? Reach out directly."
+    "Looking for a more specific version? Get in touch."
 } as const;
 
 export const cvVersions: CvVersion[] = [
   {
     title: "UX Engineering",
     description:
-      "For UX engineer, design technologist, and interaction-heavy frontend roles.",
+      "For interaction-heavy product and frontend roles.",
     href: "/files/arindam-tripathi-ux-engineering-cv.pdf",
     cta: "Download"
   },
   {
     title: "UX Research / UX Analytics",
     description:
-      "For mixed-methods research, product insights, and evidence-based design roles.",
+      "For mixed-methods research and insights roles.",
     href: "/files/arindam-tripathi-ux-research-cv.pdf",
     cta: "Download"
   },
   {
     title: "XR / Interactive Systems",
     description:
-      "For XR, spatial computing, and immersive interaction roles.",
+      "For spatial computing and immersive interaction roles.",
     href: "/files/arindam-tripathi-xr-interactive-systems-cv.pdf",
     cta: "Download"
   },
   {
     title: "Software / Product Engineering",
     description:
-      "For software engineering and startup-oriented product roles.",
+      "For shipping-focused software and product roles.",
     href: "/files/arindam-tripathi-software-product-engineering-cv.pdf",
     cta: "Download"
   }

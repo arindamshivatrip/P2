@@ -42,35 +42,33 @@ export default function CvPage() {
 
         <div className="mt-11 max-w-6xl">
           <Eyebrow>{cvPageContent.secondaryLabel}</Eyebrow>
-          <BodyText tone="secondary" className="mt-3 max-w-2xl">
+          <BodyText tone="muted" className="mt-2.5 max-w-2xl text-sm">
             {cvPageContent.secondaryIntro}
           </BodyText>
 
-          <div className="mt-6 grid gap-3.5 md:grid-cols-2 md:gap-4">
+          <div className="mt-4 grid gap-x-8 gap-y-4 md:grid-cols-2">
             {cvVersions.map((version) => (
-              <article
-                key={version.href}
-                className="rounded-[0.9rem] bg-surface/20 p-4 shadow-[0_3px_10px_rgba(35,30,24,0.038)] md:p-5"
-              >
-                <h3 className="font-display text-[1.52rem] leading-tight tracking-tight text-foreground md:text-[1.7rem]">
+              <article key={version.href} className="border-t border-border/40 pt-3.5">
+                <h3 className="font-display text-[1.38rem] leading-tight tracking-tight text-foreground md:text-[1.52rem]">
                   {version.title}
                 </h3>
-                <BodyText tone="secondary" className="mt-2.5">
+                <BodyText tone="secondary" className="mt-1.5 max-w-[44ch] text-[0.95rem]">
                   {version.description}
                 </BodyText>
-                <div className="mt-4">
-                  <Button asChild variant="ghost" className="px-3.5 py-2 text-xs">
-                    <Link href={version.href} download>
-                      {version.cta}
-                    </Link>
-                  </Button>
-                </div>
+                <Link
+                  href={version.href}
+                  download
+                  className="mt-2.5 inline-flex items-center gap-1.5 font-body text-[0.68rem] uppercase tracking-[0.12em] text-text-muted transition-colors hover:text-foreground"
+                >
+                  <span>{version.cta}</span>
+                  <span aria-hidden="true">+</span>
+                </Link>
               </article>
             ))}
           </div>
         </div>
 
-        <div className="mt-8 max-w-6xl border-t border-border/40 pt-5">
+        <div className="mt-6 max-w-6xl border-t border-border/40 pt-4">
           <BodyText tone="muted" className="max-w-3xl text-sm">
             {cvPageContent.footerNote}
           </BodyText>
