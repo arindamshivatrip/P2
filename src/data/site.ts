@@ -13,7 +13,7 @@ export const navItems: NavItem[] = [
 ];
 
 export const siteMeta = {
-  title: "Ari Portfolio",
+  title: "Arindam Tripathi - Builder, researcher, technologist",
   description: "A modular portfolio scaffold focused on systems, storytelling, and interaction.",
   owner: "Ari"
 };

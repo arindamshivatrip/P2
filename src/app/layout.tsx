@@ -8,7 +8,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: siteMeta.title,
-  description: siteMeta.description
+  description: siteMeta.description,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" }
+    ],
+    apple: [{ url: "/favicon-180.png", sizes: "180x180", type: "image/png" }]
+  }
 };
 
 export default function RootLayout({
