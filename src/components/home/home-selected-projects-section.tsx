@@ -50,6 +50,8 @@ export function HomeSelectedProjectsSection() {
                 tags={(featuredProject.tags ?? featuredProject.categories).slice(0, 3)}
                 tone="featured"
                 visualClassName={visualByTone.featured}
+                visualVideoSrc={featuredProject.video?.src}
+                visualVideoTitle={featuredProject.video?.title}
                 className="h-full p-5 md:p-6"
                 interactive
               />

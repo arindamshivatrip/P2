@@ -8,6 +8,8 @@ type ProjectCardProps = {
   tone?: "featured" | "supportingA" | "supportingB";
   interactive?: boolean;
   visualClassName?: string;
+  visualVideoSrc?: string;
+  visualVideoTitle?: string;
   className?: string;
 };
 
@@ -24,6 +26,8 @@ export function ProjectCard({
   tone = "supportingA",
   interactive = false,
   visualClassName,
+  visualVideoSrc,
+  visualVideoTitle,
   className
 }: ProjectCardProps) {
   return (
@@ -35,12 +39,36 @@ export function ProjectCard({
         className
       )}
     >
-      <div
-        className={cn(
-          "rounded-[0.75rem] bg-background/55 transition-transform duration-300 group-hover:scale-[1.015]",
-          visualClassName
-        )}
-      />
+      {visualVideoSrc ? (
+        <div
+          className={cn(
+            "relative overflow-hidden rounded-[0.75rem] bg-background/55 transition-transform duration-300 group-hover:scale-[1.015]",
+            visualClassName
+          )}
+          aria-hidden="true"
+        >
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={visualVideoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls={false}
+            preload="metadata"
+            tabIndex={-1}
+            title={visualVideoTitle}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0f1e47]/50 via-transparent to-[#ff8a4c]/35" />
+        </div>
+      ) : (
+        <div
+          className={cn(
+            "rounded-[0.75rem] bg-background/55 transition-transform duration-300 group-hover:scale-[1.015]",
+            visualClassName
+          )}
+        />
+      )}
       <h3 className="mt-4 font-display text-2xl tracking-tight">{title}</h3>
       <BodyText tone="secondary" className="mt-3">
         {summary}

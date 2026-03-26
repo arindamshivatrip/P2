@@ -43,6 +43,10 @@ export const projects: Project[] = [
     themeKey: "AI",
     thumbnail: "/images/projects/loreal-ml-planning-suite/thumbnail.jpg",
     coverImage: "/images/projects/loreal-ml-planning-suite/cover.jpg",
+    video: {
+      src: "/videos/loreal/L1.mp4",
+      title: "L'Oréal ML Planning Suite preview"
+    },
     highlights: [
       "Worked on ML-backed promotion planning tools for regional business users.",
       "Helped translate stakeholder requirements into workflows and analytics interfaces.",

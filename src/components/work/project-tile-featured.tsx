@@ -13,6 +13,7 @@ export function ProjectTileFeatured({ project, hasCoverAsset = false }: ProjectT
   const cover = getProjectCoverSrc(project);
   const fallbackCover = getFallbackCoverImage(project, "flagship");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
+  const hasVideo = Boolean(project.video?.src);
   const statusLabel = project.status;
 
   return (
@@ -24,12 +25,31 @@ export function ProjectTileFeatured({ project, hasCoverAsset = false }: ProjectT
         <div
           className="relative min-h-[250px] overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[320px]"
           style={{
-            backgroundImage: hasRealCover
+            backgroundImage: !hasVideo && hasRealCover
               ? `linear-gradient(rgba(16,16,16,.18), rgba(16,16,16,.2)), url(${cover})`
-              : fallbackCover
+              : !hasVideo
+                ? fallbackCover
+                : undefined
           }}
           aria-hidden="true"
         >
+          {hasVideo ? (
+            <>
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src={project.video?.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls={false}
+                preload="metadata"
+                tabIndex={-1}
+                title={project.video?.title}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/35" />
+            </>
+          ) : null}
         </div>
         <div className="mt-5 flex items-center gap-4 font-body text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">
           <span>{statusLabel}</span>
