@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
-import { getProjectCoverSrc } from "@/data/projects";
+import { getProjectCoverSrc, getProjectDestinationHref } from "@/data/projects";
 import type { Project } from "@/types/project";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 
@@ -14,16 +14,20 @@ export function ProjectTileFeatured({ project, hasCoverAsset = false }: ProjectT
   const fallbackCover = getFallbackCoverImage(project, "flagship");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
   const hasVideo = Boolean(project.video?.src);
+  const useWidescreenMediaFrame = project.tileMediaAspect === "widescreen-16-9";
+  const mediaFrameClassName = useWidescreenMediaFrame
+    ? "relative aspect-[16/9] overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01]"
+    : "relative min-h-[250px] overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[320px]";
   const statusLabel = project.status;
 
   return (
     <Link
-      href={`/work/${project.slug}`}
+      href={getProjectDestinationHref(project)}
       className="group block h-full rounded-[1rem] bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(38,31,24,0.14),0_4px_10px_rgba(38,31,24,0.06)]"
     >
       <article className="flex h-full flex-col p-5 md:p-6">
         <div
-          className="relative min-h-[250px] overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[320px]"
+          className={mediaFrameClassName}
           style={{
             backgroundImage: !hasVideo && hasRealCover
               ? `linear-gradient(rgba(16,16,16,.18), rgba(16,16,16,.2)), url(${cover})`

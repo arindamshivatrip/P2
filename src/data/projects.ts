@@ -47,6 +47,7 @@ export const projects: Project[] = [
       src: "/videos/loreal/L1.mp4",
       title: "L'Oréal ML Planning Suite preview"
     },
+    tileMediaAspect: "widescreen-16-9",
     highlights: [
       "Worked on ML-backed promotion planning tools for regional business users.",
       "Helped translate stakeholder requirements into workflows and analytics interfaces.",
@@ -682,6 +683,7 @@ export const projects: Project[] = [
       src: "/videos/experiments/snapt/snapt-thumb.mp4",
       title: "SnaPT hero preview"
     },
+    tileMediaAspect: "widescreen-16-9",
     highlights: [
       "Focused on reducing friction in long AI chat workflows.",
       "Improved readability and perceived performance in extended ChatGPT sessions."
@@ -1165,6 +1167,7 @@ const projectBySlug = new Map(projects.map((project) => [project.slug, project] 
 export const getProjectBySlug = (slug: string): Project | undefined => projectBySlug.get(slug);
 
 export const getExperimentDetailHref = (slug: string): string => `/experiments/${slug}`;
+export const getWorkDetailHref = (slug: string): string => `/work/${slug}`;
 
 export const getProjectDestinationHref = (project: Project): string => {
   const internalLink = project.links?.find((link) => link.kind === "internal")?.href;
@@ -1176,7 +1179,11 @@ export const getProjectDestinationHref = (project: Project): string => {
     return getExperimentDetailHref(project.slug);
   }
 
-  return "/work";
+  if (project.section === "work") {
+    return getWorkDetailHref(project.slug);
+  }
+
+  return "/";
 };
 
 export const getProjectThumbnailSrc = (project: Project): string =>

@@ -1,5 +1,7 @@
-﻿import { Container } from "@/components/layout/container";
+﻿import type { ReactNode } from "react";
+import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { ResponsiveMasonry } from "@/components/layout/responsive-masonry";
 import { Reveal } from "@/components/ui/reveal";
 import { getVisibleProjectsBySection } from "@/data/projects";
 import { getProjectAssetAvailability } from "@/lib/project-assets.server";
@@ -18,6 +20,12 @@ const pickExperiment = (
     used.add(found.id);
   }
   return found;
+};
+
+type ExperimentTile = {
+  key: string;
+  delay: number;
+  node: ReactNode;
 };
 
 export async function ExperimentsGrid() {
@@ -51,39 +59,57 @@ export async function ExperimentsGrid() {
   const hasVideo = (project: Project | undefined): boolean =>
     project ? (availability.get(project.id)?.video ?? false) || Boolean(project.video?.src) : false;
 
+  const tiles: ExperimentTile[] = [];
+
+  if (hero) {
+    tiles.push({
+      key: hero.id,
+      delay: 0,
+      node: (
+        <ExperimentHeroTile
+          project={hero}
+          hasCoverAsset={hasCover(hero)}
+          hasVideoAsset={hasVideo(hero)}
+        />
+      )
+    });
+  }
+
+  if (artifact) {
+    tiles.push({
+      key: artifact.id,
+      delay: 0.06,
+      node: <ExperimentArtifactTile project={artifact} hasCoverAsset={hasCover(artifact)} />
+    });
+  }
+
+  if (note) {
+    tiles.push({
+      key: note.id,
+      delay: 0.1,
+      node: <ExperimentNoteTile project={note} />
+    });
+  }
+
+  if (hybrid) {
+    tiles.push({
+      key: hybrid.id,
+      delay: 0.14,
+      node: <ExperimentArtifactTile project={hybrid} hasCoverAsset={hasCover(hybrid)} />
+    });
+  }
+
   return (
     <Section spacing="compact" className="pt-0 pb-7 md:pb-9">
       <Container>
         <div className="border-t border-border/55 pt-2 md:pt-2.5">
-          <div className="grid gap-3.5 md:gap-4 lg:grid-cols-12">
-            {hero ? (
-              <Reveal className="lg:col-span-7">
-                <ExperimentHeroTile
-                  project={hero}
-                  hasCoverAsset={hasCover(hero)}
-                  hasVideoAsset={hasVideo(hero)}
-                />
+          <ResponsiveMasonry>
+            {tiles.map((tile) => (
+              <Reveal key={tile.key} delay={tile.delay}>
+                {tile.node}
               </Reveal>
-            ) : null}
-
-            {artifact ? (
-              <Reveal className="lg:col-span-5" delay={0.06}>
-                <ExperimentArtifactTile project={artifact} hasCoverAsset={hasCover(artifact)} />
-              </Reveal>
-            ) : null}
-
-            {note ? (
-              <Reveal className="lg:col-span-5" delay={0.1}>
-                <ExperimentNoteTile project={note} />
-              </Reveal>
-            ) : null}
-
-            {hybrid ? (
-              <Reveal className="lg:col-span-7" delay={0.14}>
-                <ExperimentArtifactTile project={hybrid} hasCoverAsset={hasCover(hybrid)} />
-              </Reveal>
-            ) : null}
-          </div>
+            ))}
+          </ResponsiveMasonry>
         </div>
       </Container>
     </Section>

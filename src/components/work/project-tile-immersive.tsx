@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
-import { getProjectCoverSrc } from "@/data/projects";
+import { getProjectCoverSrc, getProjectDestinationHref } from "@/data/projects";
 import type { Project } from "@/types/project";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 
@@ -17,7 +17,7 @@ export function ProjectTileImmersive({ project, hasCoverAsset = false }: Project
 
   return (
     <Link
-      href={`/work/${project.slug}`}
+      href={getProjectDestinationHref(project)}
       className="group block h-full overflow-hidden rounded-[1rem] bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(38,31,24,0.15)]"
     >
       <article className="relative flex min-h-[280px] flex-col justify-end p-6 md:min-h-[340px]">

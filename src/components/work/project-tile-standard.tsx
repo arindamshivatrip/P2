@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
-import { getProjectCoverSrc } from "@/data/projects";
+import { getProjectCoverSrc, getProjectDestinationHref } from "@/data/projects";
 import type { Project } from "@/types/project";
 import { cn } from "@/lib/utils";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
@@ -21,20 +21,24 @@ export function ProjectTileStandard({
   const cover = getProjectCoverSrc(project);
   const fallbackCover = getFallbackCoverImage(project, "standard");
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
+  const useWidescreenMediaFrame = project.tileMediaAspect === "widescreen-16-9";
+  const mediaFrameClassName = useWidescreenMediaFrame
+    ? "relative aspect-[16/9] overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01]"
+    : cn(
+        "relative overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01]",
+        assertive ? "min-h-[220px] md:min-h-[250px]" : "min-h-[170px]"
+      );
   const statusLabel = project.status;
 
   return (
     <Link
-      href={`/work/${project.slug}`}
+      href={getProjectDestinationHref(project)}
       className="group block h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(38,31,24,0.12),0_4px_10px_rgba(38,31,24,0.06)] md:p-6"
     >
       <article className="flex h-full flex-col">
         {!compact ? (
           <div
-            className={cn(
-              "relative overflow-hidden rounded-[0.8rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01]",
-              assertive ? "min-h-[220px] md:min-h-[250px]" : "min-h-[170px]"
-            )}
+            className={mediaFrameClassName}
             style={{
               backgroundImage: hasRealCover
                 ? `linear-gradient(rgba(17,17,17,.12), rgba(17,17,17,.14)), url(${cover})`

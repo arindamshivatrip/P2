@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { ResponsiveMasonry } from "@/components/layout/responsive-masonry";
 import { Section } from "@/components/layout/section";
 import { Reveal } from "@/components/ui/reveal";
 import {
@@ -117,69 +118,40 @@ export async function WorkGrid({ section, activeFilter }: WorkGridProps) {
 
   const selectedIds = new Set(selectedProjects.map((project) => project.id));
   const remainingProjects = visible.filter((project) => !selectedIds.has(project.id));
+  const featuredTileOrder = [
+    { project: flagship, variant: "featured" as const, delay: 0 },
+    { project: researchTile, variant: "research" as const, delay: 0.06 },
+    { project: confidentialTile, variant: "confidential" as const, delay: 0.1 },
+    { project: shootItTile ?? engineeringTile, variant: "assertive" as const, delay: 0.14 },
+    { project: xrTile, variant: "immersive" as const, delay: 0.18 },
+    { project: utilityTile, variant: "utility" as const, delay: 0.22 }
+  ].filter(
+    (
+      tile
+    ): tile is {
+      project: Project;
+      variant: "featured" | "research" | "confidential" | "assertive" | "immersive" | "utility";
+      delay: number;
+    } => Boolean(tile.project)
+  );
 
   return (
     <Section spacing="compact" className="pt-0">
       <Container>
-        <div className="grid gap-5 lg:grid-cols-12">
-          <Reveal className="lg:col-span-8">
-            <ProjectTile
-              project={flagship}
-              variant="featured"
-              hasCoverAsset={hasCover(flagship)}
-            />
-          </Reveal>
-
-          {researchTile ? (
-            <Reveal className="lg:col-span-4" delay={0.06}>
+        <ResponsiveMasonry
+          className="-ml-4 flex w-auto md:-ml-5"
+          columnClassName="space-y-4 pl-4 md:space-y-5 md:pl-5"
+        >
+          {featuredTileOrder.map((tile) => (
+            <Reveal key={tile.project.id} delay={tile.delay}>
               <ProjectTile
-                project={researchTile}
-                variant="research"
-                hasCoverAsset={hasCover(researchTile)}
+                project={tile.project}
+                variant={tile.variant}
+                hasCoverAsset={hasCover(tile.project)}
               />
             </Reveal>
-          ) : null}
-
-          {confidentialTile ? (
-            <Reveal className="lg:col-span-5" delay={0.1}>
-              <ProjectTile
-                project={confidentialTile}
-                variant="confidential"
-                hasCoverAsset={hasCover(confidentialTile)}
-              />
-            </Reveal>
-          ) : null}
-
-          {shootItTile ?? engineeringTile ? (
-            <Reveal className="lg:col-span-7" delay={0.14}>
-              <ProjectTile
-                project={shootItTile ?? engineeringTile!}
-                variant="assertive"
-                hasCoverAsset={hasCover(shootItTile ?? engineeringTile!)}
-              />
-            </Reveal>
-          ) : null}
-
-          {xrTile ? (
-            <Reveal className="lg:col-span-8" delay={0.18}>
-              <ProjectTile
-                project={xrTile}
-                variant="immersive"
-                hasCoverAsset={hasCover(xrTile)}
-              />
-            </Reveal>
-          ) : null}
-
-          {utilityTile ? (
-            <Reveal className="lg:col-span-4" delay={0.22}>
-              <ProjectTile
-                project={utilityTile}
-                variant="utility"
-                hasCoverAsset={hasCover(utilityTile)}
-              />
-            </Reveal>
-          ) : null}
-        </div>
+          ))}
+        </ResponsiveMasonry>
 
         {remainingProjects.length > 0 ? (
           <Reveal delay={0.18}>

@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
+import { getProjectDestinationHref } from "@/data/projects";
 import type { Project } from "@/types/project";
 
 type ProjectTileResearchProps = {
@@ -18,7 +19,7 @@ export function ProjectTileResearch({ project }: ProjectTileResearchProps) {
 
   return (
     <Link
-      href={`/work/${project.slug}`}
+      href={getProjectDestinationHref(project)}
       className="group block h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-1 md:p-6"
     >
       <article className="flex h-full flex-col">

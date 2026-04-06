@@ -24,6 +24,14 @@ export function ExperimentHeroTile({
   const backgroundFallback = hasRealCover
     ? `linear-gradient(rgba(16,16,16,.16), rgba(16,16,16,.2)), url(${cover})`
     : fallbackCover;
+  const useWidescreenMediaFrame = project.tileMediaAspect === "widescreen-16-9";
+  const mediaFrameClassName = useWidescreenMediaFrame
+    ? "relative mt-4 aspect-[16/9] overflow-hidden rounded-[0.85rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01]"
+    : "relative mt-4 min-h-[220px] overflow-hidden rounded-[0.85rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[320px]";
+  const titleTopSpacingClassName = useWidescreenMediaFrame ? "mt-4" : "mt-5";
+  const subtitleTopSpacingClassName = useWidescreenMediaFrame ? "mt-2.5" : "mt-3";
+  const infoBlockTopSpacingClassName = useWidescreenMediaFrame ? "mt-5" : "mt-6";
+  const tagsTopSpacingClassName = useWidescreenMediaFrame ? "mt-4" : "mt-5";
   const outputNote = project.highlights?.[1] ?? project.highlights?.[0] ?? project.summary;
   const metaLine = getExperimentMetaLine(project);
 
@@ -33,7 +41,7 @@ export function ExperimentHeroTile({
         <p className="font-body text-[0.64rem] uppercase tracking-[0.13em] text-text-muted">{metaLine}</p>
 
         <div
-          className="relative mt-4 min-h-[220px] overflow-hidden rounded-[0.85rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01] md:min-h-[320px]"
+          className={mediaFrameClassName}
           style={{ backgroundImage: backgroundFallback }}
           aria-hidden="true"
         >
@@ -53,15 +61,19 @@ export function ExperimentHeroTile({
           ) : null}
         </div>
 
-        <h2 className="mt-5 font-display text-4xl leading-tight tracking-tight md:text-[2.7rem]">
+        <h2
+          className={`${titleTopSpacingClassName} font-display text-4xl leading-tight tracking-tight md:text-[2.7rem]`}
+        >
           {project.title}
         </h2>
 
-        <BodyText tone="secondary" className="mt-3 max-w-3xl">
+        <BodyText tone="secondary" className={`${subtitleTopSpacingClassName} max-w-3xl`}>
           {project.oneLiner}
         </BodyText>
 
-        <div className="mt-6 grid gap-4 border-t border-border/50 pt-4 md:grid-cols-2">
+        <div
+          className={`${infoBlockTopSpacingClassName} grid gap-4 border-t border-border/50 pt-4 md:grid-cols-2`}
+        >
           <div>
             <p className="font-body text-[0.62rem] uppercase tracking-[0.13em] text-accent">Field Note</p>
             <BodyText tone="secondary" className="mt-2 text-sm">
@@ -76,7 +88,7 @@ export function ExperimentHeroTile({
           </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className={`${tagsTopSpacingClassName} flex flex-wrap gap-2`}>
           {project.tech.slice(0, 3).map((item) => (
             <span
               key={item}

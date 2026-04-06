@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { BodyText } from "@/components/typography/body-text";
-import { getProjectCoverSrc } from "@/data/projects";
+import { getProjectCoverSrc, getProjectDestinationHref } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 import type { Project } from "@/types/project";
 
@@ -17,7 +17,7 @@ export function ProjectTileRail({ project, hasCoverAsset }: ProjectTileRailProps
 
   return (
     <Link
-      href={`/work/${project.slug}`}
+      href={getProjectDestinationHref(project)}
       className="group block h-[31rem] w-[18.25rem] shrink-0 snap-start rounded-[1rem] bg-surface p-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_30px_rgba(38,31,24,0.11)] sm:w-[19rem] md:w-[19.5rem]"
     >
       <article className="flex h-full flex-col">

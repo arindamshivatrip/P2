@@ -36,6 +36,7 @@ export type ProjectStatus =
   | "Handed Off";
 
 export type ProjectCardSize = "sm" | "md" | "lg" | "xl";
+export type ProjectTileMediaAspect = "default" | "widescreen-16-9";
 
 export type CaseStudyDepth = "full" | "medium" | "light" | "none";
 export type ExperimentDetailTemplate = "structured" | "legacy";
@@ -171,6 +172,7 @@ export interface Project {
   gallery?: ProjectImage[];
   pdf?: ProjectPdf;
   video?: ProjectVideo;
+  tileMediaAspect?: ProjectTileMediaAspect;
 
   highlights?: string[];
   metrics?: ProjectMetric[];
