@@ -6,6 +6,7 @@ import { ProjectCard } from "@/components/ui/project-card";
 import { Reveal } from "@/components/ui/reveal";
 import { projectsContent } from "@/data/home";
 import { getHomeFeaturedProjects, getProjectDestinationHref } from "@/data/projects";
+import type { Project } from "@/types/project";
 
 const featuredProjects = getHomeFeaturedProjects();
 const featuredProject = featuredProjects[0];
@@ -16,6 +17,14 @@ const visualByTone = {
   supportingA: "min-h-[180px] bg-gradient-to-br from-emerald-900 via-zinc-800 to-zinc-700",
   supportingB: "min-h-[170px] bg-gradient-to-br from-zinc-500 via-zinc-700 to-zinc-900"
 } as const;
+
+function getFeaturedVisualClass(project: Project): string {
+  if (project.tileMediaAspect === "widescreen-16-9") {
+    return "aspect-[16/9] bg-gradient-to-br from-zinc-700 via-zinc-900 to-[#17343f]";
+  }
+
+  return visualByTone.featured;
+}
 
 export function HomeSelectedProjectsSection() {
   if (!featuredProject) {
@@ -41,24 +50,26 @@ export function HomeSelectedProjectsSection() {
           </Reveal>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-12">
-          <Reveal className="lg:col-span-8">
-            <Link href={getProjectDestinationHref(featuredProject)} className="block">
-              <ProjectCard
-                title={featuredProject.title}
-                summary={featuredProject.oneLiner}
-                tags={(featuredProject.tags ?? featuredProject.categories).slice(0, 3)}
-                tone="featured"
-                visualClassName={visualByTone.featured}
-                visualVideoSrc={featuredProject.video?.src}
-                visualVideoTitle={featuredProject.video?.title}
-                className="h-full p-5 md:p-6"
-                interactive
-              />
-            </Link>
-          </Reveal>
+        <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(0,0.92fr)] lg:items-start">
+          <div className="space-y-5">
+            <Reveal>
+              <Link href={getProjectDestinationHref(featuredProject)} className="block">
+                <ProjectCard
+                  title={featuredProject.title}
+                  summary={featuredProject.oneLiner}
+                  tags={(featuredProject.tags ?? featuredProject.categories).slice(0, 3)}
+                  tone="featured"
+                  visualClassName={getFeaturedVisualClass(featuredProject)}
+                  visualVideoSrc={featuredProject.video?.src}
+                  visualVideoTitle={featuredProject.video?.title}
+                  className="h-full p-5 md:p-6"
+                  interactive
+                />
+              </Link>
+            </Reveal>
+          </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-4 lg:grid-cols-1">
+          <div className="space-y-5">
             {supportingProjects[0] ? (
               <Reveal delay={0.06}>
                 <Link href={getProjectDestinationHref(supportingProjects[0])} className="block">
