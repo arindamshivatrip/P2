@@ -1,4 +1,4 @@
-import type { Project, ProjectCategory, ProjectSection } from "@/types/project";
+﻿import type { Project, ProjectCategory, ProjectSection } from "@/types/project";
 
 export const PROJECT_PLACEHOLDER_THUMBNAIL = "/images/projects/placeholder-thumbnail.png";
 export const PROJECT_PLACEHOLDER_COVER = "/images/projects/placeholder-cover.png";
@@ -630,6 +630,290 @@ export const projects: Project[] = [
   },
 
   {
+    id: "snapt",
+    slug: "snapt",
+    title: "SnaPT",
+    subtitle: "Designing around friction in AI workflows",
+    oneLiner: "Designing around friction in AI workflows",
+    summary:
+      "A browser extension for improving the performance and readability of long ChatGPT conversations.",
+    section: "experiments",
+    visibility: "public",
+    entryType: "experiment",
+    role: "Builder, UX Engineer",
+    contributionTag: "Personal Project",
+    projectTypeLine: "Chrome Extension • Personal Project",
+    meta: {
+      org: "Personal",
+      teamType: "solo",
+      year: "2026",
+      sortDate: "2026-04-01",
+      dateRange: "Weekend in April 2026"
+    },
+    metaStrip: {
+      roleValue: "Builder, UX Engineer",
+      timelineValue: "Weekend in April 2026",
+      teamValue: "1 person",
+      focusValue: [
+        "Browser engineering",
+        "Interaction design",
+        "Prompt-assisted coding",
+        "Privacy / store-readiness"
+      ]
+    },
+    categories: ["Engineering", "Interaction Design"],
+    tech: [
+      "Browser engineering",
+      "Interaction design",
+      "Prompt-assisted coding",
+      "Privacy / store-readiness"
+    ],
+    tags: ["Chrome Extension", "Personal Project", "AI workflow"],
+    featured: true,
+    priority: 1,
+    cardSize: "lg",
+    status: "Completed",
+    caseStudyDepth: "light",
+    visible: true,
+    themeKey: "Web",
+    thumbnail: PROJECT_PLACEHOLDER_THUMBNAIL,
+    coverImage: PROJECT_PLACEHOLDER_COVER,
+    video: {
+      src: "/videos/experiments/snapt/snapt-thumb.mp4",
+      title: "SnaPT hero preview"
+    },
+    highlights: [
+      "Focused on reducing friction in long AI chat workflows.",
+      "Improved readability and perceived performance in extended ChatGPT sessions."
+    ],
+    detailPage: {
+      showHeroImage: true,
+      showMetaStrip: true,
+      showMetrics: false,
+      showGallery: false,
+      showPdfEmbed: false,
+      showVideo: false,
+      showOutcomeStrip: false
+    },
+    detailTemplate: "structured",
+    detailMetadata: {
+      role: "Builder, UX Engineer",
+      team: "1 person",
+      timeline: "Weekend in April 2026",
+      skills: [
+        "Browser engineering",
+        "Interaction design",
+        "Prompt-assisted coding",
+        "Privacy / store-readiness"
+      ]
+    },
+    detailSections: [
+      {
+        id: "overview",
+        title: "Overview",
+        type: "text",
+        body: [
+          "What happens when a tool becomes most useful at the exact point it starts breaking flow?",
+          "SnaPT started from a simple frustration: long ChatGPT conversations got slow, laggy, and harder to use the more context they accumulated. Fresh chats felt instant. Long working threads did not. That tension became the core problem.",
+          "Over time, this turned into more than a browser extension. It became a small systems design project around performance, context preservation, privacy, and interaction design."
+        ]
+      },
+      {
+        id: "problem",
+        title: "Problem",
+        type: "text-bullets",
+        body: [
+          "Long chats got slower as they got more valuable.",
+          "The more I used ChatGPT for real work, the more obvious the problem became. The interface started strong, then gradually got heavier. Typing lagged. Replies took longer. The page felt like it was carrying too much state."
+        ],
+        bullets: [
+          "Start a new chat and lose context.",
+          "Stay in the thread and accept the slowdown."
+        ]
+      },
+      {
+        id: "why-this-mattered",
+        title: "Why This Mattered",
+        type: "quote",
+        body: [
+          "This was not just a performance annoyance. It interrupted the workflow. If context accumulation makes the experience worse, the product starts fighting its own use case."
+        ]
+      },
+      {
+        id: "before-after-slowdown",
+        title: "Before and After Slowdown Comparison",
+        type: "media",
+        layout: "wide",
+        body: ["Placeholder visual block for thread responsiveness comparison."],
+        media: {
+          kind: "image",
+          src: PROJECT_PLACEHOLDER_COVER,
+          alt: "Before and after slowdown comparison placeholder"
+        },
+        caption: "Placeholder: before and after slowdown comparison"
+      },
+      {
+        id: "opportunity",
+        title: "Opportunity",
+        type: "text-bullets",
+        body: ["Keep the working context light while keeping history recoverable."],
+        bullets: [
+          "Keep the most relevant recent turns live.",
+          "Trim older turns from the active thread.",
+          "Keep older turns recoverable on demand.",
+          "Preserve enough recent context to keep the conversation feeling alive."
+        ]
+      },
+      {
+        id: "solution",
+        title: "Solution",
+        type: "text",
+        body: [
+          "SnaPT improves the performance and readability of long ChatGPT conversations by trimming older turns from the live view and making them recoverable later."
+        ]
+      },
+      {
+        id: "trimmed-thread-cached-history",
+        title: "Trimmed Live Thread and Cached Older Turns",
+        type: "split-media",
+        layout: "media-right",
+        body: [
+          "The active thread stays focused on recent conversation state while older turns are available when needed.",
+          "This keeps long sessions usable without forcing context resets."
+        ],
+        media: {
+          kind: "image",
+          src: PROJECT_PLACEHOLDER_COVER,
+          alt: "Trimmed live thread and cached older turns placeholder"
+        },
+        caption: "Placeholder: trimmed live thread plus cached older turns"
+      },
+      {
+        id: "core-flows",
+        title: "Core Flows",
+        type: "text-bullets",
+        body: ["Core usage paths guided how trimming and recovery behavior were designed."],
+        bullets: [
+          "Stay in the same thread without paying the performance cost.",
+          "Load older context only when needed.",
+          "Preserve recent assistant activity where it matters most."
+        ]
+      },
+      {
+        id: "research",
+        title: "Research",
+        type: "text-bullets",
+        body: ["Research focused on where speed gains came from and what tradeoffs they introduced."],
+        bullets: [
+          "Understanding where the speedup actually came from.",
+          "Comparing DOM-side trimming vs payload-side trimming.",
+          "Cached history retrieval.",
+          "Grouped-turn logic.",
+          "Analyzing existing extensions.",
+          "Understanding the difference between hiding rendered content and reducing what gets rendered."
+        ]
+      },
+      {
+        id: "solution-space",
+        title: "Exploring the Solution Space",
+        type: "text-bullets",
+        body: ["Multiple implementation paths were tested before selecting the final direction."],
+        bullets: [
+          "DOM-only trimming.",
+          "Pre-render payload trimming.",
+          "Cached history rendering.",
+          "Hybrid approach."
+        ]
+      },
+      {
+        id: "prototyping-testing",
+        title: "Prototyping and Testing",
+        type: "text-bullets",
+        body: [
+          "Many iterations were required to balance speed, readability, and conversational continuity."
+        ],
+        bullets: [
+          "Some versions improved speed but made the chat feel dead.",
+          "Some preserved too much and reintroduced lag.",
+          "Some were technically correct but felt bad to use.",
+          "Key turning point: grouping by turns instead of individual messages."
+        ]
+      },
+      {
+        id: "popup-ui-evolution",
+        title: "Popup UI Evolution",
+        type: "media",
+        layout: "wide",
+        body: ["Placeholder visual block for popup iterations."],
+        media: {
+          kind: "image",
+          src: PROJECT_PLACEHOLDER_COVER,
+          alt: "Popup UI evolution placeholder"
+        },
+        caption: "Placeholder: popup UI evolution"
+      },
+      {
+        id: "design-decisions",
+        title: "Design Decisions",
+        type: "text-bullets",
+        body: ["Final decisions centered usability and recoverability."],
+        bullets: [
+          "Grouping by turns, not by messages.",
+          "Keeping older history recoverable.",
+          "Designing the popup as a usable product surface rather than a dev utility."
+        ]
+      },
+      {
+        id: "grouped-turn-logic",
+        title: "Grouped-Turn Logic Diagram",
+        type: "media",
+        layout: "wide",
+        body: ["Placeholder logic diagram block."],
+        media: {
+          kind: "image",
+          src: PROJECT_PLACEHOLDER_COVER,
+          alt: "Grouped-turn logic diagram placeholder"
+        },
+        caption: "Placeholder: grouped-turn logic diagram"
+      },
+      {
+        id: "designing-for-constraints",
+        title: "Designing for Constraints",
+        type: "text-bullets",
+        body: [
+          "Performance vs fidelity stayed central through implementation.",
+          "Preserving too much assistant-side activity made payloads heavier, while trimming too aggressively made the conversation feel less alive.",
+          "Privacy, permissions, host access, local storage, and Chrome Web Store readiness all became part of the design problem."
+        ]
+      },
+      {
+        id: "privacy-store-artifacts",
+        title: "Permissions, Privacy, and Store-Review Artifacts",
+        type: "media",
+        layout: "wide",
+        body: ["Placeholder documentation block for policy and review artifacts."],
+        media: {
+          kind: "image",
+          src: PROJECT_PLACEHOLDER_COVER,
+          alt: "Permissions, privacy, and store-review artifacts placeholder"
+        },
+        caption: "Placeholder: permissions, privacy, and store-review artifacts"
+      },
+      {
+        id: "reflection",
+        title: "Reflection",
+        type: "reflection",
+        body: [
+          "AI lowers the barrier to building.",
+          "Judgment matters more, not less.",
+          "UX becomes more important as building gets easier.",
+          "This project sits at the intersection of implementation, interaction design, performance, product thinking, and human-centered systems."
+        ]
+      }
+    ]
+  },
+
+  {
     id: "ai-assisted-portfolio-platform",
     slug: "ai-assisted-portfolio-platform",
     title: "AI-Assisted Portfolio Platform",
@@ -680,7 +964,8 @@ export const projects: Project[] = [
       showPdfEmbed: false,
       showVideo: false,
       showOutcomeStrip: false
-    }
+    },
+    detailTemplate: "legacy"
   },
 
   {
@@ -736,7 +1021,8 @@ export const projects: Project[] = [
       showPdfEmbed: false,
       showVideo: false,
       showOutcomeStrip: false
-    }
+    },
+    detailTemplate: "legacy"
   },
 
   {
@@ -790,7 +1076,8 @@ export const projects: Project[] = [
       showPdfEmbed: false,
       showVideo: false,
       showOutcomeStrip: false
-    }
+    },
+    detailTemplate: "legacy"
   },
 
   {
@@ -849,7 +1136,8 @@ export const projects: Project[] = [
       showPdfEmbed: true,
       showVideo: false,
       showOutcomeStrip: false
-    }
+    },
+    detailTemplate: "legacy"
   }
 ];
 
@@ -876,13 +1164,19 @@ const projectBySlug = new Map(projects.map((project) => [project.slug, project] 
 
 export const getProjectBySlug = (slug: string): Project | undefined => projectBySlug.get(slug);
 
+export const getExperimentDetailHref = (slug: string): string => `/experiments/${slug}`;
+
 export const getProjectDestinationHref = (project: Project): string => {
   const internalLink = project.links?.find((link) => link.kind === "internal")?.href;
   if (internalLink) {
     return internalLink;
   }
 
-  return project.section === "work" ? "/work" : "/experiments";
+  if (project.section === "experiments") {
+    return getExperimentDetailHref(project.slug);
+  }
+
+  return "/work";
 };
 
 export const getProjectThumbnailSrc = (project: Project): string =>
@@ -941,3 +1235,5 @@ export const getCategoryCounts = (section?: ProjectSection): Partial<Record<Proj
     return acc;
   }, {});
 };
+
+

@@ -29,6 +29,7 @@ export async function ExperimentsGrid() {
 
   const used = new Set<string>();
   const hero =
+    pickExperiment(experiments, used, (project) => project.slug === "snapt") ??
     pickExperiment(experiments, used, (project) => project.slug === "ai-assisted-portfolio-platform") ??
     pickExperiment(experiments, used, () => true);
   const artifact =
@@ -47,6 +48,8 @@ export async function ExperimentsGrid() {
   const availability = new Map(availabilityEntries);
   const hasCover = (project: Project | undefined): boolean =>
     project ? availability.get(project.id)?.coverImage ?? false : false;
+  const hasVideo = (project: Project | undefined): boolean =>
+    project ? (availability.get(project.id)?.video ?? false) || Boolean(project.video?.src) : false;
 
   return (
     <Section spacing="compact" className="pt-0 pb-7 md:pb-9">
@@ -55,7 +58,11 @@ export async function ExperimentsGrid() {
           <div className="grid gap-3.5 md:gap-4 lg:grid-cols-12">
             {hero ? (
               <Reveal className="lg:col-span-7">
-                <ExperimentHeroTile project={hero} hasCoverAsset={hasCover(hero)} />
+                <ExperimentHeroTile
+                  project={hero}
+                  hasCoverAsset={hasCover(hero)}
+                  hasVideoAsset={hasVideo(hero)}
+                />
               </Reveal>
             ) : null}
 

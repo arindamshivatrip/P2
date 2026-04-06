@@ -30,6 +30,7 @@ export type ProjectStatus =
   | "Case Study"
   | "Prototype"
   | "In Progress"
+  | "Completed"
   | "Live"
   | "Shipped"
   | "Handed Off";
@@ -37,6 +38,7 @@ export type ProjectStatus =
 export type ProjectCardSize = "sm" | "md" | "lg" | "xl";
 
 export type CaseStudyDepth = "full" | "medium" | "light" | "none";
+export type ExperimentDetailTemplate = "structured" | "legacy";
 
 export interface ProjectMetric {
   label: string;
@@ -95,10 +97,47 @@ export interface ProjectTeamMember {
   role: string;
 }
 
+export interface ProjectDetailMetadata {
+  role: string;
+  team: string;
+  timeline: string;
+  skills: string[];
+}
+
+export type ProjectDetailSectionType =
+  | "text"
+  | "text-bullets"
+  | "split-media"
+  | "media"
+  | "quote"
+  | "reflection";
+
+export type ProjectDetailSectionLayout = "default" | "media-left" | "media-right" | "wide";
+
+export interface ProjectDetailSectionMedia {
+  kind: "image" | "video";
+  src: string;
+  alt?: string;
+  poster?: string;
+  title?: string;
+}
+
+export interface ProjectDetailSection {
+  id: string;
+  title: string;
+  type: ProjectDetailSectionType;
+  body: string[];
+  bullets?: string[];
+  media?: ProjectDetailSectionMedia;
+  caption?: string;
+  layout?: ProjectDetailSectionLayout;
+}
+
 export interface Project {
   id: string;
   slug: string;
   title: string;
+  subtitle?: string;
   oneLiner: string;
   summary: string;
 
@@ -108,6 +147,7 @@ export interface Project {
 
   role: string;
   contributionTag?: string;
+  projectTypeLine?: string;
 
   meta: ProjectMeta;
   metaStrip?: ProjectMetaStrip;
@@ -147,4 +187,7 @@ export interface Project {
     showVideo?: boolean;
     showOutcomeStrip?: boolean;
   };
+  detailTemplate?: ExperimentDetailTemplate;
+  detailMetadata?: ProjectDetailMetadata;
+  detailSections?: ProjectDetailSection[];
 }
