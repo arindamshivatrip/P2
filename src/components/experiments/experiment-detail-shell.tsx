@@ -1,11 +1,13 @@
 import { BodyText } from "@/components/typography/body-text";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Section } from "@/components/layout/section";
 import { ExperimentBackLink } from "@/components/experiments/experiment-back-link";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
-import type { Project, ProjectDetailSection } from "@/types/project";
+import type { Project, ProjectDetailSection, ProjectDetailSectionInlineMedia } from "@/types/project";
+import Image from "next/image";
 
 type ExperimentDetailShellProps = {
   project: Project;
@@ -34,12 +36,15 @@ function getMetaValues(project: Project) {
   };
 }
 
-function renderSectionBody(lines: string[]) {
-  return lines.map((line, index) => (
-    <BodyText key={index} tone="secondary" className={index > 0 ? "mt-3" : ""}>
-      {line}
-    </BodyText>
-  ));
+function getPrimaryExternalCta(project: Project) {
+  const chromeStoreLink = project.links?.find(
+    (link) => link.kind === "external" && link.href.includes("chromewebstore.google.com")
+  );
+  if (chromeStoreLink) {
+    return chromeStoreLink;
+  }
+
+  return project.links?.find((link) => link.kind === "external");
 }
 
 function renderMediaBlock(section: ProjectDetailSection) {
@@ -82,6 +87,154 @@ function renderMediaBlock(section: ProjectDetailSection) {
   );
 }
 
+function renderInlineMediaBlock(block: ProjectDetailSectionInlineMedia, key: string) {
+  const mediaTopSpacing = block.spacing === "tight" ? "mt-3" : "mt-5";
+  const captionTopSpacing = block.spacing === "tight" ? "mt-1" : "mt-2";
+  const caption = block.caption ? (
+    <p className={`${captionTopSpacing} font-body text-xs tracking-[0.01em] text-text-secondary`}>{block.caption}</p>
+  ) : null;
+
+  if (block.secondaryMedia) {
+    const rightMedia = block.secondaryMedia;
+    return (
+      <div key={key} className={mediaTopSpacing}>
+        <div className="grid gap-3 md:grid-cols-2">
+          <div className="relative h-[240px] overflow-hidden rounded-[0.85rem] bg-background/60 md:h-[320px]">
+            <Image
+              src={block.media.src}
+              alt={block.media.alt ?? "Section media"}
+              fill
+              className="object-contain p-2"
+              sizes="(max-width: 767px) 100vw, 50vw"
+            />
+          </div>
+          <div className="relative h-[240px] overflow-hidden rounded-[0.85rem] bg-background/60 md:h-[320px]">
+            <Image
+              src={rightMedia.src}
+              alt={rightMedia.alt ?? "Section media"}
+              fill
+              className="object-contain p-2"
+              sizes="(max-width: 767px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+        {caption}
+      </div>
+    );
+  }
+
+  if (block.media.kind === "video") {
+    return (
+      <div key={key} className={mediaTopSpacing}>
+        <div className="relative min-h-[220px] overflow-hidden rounded-[0.85rem] bg-background/70 md:min-h-[320px]">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={block.media.src}
+            poster={block.media.poster}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls={false}
+            preload="metadata"
+            tabIndex={-1}
+            title={block.media.title}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/25" />
+        </div>
+        {caption}
+      </div>
+    );
+  }
+
+  if (block.media.width && block.media.height) {
+    return (
+      <div key={key} className={mediaTopSpacing}>
+        <Image
+          src={block.media.src}
+          alt={block.media.alt ?? "Section media"}
+          width={block.media.width}
+          height={block.media.height}
+          className="h-auto w-full rounded-[0.85rem]"
+          sizes="100vw"
+        />
+        {caption}
+      </div>
+    );
+  }
+
+  return (
+    <div key={key} className={mediaTopSpacing}>
+      <div className="relative h-[240px] overflow-hidden rounded-[0.85rem] bg-background/60 md:h-[360px]">
+        <Image
+          src={block.media.src}
+          alt={block.media.alt ?? "Section media"}
+          fill
+          className="object-contain p-2"
+          sizes="100vw"
+        />
+      </div>
+      {caption}
+    </div>
+  );
+}
+
+function renderLineWithLeadingEmphasis(line: string) {
+  const match = line.match(/^\*\*(.+?)\*\*(?:\s*)(.*)$/);
+  if (!match) {
+    return line;
+  }
+
+  const [, label, rest] = match;
+  return (
+    <>
+      <strong className="font-medium text-foreground">{label}</strong>
+      {rest ? (
+        <>
+          {" "}
+          <span>{rest}</span>
+        </>
+      ) : null}
+    </>
+  );
+}
+
+function renderSectionBody(lines: string[], inlineMedia?: ProjectDetailSectionInlineMedia[]) {
+  const blocksByParagraph = new Map<number, ProjectDetailSectionInlineMedia[]>();
+  const tightNextParagraphIndexes = new Set<number>();
+  inlineMedia?.forEach((block) => {
+    const existing = blocksByParagraph.get(block.afterParagraph) ?? [];
+    existing.push(block);
+    blocksByParagraph.set(block.afterParagraph, existing);
+    if (block.spacing === "tight") {
+      tightNextParagraphIndexes.add(block.afterParagraph);
+    }
+  });
+
+  return (
+    <>
+      {lines.map((line, index) => (
+        <div key={index}>
+          <BodyText
+            tone="secondary"
+            className={
+              index > 0 ? (tightNextParagraphIndexes.has(index) ? "mt-2" : "mt-3") : ""
+            }
+          >
+            {renderLineWithLeadingEmphasis(line)}
+          </BodyText>
+          {(blocksByParagraph.get(index + 1) ?? []).map((block, blockIndex) =>
+            renderInlineMediaBlock(block, `${index + 1}-${blockIndex}`)
+          )}
+        </div>
+      ))}
+      {(blocksByParagraph.get(0) ?? []).map((block, blockIndex) =>
+        renderInlineMediaBlock(block, `0-${blockIndex}`)
+      )}
+    </>
+  );
+}
+
 function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSection }) {
   if (section.type === "text") {
     return (
@@ -89,7 +242,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
         <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
           {section.title}
         </h2>
-        <div className="mt-4 max-w-3xl">{renderSectionBody(section.body)}</div>
+        <div className="mt-4 max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>
       </section>
     );
   }
@@ -100,7 +253,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
         <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
           {section.title}
         </h2>
-        <div className="mt-4 max-w-3xl">{renderSectionBody(section.body)}</div>
+        <div className="mt-4 max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>
         {section.bullets?.length ? (
           <ul className="mt-4 space-y-2 font-body text-base leading-relaxed text-text-secondary">
             {section.bullets.map((bullet) => (
@@ -124,11 +277,11 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
           {section.title}
         </h2>
         <div className="mt-5 grid gap-5 md:grid-cols-2 md:gap-6">
-          {mediaFirst ? renderMediaBlock(section) : <div className="max-w-3xl">{renderSectionBody(section.body)}</div>}
-          {mediaFirst ? <div className="max-w-3xl">{renderSectionBody(section.body)}</div> : renderMediaBlock(section)}
+          {mediaFirst ? renderMediaBlock(section) : <div className="max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>}
+          {mediaFirst ? <div className="max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div> : renderMediaBlock(section)}
         </div>
         {section.caption ? (
-          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-muted">{section.caption}</p>
+          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-secondary">{section.caption}</p>
         ) : null}
       </section>
     );
@@ -142,7 +295,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
         </h2>
         <div className="mt-5">{renderMediaBlock(section)}</div>
         {section.caption ? (
-          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-muted">{section.caption}</p>
+          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-secondary">{section.caption}</p>
         ) : null}
       </section>
     );
@@ -165,7 +318,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
           ))}
         </blockquote>
         {section.caption ? (
-          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-muted">{section.caption}</p>
+          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-secondary">{section.caption}</p>
         ) : null}
       </section>
     );
@@ -176,7 +329,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
       <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
         {section.title}
       </h2>
-      <div className="mt-4 max-w-3xl">{renderSectionBody(section.body)}</div>
+      <div className="mt-4 max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>
     </section>
   );
 }
@@ -192,6 +345,7 @@ export function ExperimentDetailShell({
   const hasRealCover = hasCoverAsset && !cover.includes("placeholder");
   const mediaBackground = hasRealCover ? `url(${cover})` : fallbackCover;
   const meta = getMetaValues(project);
+  const primaryCta = getPrimaryExternalCta(project);
   const sections = project.detailSections ?? [];
   const hasStructuredSections = sections.length > 0;
 
@@ -243,6 +397,16 @@ export function ExperimentDetailShell({
               <BodyText tone="secondary" className="mt-3 text-lg md:text-xl">
                 {subtitle}
               </BodyText>
+
+              {primaryCta ? (
+                <div className="mt-4">
+                  <Button asChild variant="primary">
+                    <a href={primaryCta.href} target="_blank" rel="noreferrer">
+                      {primaryCta.label}
+                    </a>
+                  </Button>
+                </div>
+              ) : null}
 
               <div
                 className="relative mt-6 min-h-[280px] overflow-hidden rounded-[0.95rem] bg-cover bg-center md:min-h-[460px]"
