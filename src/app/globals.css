@@ -42,6 +42,13 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    font-weight: 400;
+  }
+
+  .font-body strong,
+  .font-body b {
+    color: rgb(var(--color-foreground));
+    font-weight: 500;
   }
 
   a {

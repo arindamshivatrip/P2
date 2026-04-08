@@ -104,7 +104,7 @@ export function ContactMethods() {
                     <p className="truncate font-body text-[1.04rem] text-foreground/95">{method.primaryLine}</p>
                   ) : null}
                   {method.id === "email" && method.secondaryLine ? (
-                    <p className="mt-1 truncate font-body text-[0.72rem] tracking-[0.025em] text-text-muted/90">
+                    <p className="mt-1 truncate font-body text-[0.72rem] tracking-[0.025em] text-text-secondary">
                       {method.secondaryLine}
                     </p>
                   ) : (

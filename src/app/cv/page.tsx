@@ -42,7 +42,7 @@ export default function CvPage() {
 
         <div className="mt-11 max-w-6xl">
           <Eyebrow>{cvPageContent.secondaryLabel}</Eyebrow>
-          <BodyText tone="muted" className="mt-2.5 max-w-2xl text-sm">
+          <BodyText tone="secondary" className="mt-2.5 max-w-2xl text-sm font-normal">
             {cvPageContent.secondaryIntro}
           </BodyText>
 
@@ -69,7 +69,7 @@ export default function CvPage() {
         </div>
 
         <div className="mt-6 max-w-6xl border-t border-border/40 pt-4">
-          <BodyText tone="muted" className="max-w-3xl text-sm">
+          <BodyText tone="secondary" className="max-w-3xl text-sm font-normal">
             {cvPageContent.footerNote}
           </BodyText>
         </div>

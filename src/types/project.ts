@@ -121,6 +121,16 @@ export interface ProjectDetailSectionMedia {
   alt?: string;
   poster?: string;
   title?: string;
+  width?: number;
+  height?: number;
+}
+
+export interface ProjectDetailSectionInlineMedia {
+  afterParagraph: number;
+  media: ProjectDetailSectionMedia;
+  secondaryMedia?: ProjectDetailSectionMedia;
+  caption?: string;
+  spacing?: "default" | "tight";
 }
 
 export interface ProjectDetailSection {
@@ -132,6 +142,7 @@ export interface ProjectDetailSection {
   media?: ProjectDetailSectionMedia;
   caption?: string;
   layout?: ProjectDetailSectionLayout;
+  inlineMedia?: ProjectDetailSectionInlineMedia[];
 }
 
 export interface Project {
@@ -192,4 +203,8 @@ export interface Project {
   detailTemplate?: ExperimentDetailTemplate;
   detailMetadata?: ProjectDetailMetadata;
   detailSections?: ProjectDetailSection[];
+  detailBrandMark?: {
+    src: string;
+    alt: string;
+  };
 }

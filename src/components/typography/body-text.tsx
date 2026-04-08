@@ -17,7 +17,7 @@ export function BodyText<T extends ElementType = "p">({
   return (
     <Component
       className={cn(
-        "font-body text-base leading-relaxed",
+        "font-body font-light text-base leading-relaxed [&_b]:font-medium [&_b]:text-foreground [&_strong]:font-medium [&_strong]:text-foreground",
         tone === "default" && "text-foreground",
         tone === "secondary" && "text-text-secondary",
         tone === "muted" && "text-text-muted",
