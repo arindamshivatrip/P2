@@ -844,8 +844,8 @@ export const projects: Project[] = [
               kind: "image",
               src: "/images/experiments/snapt/grouped-flow.png",
               alt: "SnaPT trim and recovery architecture flow",
-              width: 1179,
-              height: 93
+              width: 4623,
+              height: 828
             },
             caption: "SnaPT trims the live working set and moves older turns into a recoverable layer."
           },
