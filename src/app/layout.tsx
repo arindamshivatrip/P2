@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 import { epoch, instrumentSerif, neueRegrade } from "@/app/fonts";
 import { siteMeta } from "@/data/site";
 import "./globals.css";
@@ -30,6 +31,7 @@ export default function RootLayout({
       className={`${neueRegrade.variable} ${instrumentSerif.variable} ${epoch.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground">
+        <CustomCursor />
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
           <div className="flex-1">{children}</div>

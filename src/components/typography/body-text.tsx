@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import { createElement, type ComponentPropsWithoutRef, type ElementType } from "react";
 import { cn } from "@/lib/utils";
 
 type BodyTextProps<T extends ElementType = "p"> = {
@@ -12,18 +12,16 @@ export function BodyText<T extends ElementType = "p">({
   tone = "default",
   ...props
 }: BodyTextProps<T>) {
-  const Component = as ?? "p";
+  const Component = (as ?? "p") as ElementType;
 
-  return (
-    <Component
-      className={cn(
-        "font-body font-light text-base leading-relaxed [&_b]:font-medium [&_b]:text-foreground [&_strong]:font-medium [&_strong]:text-foreground",
-        tone === "default" && "text-foreground",
-        tone === "secondary" && "text-text-secondary",
-        tone === "muted" && "text-text-muted",
-        className
-      )}
-      {...props}
-    />
-  );
+  return createElement(Component, {
+    className: cn(
+      "font-body font-light text-base leading-relaxed [&_b]:font-medium [&_b]:text-foreground [&_strong]:font-medium [&_strong]:text-foreground",
+      tone === "default" && "text-foreground",
+      tone === "secondary" && "text-text-secondary",
+      tone === "muted" && "text-text-muted",
+      className
+    ),
+    ...props
+  });
 }
