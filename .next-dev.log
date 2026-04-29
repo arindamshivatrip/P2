@@ -1,0 +1,62 @@
+
+> ari-portfolio@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.14
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.0.183:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling /experiments/resonance-field ...
+ ✓ Compiled /experiments/resonance-field in 7.6s (742 modules)
+ GET /experiments/resonance-field 200 in 8271ms
+ GET /experiments/resonance-field 200 in 2066ms
+ GET /experiments/resonance-field 200 in 127ms
+ GET /experiments/resonance-field 200 in 165ms
+ ✓ Compiled in 969ms (715 modules)
+ ✓ Compiled in 714ms (715 modules)
+ ✓ Compiled in 706ms (715 modules)
+ ✓ Compiled in 644ms (715 modules)
+ ✓ Compiled in 909ms (715 modules)
+ ✓ Compiled in 618ms (715 modules)
+ ✓ Compiled in 561ms (715 modules)
+ ✓ Compiled in 655ms (715 modules)
+ ✓ Compiled in 1191ms (715 modules)
+ ✓ Compiled in 806ms (715 modules)
+ GET /experiments/resonance-field 200 in 206ms
+ ○ Compiling / ...
+ ✓ Compiled / in 3.1s (1518 modules)
+ GET / 200 in 3673ms
+ GET /experiments/resonance-field 200 in 105ms
+ GET /experiments/resonance-field 200 in 141ms
+ ✓ Compiled in 1050ms (1116 modules)
+ ✓ Compiled in 683ms (1116 modules)
+ ✓ Compiled in 671ms (1116 modules)
+ ✓ Compiled in 716ms (1116 modules)
+ ✓ Compiled in 954ms (1116 modules)
+ ✓ Compiled in 670ms (1116 modules)
+ ✓ Compiled in 830ms (1116 modules)
+ ✓ Compiled in 648ms (1116 modules)
+ ✓ Compiled in 690ms (1116 modules)
+ ✓ Compiled in 636ms (1116 modules)
+ ✓ Compiled in 873ms (1116 modules)
+ ✓ Compiled in 689ms (1116 modules)
+ ✓ Compiled in 692ms (1116 modules)
+ ✓ Compiled in 843ms (1116 modules)
+ ✓ Compiled in 766ms (1116 modules)
+ ✓ Compiled in 685ms (1116 modules)
+ ✓ Compiled in 870ms (1116 modules)
+ GET /experiments/resonance-field 200 in 131ms
+ GET /experiments/resonance-field 200 in 62ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 823ms (838 modules)
+ ✓ Compiled in 1177ms (718 modules)
+ GET /work 200 in 3171ms
+ GET /experiments 200 in 3174ms
+ GET /about 200 in 3176ms
+ GET /contact 200 in 3175ms
+ GET / 200 in 3190ms
+ ○ Compiling /cv ...
+ ✓ Compiled /cv in 577ms (1655 modules)
+ GET /cv 200 in 694ms
