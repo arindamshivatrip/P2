@@ -79,3 +79,87 @@
     background: rgba(102, 95, 85, 0.62);
   }
 }
+
+@layer utilities {
+  .resonance-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(54px);
+    opacity: 0.48;
+    transform: translate3d(0, 0, 0);
+    animation: resonance-orb-drift 24s ease-in-out infinite alternate;
+  }
+
+  .resonance-orb-a {
+    left: 8%;
+    top: 18%;
+    width: 18rem;
+    height: 18rem;
+    background: rgba(170, 184, 255, 0.22);
+  }
+
+  .resonance-orb-b {
+    right: 11%;
+    top: 23%;
+    width: 16rem;
+    height: 16rem;
+    background: rgba(184, 240, 255, 0.16);
+    animation-delay: -9s;
+  }
+
+  .resonance-orb-c {
+    bottom: 4%;
+    left: 42%;
+    width: 22rem;
+    height: 22rem;
+    background: rgba(170, 184, 255, 0.11);
+    animation-delay: -15s;
+  }
+
+  .resonance-drift-dot {
+    position: absolute;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 9999px;
+    background: rgba(245, 247, 250, 0.64);
+    box-shadow: 0 0 18px rgba(184, 240, 255, 0.38);
+    animation: resonance-dot-drift 22s linear infinite;
+  }
+}
+
+@keyframes resonance-orb-drift {
+  from {
+    transform: translate3d(-0.75rem, -0.5rem, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1rem, 0.75rem, 0) scale(1.06);
+  }
+}
+
+@keyframes resonance-dot-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0.75rem, 0);
+  }
+
+  18% {
+    opacity: 0.7;
+  }
+
+  82% {
+    opacity: 0.45;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(1.5rem, -2rem, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resonance-orb,
+  .resonance-drift-dot {
+    animation: none;
+  }
+}
