@@ -1,0 +1,14 @@
+
+> ari-portfolio@0.1.0 dev
+> next dev -p 3000
+
+   ▲ Next.js 15.5.14
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.0.183:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.3s
+ ○ Compiling /experiments/interactive-gallery ...
+ ✓ Compiled /experiments/interactive-gallery in 3.4s (2580 modules)
+ GET /experiments/interactive-gallery 200 in 4531ms
+ GET /experiments/interactive-gallery 200 in 163ms
