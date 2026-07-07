@@ -11,7 +11,7 @@ export const contactContent = {
   eyebrow: "Contact",
   heading: "Open to thoughtful collaboration.",
   supporting:
-    "I’m currently based in the U.S. and pursuing my master’s in human-computer interaction. I’m open to internships, full-time opportunities, and collaborations across human-centered systems, interaction design, and AI-enabled products.",
+    "I’m based in the U.S., finishing my master’s in human-computer interaction at the University of Maryland. I’m looking for 2026 internships and full-time roles in product design engineering, human-AI interaction, UX engineering, and XR prototyping — and I’m always open to research collaborations.",
   primaryCta: {
     label: "Email me",
     href: "mailto:aritrip@umd.edu"
@@ -21,7 +21,7 @@ export const contactContent = {
     href: "/cv"
   },
   methodsHeading: "Reach me directly",
-  personalLine: "Email is best for conversation, with LinkedIn and GitHub for profile and work.",
+  personalLine: "Email is fastest — I usually reply within a day. LinkedIn and GitHub for profile and code.",
   methods: [
     {
       id: "email",

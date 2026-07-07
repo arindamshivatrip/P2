@@ -9,7 +9,7 @@ export const projects: Project[] = [
     slug: "loreal-ml-planning-suite",
     title: "ML Planning Suite for APAC Markets",
     oneLiner:
-      "A decision-support tool suite for promotion planning used across APAC markets.",
+      "A decision-support tool suite for promotion planning, used by 200+ commercial users across APAC markets.",
     summary:
       "At L’Oréal, I worked on ML-backed planning tools and analytics interfaces that helped commercial teams make faster, more consistent planning decisions across multiple APAC markets. The public version focuses on scope, contribution, and outcomes rather than internal product details.",
     section: "work",

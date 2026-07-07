@@ -28,7 +28,8 @@ const config: Config = {
         button: "var(--radius-button)"
       },
       boxShadow: {
-        card: "var(--shadow-card)"
+        card: "var(--shadow-card)",
+        "card-hover": "var(--shadow-card-hover)"
       }
     }
   },

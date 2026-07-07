@@ -143,7 +143,7 @@ export async function WorkGrid({ section, activeFilter }: WorkGridProps) {
           columnClassName="space-y-4 pl-4 md:space-y-5 md:pl-5"
         >
           {featuredTileOrder.map((tile) => (
-            <Reveal key={tile.project.id} delay={tile.delay}>
+            <Reveal key={tile.project.id} delay={tile.delay} amount={0.05}>
               <ProjectTile
                 project={tile.project}
                 variant={tile.variant}

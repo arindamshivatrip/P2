@@ -38,6 +38,14 @@ export const pageSlide: Variants = {
   }
 };
 
+// The only spring configs allowed in components — new interactions pick one
+// of these rather than defining inline physics (see INTERACTION_SYSTEM_PLAN.md).
+export const springs = {
+  snappy: { stiffness: 420, damping: 32, mass: 0.6 },
+  settle: { stiffness: 180, damping: 12, mass: 1 },
+  follow: { stiffness: 260, damping: 28, mass: 0.5 }
+} as const;
+
 export const hoverLift = {
   whileHover: { y: -4, transition: { duration: 0.2, ease: "easeOut" as const } },
   whileTap: { y: -1, transition: { duration: 0.15 } }

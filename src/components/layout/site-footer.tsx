@@ -16,17 +16,27 @@ export function SiteFooter() {
               aria-label="Footer"
               className="flex flex-wrap items-center gap-2 font-body text-sm text-text-secondary md:justify-end"
             >
-              <Link href="#" className="hover:text-foreground">
+              <a
+                href="https://www.linkedin.com/in/arindamtrip/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground"
+              >
                 LinkedIn
-              </Link>
+              </a>
               <span aria-hidden="true">·</span>
-              <Link href="mailto:arindamtrip@gmail.com" className="hover:text-foreground">
+              <a href="mailto:aritrip@umd.edu" className="hover:text-foreground">
                 Email
-              </Link>
+              </a>
               <span aria-hidden="true">·</span>
-              <Link href="#" className="hover:text-foreground">
+              <a
+                href="https://github.com/arindamshivatrip"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground"
+              >
                 GitHub
-              </Link>
+              </a>
               <span aria-hidden="true">·</span>
               <Link href="/cv" className="hover:text-foreground">
                 CV

@@ -20,7 +20,7 @@ export function ExperimentArtifactTile({ project, hasCoverAsset }: ExperimentArt
 
   return (
     <Link href={getProjectDestinationHref(project)} className="group block h-full">
-      <article className="h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_30px_rgba(38,31,24,0.12)] md:p-6">
+      <article className="h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-hover md:p-6">
         <p className="font-body text-[0.64rem] uppercase tracking-[0.13em] text-text-muted">{metaLine}</p>
 
         <h3 className="mt-4 font-display text-4xl leading-tight tracking-tight">{project.title}</h3>
