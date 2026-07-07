@@ -1,4 +1,5 @@
 import { BodyText } from "@/components/typography/body-text";
+import { ProjectCardVisual } from "@/components/ui/project-card-visual";
 import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
@@ -33,62 +34,32 @@ export function ProjectCard({
   return (
     <article
       className={cn(
-        "group rounded-card p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(38,31,24,0.14),0_4px_10px_rgba(38,31,24,0.06)]",
+        "group rounded-card p-4 transition-all duration-300 motion-safe:hover:-translate-y-1 hover:shadow-card-hover",
         interactive && "cursor-pointer focus-within:ring-2 focus-within:ring-accent/40",
         toneStyles[tone],
         className
       )}
     >
-      {visualVideoSrc ? (
-        <div
-          className={cn(
-            "relative overflow-hidden rounded-[0.75rem] bg-background/55 transition-transform duration-300 group-hover:scale-[1.015]",
-            visualClassName
-          )}
-          aria-hidden="true"
-        >
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            src={visualVideoSrc}
-            autoPlay
-            loop
-            muted
-            playsInline
-            controls={false}
-            preload="metadata"
-            tabIndex={-1}
-            title={visualVideoTitle}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0f1e47]/50 via-transparent to-[#ff8a4c]/35" />
-        </div>
-      ) : (
-        <div
-          className={cn(
-            "rounded-[0.75rem] bg-background/55 transition-transform duration-300 group-hover:scale-[1.015]",
-            visualClassName
-          )}
-        />
-      )}
+      <ProjectCardVisual
+        className={visualClassName}
+        videoSrc={visualVideoSrc}
+        videoTitle={visualVideoTitle}
+      />
       <h3 className="mt-4 font-display text-2xl tracking-tight">{title}</h3>
       <BodyText tone="secondary" className="mt-3">
         {summary}
       </BodyText>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-background/65 px-2.5 py-1 font-body text-[0.68rem] uppercase tracking-[0.12em] text-text-secondary"
-          >
-            {tag}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <p className="font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted">
+          {tags.join(" · ")}
+        </p>
+        {interactive ? (
+          <span className="inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.12em] text-text-muted">
+            <span>Open details</span>
+            <span aria-hidden="true">+</span>
           </span>
-        ))}
+        ) : null}
       </div>
-      {interactive ? (
-        <div className="mt-4 inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.12em] text-text-muted">
-          <span>Open details</span>
-          <span aria-hidden="true">+</span>
-        </div>
-      ) : null}
     </article>
   );
 }

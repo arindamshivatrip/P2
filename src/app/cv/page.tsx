@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
@@ -6,6 +7,12 @@ import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Eyebrow } from "@/components/typography/eyebrow";
 import { cvPageContent, cvVersions } from "@/data/cv";
+
+export const metadata: Metadata = {
+  title: "CV — Arindam Tripathi",
+  description:
+    "Focused CV versions for AI systems, UX engineering, UX research, XR, and software roles."
+};
 
 export default function CvPage() {
   return (

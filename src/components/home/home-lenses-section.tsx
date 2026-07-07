@@ -1,39 +1,38 @@
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
-import { Eyebrow } from "@/components/typography/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
-import { lensItems, lensesContent } from "@/data/home";
+import { lensesContent, lensesStatement } from "@/data/home";
 
 export function HomeLensesSection() {
   return (
     <Section className="pt-5 md:pt-6 pb-8 md:pb-10">
       <Container>
-        <div className="rounded-[1.25rem] bg-surface p-6 shadow-card md:p-10">
+        <div className="border-t border-border pt-10 md:pt-14">
           <Reveal>
             <DisplayHeading as="h2" className="text-4xl md:text-[3.15rem]">
               {lensesContent.headingLineOne}
               <br />
               <span className="font-serif italic">{lensesContent.headingLineTwo}</span>
             </DisplayHeading>
-            <BodyText tone="secondary" className="mt-5 max-w-3xl">
-              {lensesContent.intro}
-            </BodyText>
           </Reveal>
 
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {lensItems.map((lens, index) => (
-              <Reveal key={lens.id} delay={index * 0.05}>
-                <article className="h-full rounded-card bg-background/75 p-4 shadow-[0_10px_24px_rgba(38,31,24,0.08)] transition-shadow hover:shadow-[0_14px_28px_rgba(38,31,24,0.12)]">
-                  <Eyebrow className="text-accent/90">{lens.title}</Eyebrow>
-                  <BodyText tone="secondary" className="mt-3 text-sm leading-relaxed">
-                    {lens.body}
-                  </BodyText>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={0.08}>
+            <p className="mt-8 max-w-[38ch] font-display text-[clamp(1.5rem,2.6vw,2.3rem)] leading-[1.32] tracking-tight text-foreground md:mt-10">
+              {lensesStatement.map((segment, index) =>
+                segment.accent ? (
+                  <em
+                    key={index}
+                    className="font-serif italic underline decoration-accent decoration-[0.1em] underline-offset-[0.22em]"
+                  >
+                    {segment.text}
+                  </em>
+                ) : (
+                  <span key={index}>{segment.text}</span>
+                )
+              )}
+            </p>
+          </Reveal>
         </div>
       </Container>
     </Section>

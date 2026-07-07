@@ -14,6 +14,7 @@ export const navItems: NavItem[] = [
 
 export const siteMeta = {
   title: "Arindam Tripathi - Builder, researcher, technologist",
-  description: "A modular portfolio scaffold focused on systems, storytelling, and interaction.",
+  description:
+    "Arindam Tripathi — designer-engineer building human-centered AI systems, interfaces, and XR experiences. HCI master's at the University of Maryland; previously L'Oréal Singapore.",
   owner: "Ari"
 };

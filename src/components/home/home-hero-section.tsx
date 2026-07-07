@@ -1,55 +1,48 @@
 import Link from "next/link";
+import { HeroAccentRule } from "@/components/home/hero-accent-rule";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
 import { heroContent } from "@/data/home";
 
 export function HomeHeroSection() {
   return (
     <Section spacing="hero" className="pb-8 md:pb-10">
       <Container>
-        <div className="relative grid gap-8 md:grid-cols-12 md:gap-8">
-          <div className="absolute -left-4 top-20 -z-10 hidden h-56 w-56 rounded-full bg-accent/6 blur-3xl md:block" />
-          <div className="md:col-span-8 lg:col-span-8">
-            <Reveal amount={0.2}>
-              <DisplayHeading className="max-w-[14ch] text-5xl leading-[0.95] md:text-7xl lg:text-[5.2rem]">
-                I&apos;m Arindam.
-                <br />
-                I <span className="font-serif italic text-accent">design</span> and{" "}
-                <span className="font-serif italic text-accent">build</span>
-                <br />
-                systems for people.
-              </DisplayHeading>
-              <BodyText tone="secondary" className="mt-5 max-w-[58ch] text-[1.02rem]">
-                {heroContent.supporting}
-              </BodyText>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Button asChild>
-                  <Link href="/contact">{heroContent.primaryCta}</Link>
-                </Button>
-              </div>
-            </Reveal>
-          </div>
+        <div className="flex flex-col justify-center md:min-h-[max(26rem,calc(100svh-16rem))]">
+          <DisplayHeading className="text-[11vw] leading-[0.98] sm:text-[3.4rem] md:text-[8.8vw] xl:text-[7.75rem]">
+            <TextReveal
+              lines={[
+                <span key="line-1">I&apos;m Arindam.</span>,
+                <span key="line-2">
+                  I <span className="font-serif italic text-accent">design</span> and{" "}
+                  <span className="font-serif italic text-accent">build</span>
+                </span>,
+                <span key="line-3">systems for people.</span>
+              ]}
+            />
+          </DisplayHeading>
 
-          <div className="md:col-span-4 lg:col-span-4 md:flex md:items-start md:pt-1">
-            <Reveal className="w-full" delay={0.08}>
-              <aside className="rounded-card bg-surface p-6 shadow-card backdrop-blur-sm">
-                <ul className="space-y-4">
-                  {heroContent.panel.map((line) => (
-                    <li
-                      key={line}
-                      className="font-body text-sm leading-relaxed text-text-secondary last:border-t last:border-border/80 last:pt-4"
-                    >
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-            </Reveal>
-          </div>
+          <HeroAccentRule className="mt-6 max-w-[36rem] md:mt-8" />
+
+          <Reveal delay={0.4}>
+            <BodyText tone="secondary" className="mt-6 max-w-[58ch] text-[1.05rem] md:mt-7">
+              {heroContent.supporting}
+            </BodyText>
+          </Reveal>
+
+          <Reveal delay={0.5}>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+              <Button asChild>
+                <Link href="/contact">{heroContent.primaryCta}</Link>
+              </Button>
+              <p className="font-body text-sm text-text-muted">{heroContent.signal}</p>
+            </div>
+          </Reveal>
         </div>
       </Container>
     </Section>

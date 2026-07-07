@@ -27,8 +27,8 @@ export function AboutHero() {
           <div className="pt-1 md:pt-2">
             <Eyebrow>About</Eyebrow>
             <DisplayHeading as="h1" className="mt-3 max-w-[18ch] text-5xl leading-[0.98] md:text-6xl">
-              I design and build{" "}
-              <span className="font-serif italic text-accent">human-centered</span> systems.
+              Engineering taught me how.{" "}
+              <span className="font-serif italic text-accent">People</span> taught me why.
             </DisplayHeading>
             <BodyText tone="secondary" className="mt-4 max-w-3xl text-[1.02rem]">
               {aboutContent.openingIdea}

@@ -18,7 +18,7 @@ export function ProjectTileRail({ project, hasCoverAsset }: ProjectTileRailProps
   return (
     <Link
       href={getProjectDestinationHref(project)}
-      className="group block h-[31rem] w-[18.25rem] shrink-0 snap-start rounded-[1rem] bg-surface p-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_30px_rgba(38,31,24,0.11)] sm:w-[19rem] md:w-[19.5rem]"
+      className="group block h-[31rem] w-[18.25rem] shrink-0 snap-start rounded-[1rem] bg-surface p-4 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover sm:w-[19rem] md:w-[19.5rem]"
     >
       <article className="flex h-full flex-col">
         <div
@@ -32,8 +32,13 @@ export function ProjectTileRail({ project, hasCoverAsset }: ProjectTileRailProps
         />
 
         <div className="mt-4 min-h-[0.95rem] flex items-center gap-3 font-body text-[0.66rem] uppercase tracking-[0.12em] text-text-muted">
-          <span className="truncate">{statusLabel}</span>
-          <span>{project.meta.year}</span>
+          <span className="shrink-0">{statusLabel}</span>
+          <span className="shrink-0">{project.meta.year}</span>
+          {project.meta.org ? (
+            <span className="min-w-0 flex-1 truncate border-l border-border/70 pl-3">
+              {project.meta.org}
+            </span>
+          ) : null}
         </div>
 
         <h3 className="mt-2 min-h-[4.4rem] overflow-hidden font-display text-[1.9rem] leading-tight tracking-tight [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">

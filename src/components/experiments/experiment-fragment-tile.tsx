@@ -21,7 +21,7 @@ export function ExperimentFragmentTile({
 
   return (
     <Link href={getProjectDestinationHref(project)} className="group block h-full">
-      <article className="h-full rounded-[0.95rem] bg-surface p-4 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_24px_rgba(38,31,24,0.11)]">
+      <article className="h-full rounded-[0.95rem] bg-surface p-4 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-hover">
         <div
           className="h-[8.5rem] rounded-[0.7rem] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.01]"
           style={{

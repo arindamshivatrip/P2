@@ -23,7 +23,7 @@ export function ProjectTileFeatured({ project, hasCoverAsset = false }: ProjectT
   return (
     <Link
       href={getProjectDestinationHref(project)}
-      className="group block h-full rounded-[1rem] bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(38,31,24,0.14),0_4px_10px_rgba(38,31,24,0.06)]"
+      className="group block h-full rounded-[1rem] bg-surface shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
     >
       <article className="flex h-full flex-col p-5 md:p-6">
         <div

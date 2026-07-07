@@ -13,7 +13,7 @@ export function ProjectTileConfidential({ project }: ProjectTileConfidentialProp
   return (
     <Link
       href={getProjectDestinationHref(project)}
-      className="group block h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_30px_rgba(38,31,24,0.12)] md:p-6"
+      className="group block h-full rounded-[1rem] bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover md:p-6"
     >
       <article className="flex h-full flex-col">
         <div className="flex items-center gap-4 font-body text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">
