@@ -2,13 +2,14 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
+import { TextReveal } from "@/components/ui/text-reveal";
 
 export function WorkHeader() {
   return (
     <Section spacing="compact" className="pb-4 md:pb-5">
       <Container>
-        <DisplayHeading as="h1" className="text-5xl md:text-7xl">
-          Work
+        <DisplayHeading as="h1" className="text-[17vw] leading-[0.95] sm:text-6xl md:text-[7.5vw] xl:text-[6.5rem]">
+          <TextReveal lines={[<span key="work">Work</span>]} />
         </DisplayHeading>
         <BodyText tone="secondary" className="mt-4 max-w-[62ch]">
           Case studies across AI systems, interaction design, research, and XR — with

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ExperimentsGrid } from "@/components/experiments/experiments-grid";
 import { ExperimentsHeader } from "@/components/experiments/experiments-header";
+import { ExperimentsLab } from "@/components/experiments/experiments-lab";
 
 export const metadata: Metadata = {
   title: "Experiments — Arindam Tripathi",
@@ -11,7 +11,7 @@ export default function ExperimentsPage() {
   return (
     <>
       <ExperimentsHeader />
-      <ExperimentsGrid />
+      <ExperimentsLab />
     </>
   );
 }

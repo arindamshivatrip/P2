@@ -1,168 +1,63 @@
 import { Container } from "@/components/layout/container";
-import { ResponsiveMasonry } from "@/components/layout/responsive-masonry";
 import { Section } from "@/components/layout/section";
-import { Reveal } from "@/components/ui/reveal";
-import {
-  getVisibleProjectsBySection,
-  getFeaturedProjectsBySection
-} from "@/data/projects";
-import { ProjectTile } from "@/components/work/project-tile";
-import { WorkArchiveRail } from "@/components/work/work-archive-rail";
-import type { Project, ProjectSection } from "@/types/project";
+import { getFallbackCoverImage } from "@/components/work/tile-media";
+import { WorkIndex, type WorkIndexItem } from "@/components/work/work-index";
+import { getProjectDestinationHref, getVisibleProjectsBySection } from "@/data/projects";
 import { getProjectAssetAvailability } from "@/lib/project-assets.server";
+import type { Project, ProjectSection } from "@/types/project";
 
 type WorkGridProps = {
   section: ProjectSection;
-  activeFilter: string;
 };
 
-const matchesFilter = (project: Project, filter: string): boolean => {
-  if (filter === "all") {
-    return true;
+// Honest, single-word context per project — derived, never hand-badged.
+function getStatusLabel(project: Project): string {
+  if (project.nda?.isRestricted) {
+    return "Confidential";
   }
-
-  if (filter === "ai") {
-    return project.categories.includes("AI Systems");
+  if (project.entryType === "research") {
+    return "Research";
   }
-
-  if (filter === "interaction") {
-    return project.categories.includes("Interaction Design");
+  if (project.status === "In Progress") {
+    return "In progress";
   }
-
-  if (filter === "research") {
-    return project.categories.includes("Research");
+  if (project.status === "Case Study") {
+    return "Case study";
   }
+  return project.status;
+}
 
-  if (filter === "xr") {
-    return (
-      project.categories.includes("XR / Spatial") || project.categories.includes("Mobile AR")
-    );
-  }
+export async function WorkGrid({ section }: WorkGridProps) {
+  const visible = getVisibleProjectsBySection(section);
 
-  return true;
-};
-
-const pickFirst = (
-  source: Project[],
-  used: Set<string>,
-  matcher: (project: Project) => boolean
-): Project | undefined => {
-  const found = source.find((project) => !used.has(project.id) && matcher(project));
-  if (found) {
-    used.add(found.id);
-  }
-  return found;
-};
-
-export async function WorkGrid({ section, activeFilter }: WorkGridProps) {
-  const visible = getVisibleProjectsBySection(section).filter((project) =>
-    matchesFilter(project, activeFilter)
+  const items: WorkIndexItem[] = await Promise.all(
+    visible.map(async (project) => {
+      const availability = await getProjectAssetAvailability(project);
+      return {
+        id: project.id,
+        href: getProjectDestinationHref(project),
+        title: project.title,
+        oneLiner: project.oneLiner,
+        year: project.meta.year,
+        org: project.meta.org,
+        statusLabel: getStatusLabel(project),
+        categories: project.categories,
+        featured: project.featured,
+        fallbackGradient: getFallbackCoverImage(project, "standard"),
+        cover: availability.coverImage ? project.coverImage : undefined,
+        video: availability.video ? project.video?.src : undefined
+      };
+    })
   );
-  const featured = getFeaturedProjectsBySection(section).filter((project) =>
-    matchesFilter(project, activeFilter)
-  );
-  const used = new Set<string>();
 
-  const flagship = pickFirst(featured, used, () => true) ?? visible[0];
-  if (flagship) {
-    used.add(flagship.id);
-  }
-
-  const researchTile = pickFirst(visible, used, (project) => project.entryType === "research");
-  const confidentialTile = pickFirst(
-    visible,
-    used,
-    (project) => project.visibility === "confidential-summary"
-  );
-  const shootItTile = pickFirst(
-    visible,
-    used,
-    (project) => project.slug === "shoot-it-ar-laser-tag-system"
-  );
-  const engineeringTile = pickFirst(
-    visible,
-    used,
-    (project) => project.categories.includes("Engineering")
-  );
-  const xrTile = pickFirst(
-    visible,
-    used,
-    (project) => project.slug === "vr-heatstroke-education-simulator"
-  ) ??
-    pickFirst(visible, used, (project) => project.categories.includes("XR / Spatial"));
-  const utilityTile = pickFirst(visible, used, () => true);
-
-  if (!flagship) {
+  if (items.length === 0) {
     return null;
   }
-
-  const selectedProjects = [
-    flagship,
-    researchTile,
-    confidentialTile,
-    shootItTile ?? engineeringTile,
-    xrTile,
-    utilityTile
-  ].filter((project): project is Project => Boolean(project));
-
-  const availabilityEntries = await Promise.all(
-    visible.map(async (project) => [
-      project.id,
-      await getProjectAssetAvailability(project)
-    ] as const)
-  );
-
-  const availability = new Map(availabilityEntries);
-  const hasCover = (project: Project): boolean =>
-    availability.get(project.id)?.coverImage ?? false;
-
-  const selectedIds = new Set(selectedProjects.map((project) => project.id));
-  const remainingProjects = visible.filter((project) => !selectedIds.has(project.id));
-  const featuredTileOrder = [
-    { project: flagship, variant: "featured" as const, delay: 0 },
-    { project: researchTile, variant: "research" as const, delay: 0.06 },
-    { project: confidentialTile, variant: "confidential" as const, delay: 0.1 },
-    { project: shootItTile ?? engineeringTile, variant: "assertive" as const, delay: 0.14 },
-    { project: xrTile, variant: "immersive" as const, delay: 0.18 },
-    { project: utilityTile, variant: "utility" as const, delay: 0.22 }
-  ].filter(
-    (
-      tile
-    ): tile is {
-      project: Project;
-      variant: "featured" | "research" | "confidential" | "assertive" | "immersive" | "utility";
-      delay: number;
-    } => Boolean(tile.project)
-  );
 
   return (
     <Section spacing="compact" className="pt-0">
       <Container>
-        <ResponsiveMasonry
-          className="-ml-4 flex w-auto md:-ml-5"
-          columnClassName="space-y-4 pl-4 md:space-y-5 md:pl-5"
-        >
-          {featuredTileOrder.map((tile) => (
-            <Reveal key={tile.project.id} delay={tile.delay} amount={0.05}>
-              <ProjectTile
-                project={tile.project}
-                variant={tile.variant}
-                hasCoverAsset={hasCover(tile.project)}
-              />
-            </Reveal>
-          ))}
-        </ResponsiveMasonry>
-
-        {remainingProjects.length > 0 ? (
-          <Reveal delay={0.18}>
-            <WorkArchiveRail
-              items={remainingProjects.map((project) => ({
-                project,
-                hasCoverAsset: hasCover(project)
-              }))}
-            />
-          </Reveal>
-        ) : null}
+        <WorkIndex items={items} />
       </Container>
     </Section>
   );

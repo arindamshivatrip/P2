@@ -4,6 +4,8 @@ import { Container } from "@/components/layout/container";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Section } from "@/components/layout/section";
 import { ExperimentBackLink } from "@/components/experiments/experiment-back-link";
+import { ExperimentStamp } from "@/components/experiments/experiment-stamp";
+import { getExperimentStamp } from "@/components/experiments/experiment-meta";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 import type { Project, ProjectDetailSection, ProjectDetailSectionInlineMedia } from "@/types/project";
@@ -386,9 +388,12 @@ export function ExperimentDetailShell({
             ) : null}
 
             <div className="min-w-0">
-              <p className="font-body text-[0.66rem] uppercase tracking-[0.13em] text-text-muted">
-                {getProjectTypeLine(project)}
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="font-body text-[0.66rem] uppercase tracking-[0.13em] text-text-muted">
+                  {getProjectTypeLine(project)}
+                </p>
+                <ExperimentStamp label={getExperimentStamp(project)} />
+              </div>
 
               <DisplayHeading as="h1" className="mt-3 text-5xl md:text-[4rem]">
                 {project.title}

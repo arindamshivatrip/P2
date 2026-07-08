@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorkDetailShell } from "@/components/work/work-detail-shell";
-import { getProjectBySlug, getProjectsBySection } from "@/data/projects";
+import {
+  getProjectBySlug,
+  getProjectsBySection,
+  getVisibleProjectsBySection,
+  getWorkDetailHref
+} from "@/data/projects";
 import { getProjectAssetAvailability } from "@/lib/project-assets.server";
 
 type WorkDetailPageProps = {
@@ -40,11 +45,19 @@ export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
 
   const availability = await getProjectAssetAvailability(project);
 
+  const visibleWork = getVisibleProjectsBySection("work");
+  const currentIndex = visibleWork.findIndex((entry) => entry.id === project.id);
+  const next =
+    currentIndex >= 0 && visibleWork.length > 1
+      ? visibleWork[(currentIndex + 1) % visibleWork.length]
+      : undefined;
+
   return (
     <WorkDetailShell
       project={project}
       hasCoverAsset={availability.coverImage}
       hasVideoAsset={availability.video}
+      nextProject={next ? { title: next.title, href: getWorkDetailHref(next.slug) } : undefined}
     />
   );
 }

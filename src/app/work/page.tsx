@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { WorkCta } from "@/components/work/work-cta";
-import { WorkFilters } from "@/components/work/work-filters";
 import { WorkGrid } from "@/components/work/work-grid";
 import { WorkHeader } from "@/components/work/work-header";
 
@@ -10,19 +10,14 @@ export const metadata: Metadata = {
     "Case studies across AI systems, interaction design, research, and XR — including work at L'Oréal Singapore and the University of Maryland."
 };
 
-type WorkPageProps = {
-  searchParams?: Promise<{ focus?: string }>;
-};
-
-export default async function WorkPage({ searchParams }: WorkPageProps) {
-  const params = (await searchParams) ?? {};
-  const focus = params.focus ?? "all";
-
+export default function WorkPage() {
   return (
     <>
       <WorkHeader />
-      <WorkFilters activeFilter={focus} />
-      <WorkGrid activeFilter={focus} section="work" />
+      {/* Suspense lets the client index read ?focus= while the page stays static */}
+      <Suspense fallback={null}>
+        <WorkGrid section="work" />
+      </Suspense>
       <WorkCta />
     </>
   );

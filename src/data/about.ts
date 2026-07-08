@@ -46,10 +46,10 @@ export const aboutGalleryItems: AboutGalleryItem[] = [
 
 export const aboutContent = {
   openingIdea:
-    "I design and build human-centered systems that balance technical rigor with real human needs.",
+    "One through-line: I build interactive systems — AI tools, XR prototypes, data products — and study how people actually use them.",
   introParagraphs: [
-    "My work sits at the intersection of HCI, data, and interactive systems - spanning immersive XR experiences, ML-driven web applications, and qualitative research. I am especially interested in how technology shapes behavior, attention, and well-being, and how design can make those interactions more intentional rather than overwhelming.",
-    "I am currently pursuing a Master's in Human-Computer Interaction at the University of Maryland, building on a background in computer engineering, product development, and data-driven systems work across L'Oreal Singapore and SP Digital."
+    "The work spans HCI research, XR prototyping, and data-heavy product engineering — ML planning tools used by real commercial teams, multiplayer AR built on physical hardware, diary studies on smartphone habits. What ties it together is a habit of caring about behavior: how a tool changes what someone pays attention to, and whether that change is good for them. Accessibility and real-world constraints are part of that, not an afterthought.",
+    "Right now I'm doing a Master's in Human-Computer Interaction at the University of Maryland, on top of a computer engineering degree from NUS and a few years of shipping data and product systems at L'Oréal Singapore and SP Digital."
   ],
   snapshot: [
     {
