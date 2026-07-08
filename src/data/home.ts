@@ -9,6 +9,37 @@ export const heroContent = {
   signal: "MS HCI at the University of Maryland · previously L'Oréal Singapore & SP Digital"
 };
 
+export type HeroTrailFragment =
+  | { kind: "tile"; label: string; gradient: string; src?: string; alt?: string }
+  | { kind: "word"; text: string };
+
+// Gradient families for the trail tiles — drawn from the app's navy→orange
+// identity, varied so adjacent projects never share a wash. Full literal class
+// strings so Tailwind's content scan picks up the arbitrary values.
+const trailGradients = {
+  navyOrange: "bg-gradient-to-br from-[#0f1e47] via-[#2a2550] to-[#ff8a4c]",
+  ember: "bg-gradient-to-br from-[#ff8a4c] via-[#b1472a] to-[#3a1b16]",
+  plum: "bg-gradient-to-br from-[#4a2540] via-[#6b2f45] to-[#ff8a4c]",
+  night: "bg-gradient-to-br from-[#0b1533] via-[#241a4a] to-[#4a2a6a]",
+  dusk: "bg-gradient-to-tr from-[#12203f] via-[#5a3a5c] to-[#ff9d5c]"
+} as const;
+
+// Flow-follow trail deck: minimal project tiles (short company/category labels)
+// with a few italic craft words as secondary accents. Add an optional `src` to
+// a tile later to render a real crop in place of the gradient.
+export const heroTrailFragments: HeroTrailFragment[] = [
+  { kind: "tile", label: "L'ORÉAL", gradient: trailGradients.navyOrange },
+  { kind: "word", text: "prototype" },
+  { kind: "tile", label: "NIANTIC", gradient: trailGradients.night },
+  { kind: "tile", label: "VR", gradient: trailGradients.ember },
+  { kind: "word", text: "research" },
+  { kind: "tile", label: "SHOPEE", gradient: trailGradients.plum },
+  { kind: "tile", label: "DATA", gradient: trailGradients.dusk },
+  { kind: "tile", label: "AR", gradient: trailGradients.navyOrange },
+  { kind: "word", text: "build" },
+  { kind: "tile", label: "UX", gradient: trailGradients.ember }
+];
+
 export const projectsContent = {
   title: "Selected Work"
 };
