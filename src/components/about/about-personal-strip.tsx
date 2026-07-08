@@ -1,30 +1,26 @@
-﻿import { Container } from "@/components/layout/container";
+import { AboutPhotoSheet } from "@/components/about/about-photo-sheet";
+import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Eyebrow } from "@/components/typography/eyebrow";
-import { AboutParallaxRail } from "@/components/about/about-parallax-rail";
-import { aboutContent, aboutGalleryItems } from "@/data/about";
+import { aboutGalleryItems, aboutPersonal } from "@/data/about";
 
 export function AboutPersonalStrip() {
   return (
     <Section spacing="compact" className="pt-0 pb-9 md:pb-10">
       <Container>
         <div className="border-t border-border/60 pt-4 md:pt-5">
-          <Eyebrow>Personal</Eyebrow>
+          <Eyebrow>{aboutPersonal.eyebrow}</Eyebrow>
           <DisplayHeading as="h2">
-            Life outside the <span className="font-serif italic">screen</span>
+            Outside the <span className="font-serif italic">screen</span>
           </DisplayHeading>
           <BodyText tone="secondary" className="mt-4 max-w-3xl">
-            {aboutContent.personal}
+            {aboutPersonal.intro}
           </BodyText>
 
-          <div className="mt-6 md:mt-7">
-            <AboutParallaxRail
-              id="about-personal-rail"
-              items={aboutGalleryItems}
-              railLabel="personal images"
-            />
+          <div className="mt-8 md:mt-10">
+            <AboutPhotoSheet items={aboutGalleryItems} />
           </div>
         </div>
       </Container>

@@ -2,6 +2,7 @@
   assetName: string;
   src: string;
   caption: string;
+  note: string;
   alt: string;
 };
 
@@ -9,40 +10,53 @@ export const aboutGalleryItems: AboutGalleryItem[] = [
   {
     assetName: "camera-process",
     src: "/images/about/camera-process.jpg",
-    caption: "Looking Closer",
+    caption: "Looking closer",
+    note: "camera first, explanation later",
     alt: "using camera on a cliffside"
   },
   {
     assetName: "snow-hike",
     src: "/images/about/snow-hike.jpg",
-    caption: "Higher Ground",
+    caption: "Higher ground",
+    note: "scale changes the problem",
     alt: "hiking in snow-covered mountains"
   },
   {
     assetName: "loreal-professional",
     src: "/images/about/loreal-professional.jpg",
-    caption: "At Work",
+    caption: "At work",
+    note: "systems meet rooms full of people",
     alt: "professional portrait at a work event"
   },
   {
     assetName: "astrophotography",
     src: "/images/about/astrophotography.jpg",
-    caption: "Night Sky",
+    caption: "Night sky",
+    note: "patience, noise, signal",
     alt: "night sky over mountain peaks"
   },
   {
     assetName: "rainy-city-lights",
     src: "/images/about/rainy-city-lights.jpg",
-    caption: "After Rain",
+    caption: "After rain",
+    note: "city light doing half the composition",
     alt: "rainy city street with red light trails"
   },
   {
     assetName: "rock-plane-silhouette",
     src: "/images/about/rock-plane-silhouette.jpg",
-    caption: "In Transit",
+    caption: "In transit",
+    note: "most ideas arrive between places",
     alt: "airplane crossing dusk above rock formations"
   }
 ];
+
+export const aboutPersonal = {
+  eyebrow: "Personal",
+  title: "Outside the screen",
+  intro:
+    "I take photos for the same reason I like research: it slows down the first answer."
+} as const;
 
 export const aboutContent = {
   openingIdea:

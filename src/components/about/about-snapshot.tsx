@@ -24,10 +24,22 @@ export function AboutSnapshot() {
                   {block.title}
                 </DisplayHeading>
               </div>
-              <ul className={cn("space-y-2.5", block.title === "Interested in" && "space-y-2")}>
+              <ul
+                className={cn(
+                  "space-y-2.5 transition-transform duration-300 ease-out motion-safe:group-hover:translate-x-1",
+                  block.title === "Interested in" && "space-y-2"
+                )}
+              >
                 {block.items.map((item) => (
-                  <li key={item} className="font-body text-base leading-relaxed text-text-secondary">
-                    {item}
+                  <li
+                    key={item}
+                    className="group/item flex items-baseline gap-3 font-body text-base leading-relaxed text-text-secondary transition-colors duration-200 hover:text-foreground"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.65rem] h-px w-3 shrink-0 bg-border transition-colors duration-200 group-hover/item:bg-accent motion-safe:transition-all motion-safe:group-hover/item:w-6"
+                    />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
