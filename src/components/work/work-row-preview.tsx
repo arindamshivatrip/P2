@@ -91,7 +91,7 @@ export function WorkRowPreview({ item, pointerX, pointerY }: WorkRowPreviewProps
             >
               <div className="absolute inset-0 bg-[rgba(31,31,31,0.3)]" />
               <div className="absolute inset-0 flex flex-col justify-between p-6">
-                <span className="font-body text-[0.65rem] uppercase tracking-[0.16em] text-background/80">
+                <span className="font-body text-label uppercase text-background/80">
                   {item.year} · {item.statusLabel}
                 </span>
                 <span className="max-w-[16ch] font-display text-[1.7rem] leading-[1.1] tracking-tight text-background">

@@ -60,16 +60,16 @@ export function WorkDetailShell({
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
               <Link
                 href="/work"
-                className="font-body text-[0.72rem] uppercase tracking-[0.13em] text-text-muted transition-colors hover:text-foreground"
+                className="font-body text-label-lg uppercase text-text-muted transition-colors hover:text-foreground"
               >
                 ← All work
               </Link>
-              <p className="font-body text-[0.66rem] uppercase tracking-[0.13em] text-text-muted">
+              <p className="font-body text-label uppercase text-text-muted">
                 {getProjectTypeLine(project)}
               </p>
             </div>
 
-            <DisplayHeading as="h1" className="mt-4 text-5xl md:text-[4.2rem] md:leading-[1]">
+            <DisplayHeading as="h1" className="mt-4 text-display-md">
               {project.title}
             </DisplayHeading>
 
@@ -102,19 +102,19 @@ export function WorkDetailShell({
             <dl className="mt-4 max-w-3xl border-t border-border/45 pt-3 font-body text-sm text-text-secondary">
               <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Role</dt>
+                  <dt className="text-label uppercase text-text-muted">Role</dt>
                   <dd className="mt-1.5 text-foreground/88">{meta.role}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Team / Org</dt>
+                  <dt className="text-label uppercase text-text-muted">Team / Org</dt>
                   <dd className="mt-1.5 text-foreground/88">{meta.teamOrOrg}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Timeline</dt>
+                  <dt className="text-label uppercase text-text-muted">Timeline</dt>
                   <dd className="mt-1.5 text-foreground/88">{meta.timeline}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Skills / Tools</dt>
+                  <dt className="text-label uppercase text-text-muted">Skills / Tools</dt>
                   <dd className="mt-1.5">
                     <ul className="space-y-1">
                       {meta.skills.map((skill) => (
@@ -129,7 +129,7 @@ export function WorkDetailShell({
             </dl>
 
             <section className="mt-10 border-t border-border/40 pt-8">
-              <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+              <h2 className="font-display text-display-xs tracking-tight">
                 Overview
               </h2>
               <div className="mt-4 max-w-3xl space-y-3">
@@ -149,7 +149,7 @@ export function WorkDetailShell({
 
             {highlights.length > 0 ? (
               <section className="mt-10 border-t border-border/40 pt-8">
-                <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+                <h2 className="font-display text-display-xs tracking-tight">
                   What I did
                 </h2>
                 <ul className="mt-4 max-w-3xl space-y-3">
@@ -165,16 +165,16 @@ export function WorkDetailShell({
 
             {metrics.length > 0 ? (
               <section className="mt-10 border-t border-border/40 pt-8">
-                <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+                <h2 className="font-display text-display-xs tracking-tight">
                   Outcomes
                 </h2>
                 <dl className="mt-5 grid max-w-3xl gap-x-8 gap-y-5 sm:grid-cols-2">
                   {metrics.map((metric) => (
                     <div key={metric.label} className="border-t border-border/45 pt-3">
-                      <dd className="font-display text-2xl tracking-tight text-foreground md:text-[1.7rem]">
+                      <dd className="font-display text-2xl tracking-tight text-foreground">
                         {metric.value}
                       </dd>
-                      <dt className="mt-1 font-body text-[0.72rem] uppercase tracking-[0.12em] text-text-muted">
+                      <dt className="mt-1 font-body text-label-lg uppercase text-text-muted">
                         {metric.label}
                       </dt>
                     </div>
@@ -192,7 +192,7 @@ export function WorkDetailShell({
               </Link>
               {nextProject ? (
                 <Link href={nextProject.href} className="group text-right">
-                  <span className="block font-body text-[0.68rem] uppercase tracking-[0.13em] text-text-muted">
+                  <span className="block font-body text-label uppercase text-text-muted">
                     Next project
                   </span>
                   <span className="mt-1 block font-display text-xl tracking-tight text-foreground transition-colors group-hover:text-accent md:text-2xl">

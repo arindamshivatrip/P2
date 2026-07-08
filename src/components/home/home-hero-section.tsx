@@ -14,7 +14,7 @@ export function HomeHeroSection() {
     <Section spacing="hero" className="pb-8 md:pb-10">
       <Container>
         <div className="flex flex-col justify-center md:min-h-[max(26rem,calc(100svh-16rem))]">
-          <DisplayHeading className="text-[11vw] leading-[0.98] sm:text-[3.4rem] md:text-[8.8vw] xl:text-[7.75rem]">
+          <DisplayHeading className="text-display-xl">
             <TextReveal
               lines={[
                 <span key="line-1">I&apos;m Arindam.</span>,
@@ -30,7 +30,7 @@ export function HomeHeroSection() {
           <HeroAccentRule className="mt-6 max-w-[36rem] md:mt-8" />
 
           <Reveal delay={0.4}>
-            <BodyText tone="secondary" className="mt-6 max-w-[58ch] text-[1.05rem] md:mt-7">
+            <BodyText tone="secondary" className="mt-6 max-w-[58ch] text-body-lg md:mt-7">
               {heroContent.supporting}
             </BodyText>
           </Reveal>
@@ -40,7 +40,7 @@ export function HomeHeroSection() {
               <Button asChild>
                 <Link href="/contact">{heroContent.primaryCta}</Link>
               </Button>
-              <p className="font-body text-sm text-text-muted">{heroContent.signal}</p>
+              <p className="font-body text-caption text-text-muted">{heroContent.signal}</p>
             </div>
           </Reveal>
         </div>

@@ -8,7 +8,7 @@ export function WorkHeader() {
   return (
     <Section spacing="compact" className="pb-4 md:pb-5">
       <Container>
-        <DisplayHeading as="h1" className="text-[17vw] leading-[0.95] sm:text-6xl md:text-[7.5vw] xl:text-[6.5rem]">
+        <DisplayHeading as="h1" className="text-display-lg">
           <TextReveal lines={[<span key="work">Work</span>]} />
         </DisplayHeading>
         <BodyText tone="secondary" className="mt-4 max-w-[62ch]">

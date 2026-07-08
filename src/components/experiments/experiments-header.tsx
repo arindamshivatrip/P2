@@ -11,7 +11,7 @@ export function ExperimentsHeader() {
       <Container>
         <DisplayHeading
           as="h1"
-          className="text-[13vw] leading-[0.95] sm:text-6xl md:text-[7.5vw] xl:text-[6.5rem]"
+          className="text-display-lg"
         >
           <TextReveal
             lines={[
@@ -25,7 +25,7 @@ export function ExperimentsHeader() {
             ]}
           />
         </DisplayHeading>
-        <BodyText tone="secondary" className="mt-3 max-w-[62ch] text-[1rem] leading-[1.55]">
+        <BodyText tone="secondary" className="mt-3 max-w-[62ch]">
           The lab side of the site — prototypes, game jams, and studies built to learn
           something specific. Some shipped, some are mid-experiment.{" "}
           <span className="font-serif italic">That&apos;s the point.</span>

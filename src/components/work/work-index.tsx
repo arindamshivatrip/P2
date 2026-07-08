@@ -117,12 +117,12 @@ export function WorkIndex({ items }: WorkIndexProps) {
           <p
             className={cn(
               "max-w-[62ch] font-body leading-relaxed text-text-secondary",
-              tier === "featured" ? "text-[0.98rem]" : "text-sm"
+              tier === "featured" ? "text-base" : "text-sm"
             )}
           >
             {item.oneLiner}
           </p>
-          <span className="font-body text-[0.78rem] text-text-muted">
+          <span className="font-body text-caption text-text-muted">
             {[item.org, item.statusLabel].filter(Boolean).join(" · ")}
           </span>
         </div>

@@ -78,7 +78,7 @@ function FoldedNote({
     >
       {open ? (
         <span className="block space-y-1">
-          <span className="block font-body text-[0.58rem] uppercase tracking-[0.14em] text-text-muted">
+          <span className="block font-body text-label-xs uppercase text-text-muted">
             lab notes
           </span>
           {lines.map((line) => (
@@ -429,7 +429,7 @@ function LabCanvas({ items }: { items: LabItem[] }) {
           {imprints.map((imprint, index) => (
             <motion.span
               key={`${imprint.x}-${imprint.y}-${index}`}
-              className="absolute flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent/70 px-1 text-center font-body text-[0.45rem] font-semibold uppercase leading-tight tracking-[0.13em] text-accent"
+              className="absolute flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent/70 px-1 text-center font-body text-[0.45rem] uppercase leading-tight tracking-[0.13em] text-accent"
               style={{ left: imprint.x, top: imprint.y, rotate: imprint.r }}
               initial={{ scale: 1.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 0.9 }}
@@ -588,7 +588,7 @@ function LabShelf({ items }: { items: LabItem[] }) {
         <button
           type="button"
           onClick={() => setStampCount((count) => Math.min(count + 1, 8))}
-          className="rounded-[0.5rem] border border-border/70 bg-surface px-3 py-2 font-body text-[0.7rem] font-medium uppercase tracking-[0.12em] text-foreground shadow-card transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 motion-safe:active:scale-95"
+          className="rounded-[0.5rem] border border-border/70 bg-surface px-3 py-2 font-body text-label-lg uppercase text-foreground shadow-card transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 motion-safe:active:scale-95"
         >
           press the stamp
         </button>
@@ -596,7 +596,7 @@ function LabShelf({ items }: { items: LabItem[] }) {
           {Array.from({ length: stampCount }).map((_, index) => (
             <span
               key={index}
-              className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-accent/70 px-0.5 text-center font-body text-[0.38rem] font-semibold uppercase leading-tight tracking-[0.12em] text-accent"
+              className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-accent/70 px-0.5 text-center font-body text-[0.38rem] uppercase leading-tight tracking-[0.12em] text-accent"
               style={{ rotate: `${((index * 37) % 26) - 13}deg` }}
             >
               {STAMP_VARIANTS[index % STAMP_VARIANTS.length]}

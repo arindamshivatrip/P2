@@ -20,7 +20,7 @@ function HeaderNavLink({ href, label, isActive }: HeaderNavLinkProps) {
       href={href}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "relative pb-1 font-body text-base font-medium text-foreground/80 hover:text-foreground",
+        "relative pb-1 font-body text-base text-foreground/80 hover:text-foreground",
         isActive && "text-foreground"
       )}
     >
@@ -119,7 +119,7 @@ export function SiteHeader() {
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => setMenuOpen(false)}
                       className={cn(
-                        "block py-2.5 font-body text-[0.98rem] text-foreground/85 transition-colors hover:text-foreground",
+                        "block py-2.5 font-body text-base text-foreground/85 transition-colors hover:text-foreground",
                         isActive && "text-foreground"
                       )}
                     >

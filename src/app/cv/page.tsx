@@ -19,7 +19,7 @@ export default function CvPage() {
     <Section spacing="compact">
       <Container>
         <Eyebrow>{cvPageContent.eyebrow}</Eyebrow>
-        <DisplayHeading as="h1" className="mt-2.5 text-5xl md:text-6xl">
+        <DisplayHeading as="h1" className="mt-2.5 text-display-md">
           {cvPageContent.title}
         </DisplayHeading>
         <BodyText tone="secondary" className="mt-4 max-w-3xl">
@@ -29,7 +29,7 @@ export default function CvPage() {
         <div className="relative mt-8 max-w-5xl py-1 pl-4">
           <span aria-hidden="true" className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-px bg-accent/45" />
           <Eyebrow>{cvPageContent.primaryLabel}</Eyebrow>
-          <DisplayHeading as="h2" className="mt-2.5 text-[2.5rem] md:text-[3.15rem]">
+          <DisplayHeading as="h2" className="mt-2.5">
             {cvPageContent.primaryTitle}
           </DisplayHeading>
           <BodyText tone="secondary" className="mt-3.5 max-w-2xl">
@@ -56,16 +56,16 @@ export default function CvPage() {
           <div className="mt-4 grid gap-x-8 gap-y-4 md:grid-cols-2">
             {cvVersions.map((version) => (
               <article key={version.href} className="border-t border-border/40 pt-3.5">
-                <h3 className="font-display text-[1.38rem] leading-tight tracking-tight text-foreground md:text-[1.52rem]">
+                <h3 className="font-display text-2xl leading-tight tracking-tight text-foreground">
                   {version.title}
                 </h3>
-                <BodyText tone="secondary" className="mt-1.5 max-w-[44ch] text-[0.95rem]">
+                <BodyText tone="secondary" className="mt-1.5 max-w-[44ch] text-body-sm">
                   {version.description}
                 </BodyText>
                 <Link
                   href={version.href}
                   download
-                  className="mt-2.5 inline-flex items-center gap-1.5 font-body text-[0.68rem] uppercase tracking-[0.12em] text-text-muted transition-colors hover:text-foreground"
+                  className="mt-2.5 inline-flex items-center gap-1.5 font-body text-label uppercase text-text-muted transition-colors hover:text-foreground"
                 >
                   <span>{version.cta}</span>
                   <span aria-hidden="true">+</span>

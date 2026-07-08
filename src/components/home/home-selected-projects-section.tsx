@@ -36,14 +36,14 @@ export function HomeSelectedProjectsSection() {
       <Container>
         <div className="flex items-end justify-between gap-4">
           <Reveal>
-            <DisplayHeading as="h2" className="text-4xl md:text-[3.2rem]">
+            <DisplayHeading as="h2">
               {projectsContent.title}
             </DisplayHeading>
           </Reveal>
           <Reveal delay={0.04}>
             <Link
               href="/work"
-              className="pb-1 font-body text-sm uppercase tracking-[0.12em] text-text-muted transition-colors hover:text-foreground"
+              className="pb-1 font-body text-label-lg uppercase text-text-muted transition-colors hover:text-foreground"
             >
               View all work
             </Link>

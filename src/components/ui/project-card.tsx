@@ -50,11 +50,11 @@ export function ProjectCard({
         {summary}
       </BodyText>
       <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-        <p className="font-body text-[0.68rem] uppercase tracking-[0.14em] text-text-muted">
+        <p className="font-body text-label uppercase text-text-muted">
           {tags.join(" · ")}
         </p>
         {interactive ? (
-          <span className="inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.12em] text-text-muted">
+          <span className="inline-flex items-center gap-2 font-body text-label uppercase text-text-muted">
             <span>Open details</span>
             <span aria-hidden="true">+</span>
           </span>

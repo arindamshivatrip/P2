@@ -32,8 +32,8 @@ export function WorkFilters({ active, onChange, resultCount, animated }: WorkFil
               onClick={() => onChange(filter.value)}
               aria-pressed={isActive}
               className={cn(
-                "relative py-3 font-body text-[0.96rem] font-medium text-text-secondary transition-colors hover:text-foreground md:py-2",
-                isActive && "font-semibold text-foreground"
+                "relative py-3 font-body text-base text-text-secondary transition-colors hover:text-foreground md:py-2",
+                isActive && "text-foreground"
               )}
             >
               {filter.label}

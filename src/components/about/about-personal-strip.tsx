@@ -12,7 +12,7 @@ export function AboutPersonalStrip() {
       <Container>
         <div className="border-t border-border/60 pt-4 md:pt-5">
           <Eyebrow>Personal</Eyebrow>
-          <DisplayHeading as="h2" className="text-4xl md:text-5xl">
+          <DisplayHeading as="h2">
             Life outside the <span className="font-serif italic">screen</span>
           </DisplayHeading>
           <BodyText tone="secondary" className="mt-4 max-w-3xl">

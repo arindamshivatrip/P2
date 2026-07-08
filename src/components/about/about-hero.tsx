@@ -28,7 +28,7 @@ export function AboutHero() {
 
           <div className="pt-1 md:pt-2">
             <Eyebrow>About</Eyebrow>
-            <DisplayHeading as="h1" className="mt-3 max-w-[18ch] text-5xl leading-[0.98] md:text-6xl">
+            <DisplayHeading as="h1" className="mt-3 max-w-[18ch] text-display-md">
               <TextReveal
                 lines={[
                   <span key="how">Engineering taught me how.</span>,
@@ -39,7 +39,7 @@ export function AboutHero() {
               />
             </DisplayHeading>
             <Reveal delay={0.35}>
-              <BodyText tone="secondary" className="mt-4 max-w-3xl text-[1.02rem]">
+              <BodyText tone="secondary" className="mt-4 max-w-3xl text-body-lg">
                 {aboutContent.openingIdea}
               </BodyText>
             </Reveal>

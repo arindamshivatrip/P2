@@ -20,7 +20,7 @@ export function AboutSnapshot() {
             >
               <div>
                 <span className="mb-2 block h-px w-8 bg-accent/55 transition-all duration-300 motion-safe:group-hover:w-14 motion-safe:group-hover:bg-accent" />
-                <DisplayHeading as="h2" className="mt-1 text-[1.82rem] md:text-[2.08rem]">
+                <DisplayHeading as="h2" className="mt-1 text-display-xs">
                   {block.title}
                 </DisplayHeading>
               </div>
