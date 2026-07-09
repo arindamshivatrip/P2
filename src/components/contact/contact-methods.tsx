@@ -120,7 +120,7 @@ export function ContactMethods() {
                       <Link
                         href={method.href}
                         target={method.external ? "_blank" : undefined}
-                        rel={method.external ? "noreferrer" : undefined}
+                        rel={method.external ? "noopener noreferrer" : undefined}
                       >
                         {method.ctaLabel}
                       </Link>

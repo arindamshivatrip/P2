@@ -3,12 +3,14 @@ import { Suspense } from "react";
 import { WorkCta } from "@/components/work/work-cta";
 import { WorkGrid } from "@/components/work/work-grid";
 import { WorkHeader } from "@/components/work/work-header";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Work — Arindam Tripathi",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Work",
   description:
-    "Case studies across AI systems, interaction design, research, and XR — including work at L'Oréal Singapore and the University of Maryland."
-};
+    "Selected case studies across XR, data-driven product systems, UX research, and interactive engineering.",
+  path: "/work"
+});
 
 export default function WorkPage() {
   return (

@@ -19,7 +19,7 @@ export function SiteFooter() {
               <a
                 href="https://www.linkedin.com/in/arindamtrip/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hover:text-foreground"
               >
                 LinkedIn
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <a
                 href="https://github.com/arindamshivatrip"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hover:text-foreground"
               >
                 GitHub

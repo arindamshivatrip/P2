@@ -7,8 +7,28 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMeta.url),
-  title: siteMeta.title,
+  title: {
+    default: siteMeta.title,
+    template: `%s — ${siteMeta.name}`
+  },
   description: siteMeta.description,
+  applicationName: siteMeta.name,
+  authors: [{ name: siteMeta.formalName, url: siteMeta.url }],
+  creator: siteMeta.formalName,
+  openGraph: {
+    type: "website",
+    siteName: siteMeta.name,
+    url: siteMeta.url,
+    title: siteMeta.title,
+    description: siteMeta.description,
+    images: [{ url: siteMeta.ogImage, alt: siteMeta.ogImageAlt }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteMeta.title,
+    description: siteMeta.description,
+    images: [siteMeta.ogImage]
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

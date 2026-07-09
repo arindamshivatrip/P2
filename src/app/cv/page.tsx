@@ -7,12 +7,14 @@ import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Eyebrow } from "@/components/typography/eyebrow";
 import { cvPageContent, cvVersions } from "@/data/cv";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "CV — Arindam Tripathi",
+export const metadata: Metadata = buildPageMetadata({
+  title: "CV",
   description:
-    "Focused CV versions for AI systems, UX engineering, UX research, XR, and software roles."
-};
+    "Download Arindam Tripathi’s CV and alternate resume versions for HCI, UX engineering, XR, research, and software/product roles.",
+  path: "/cv"
+});
 
 export default function CvPage() {
   return (
