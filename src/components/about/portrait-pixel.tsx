@@ -23,7 +23,9 @@ const ANCHOR_Y = 0.34;
 
 const FRAME_CLASS =
   "relative aspect-[4/5] w-full overflow-hidden rounded-[0.95rem] bg-surface/65";
-const IMAGE_SIZES = "(max-width: 768px) 92vw, (max-width: 1280px) 38vw, 24rem";
+// Each term is the frame size × ZOOM: the image renders under scale-[1.46], so
+// Next/Image must fetch enough pixels for the post-scale size, not the frame.
+const IMAGE_SIZES = "(max-width: 768px) 134vw, (max-width: 1280px) 55vw, 35rem";
 
 // Cell-aligned stud + hairline overlay that sells "built from blocks": one
 // highlight dot per cell plus a faint grid. Sized in fractions of the frame so
@@ -96,7 +98,7 @@ function usePixelatedPortrait(src: string): string | null {
 // Desktop hover shows the block layer through a cursor-following circular
 // window; keyboard focus and mobile tap reveal the full block portrait.
 // Reduced motion: no moving mask, instant full-layer fade. The block layer is
-// produced once on mount (a 28×35 canvas draw), so there is no per-frame work.
+// produced once on mount (a 56×70 canvas draw), so there is no per-frame work.
 export function PortraitPixel({ src, alt }: PortraitPixelProps) {
   const prefersReducedMotion = useReducedMotion();
   const [finePointer, setFinePointer] = useState(false);

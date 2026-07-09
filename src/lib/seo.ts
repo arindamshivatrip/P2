@@ -64,7 +64,7 @@ export function projectOgImage(
   project: { coverImage?: string; thumbnail?: string }
 ): string | undefined {
   const isReal = (path?: string): path is string =>
-    Boolean(path) && !path!.includes("placeholder");
+    typeof path === "string" && !path.includes("placeholder");
 
   if (availability.coverImage && isReal(project.coverImage)) {
     return project.coverImage;

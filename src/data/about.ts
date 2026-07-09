@@ -130,12 +130,6 @@ export const aboutPersonalReveals = {
 } as const;
 
 export const aboutContent = {
-  openingIdea:
-    "One through-line: I build interactive systems — AI tools, XR prototypes, data products — and study how people actually use them.",
-  introParagraphs: [
-    "The work spans HCI research, XR prototyping, and data-heavy product engineering — ML planning tools used by real commercial teams, multiplayer AR built on physical hardware, diary studies on smartphone habits. What ties it together is a habit of caring about behavior: how a tool changes what someone pays attention to, and whether that change is good for them. Accessibility and real-world constraints are part of that, not an afterthought.",
-    "Right now I'm doing a Master's in Human-Computer Interaction at the University of Maryland, on top of a computer engineering degree from NUS and a few years of shipping data and product systems at L'Oréal Singapore and SP Digital."
-  ],
   snapshot: [
     {
       title: "Right now",
@@ -165,8 +159,6 @@ export const aboutContent = {
       ]
     }
   ],
-  personal:
-    "Outside of work, I spend a lot of time hiking, photographing, and reconnecting with nature. A lot of how I think about observation, atmosphere, and design comes from moving between cities, landscapes, and quieter moments outdoors.",
   portrait: {
     src: "/images/about/brooklyn-main-portrait.jpg",
     alt: "standing portrait by brooklyn waterfront"

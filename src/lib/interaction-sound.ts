@@ -119,11 +119,5 @@ export const interactionSounds = {
     if (canPlay()) {
       noiseBurst(0.13, 900, 0.018);
     }
-  },
-  // polaroid: subtle card slide
-  card: () => {
-    if (canPlay()) {
-      noiseBurst(0.1, 1600, 0.02);
-    }
   }
 };
