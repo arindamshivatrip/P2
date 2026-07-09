@@ -29,8 +29,11 @@ export function ContactHero() {
           {contactContent.supporting}
         </BodyText>
 
-        <div className="mt-7 flex flex-wrap items-center gap-2.5">
-          <Button asChild variant="ghost" className="px-3 py-1.5 text-xs">
+        <div className="mt-7 flex flex-wrap items-center gap-3">
+          <Button asChild className="px-4 py-2.5 text-sm">
+            <Link href={contactContent.primaryCta.href}>{contactContent.primaryCta.label}</Link>
+          </Button>
+          <Button asChild variant="ghost" className="px-4 py-2.5 text-sm">
             <Link href={contactContent.secondaryCta.href}>{contactContent.secondaryCta.label}</Link>
           </Button>
         </div>

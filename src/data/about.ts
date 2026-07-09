@@ -148,8 +148,8 @@ export const aboutContent = {
     {
       title: "Before that",
       items: [
-        "Data Analytics Specialist, L'Oreal Singapore",
-        "Enterprise Architecture Intern, L'Oreal Singapore",
+        "Data Analytics Specialist, L'Oréal Singapore",
+        "Enterprise Architecture Intern, L'Oréal Singapore",
         "Full Stack Developer Intern, SP Digital",
         "B.Eng. Computer Engineering (Honors), National University of Singapore"
       ]

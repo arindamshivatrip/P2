@@ -45,6 +45,9 @@ export default function CvPage() {
               <Link href="/contact">{cvPageContent.contactCta}</Link>
             </Button>
           </div>
+          <Eyebrow className="mt-4 normal-case tracking-normal text-text-muted/80">
+            {cvPageContent.lastUpdated}
+          </Eyebrow>
         </div>
 
         <div className="mt-11 max-w-6xl">

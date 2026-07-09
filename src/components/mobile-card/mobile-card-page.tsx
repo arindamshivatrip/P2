@@ -9,7 +9,7 @@ import styles from "./mobile-card-page.module.css";
 const MAX_TILT = 12;
 const QR_URL = "https://arindamtripathi.com/mobile_card";
 const WEBSITE_URL = "https://arindamtripathi.com";
-const LINKEDIN_URL = "https://www.linkedin.com/in/arindamtripathi";
+const LINKEDIN_URL = "https://www.linkedin.com/in/arindamtrip/";
 const CV_URL = "/files/arindam-tripathi-xr-interactive-systems-cv.pdf";
 const PORTRAIT_URL = "/images/about/brooklyn-main-portrait.jpg";
 
@@ -314,7 +314,7 @@ export function MobileCardPage() {
                     </div>
 
                     <div className={styles.linkGroup}>
-                      <LinkRow href={LINKEDIN_URL} label="LinkedIn" detail="linkedin.com/in/arindamtripathi" icon={<LinkedInIcon />} />
+                      <LinkRow href={LINKEDIN_URL} label="LinkedIn" detail="linkedin.com/in/arindamtrip" icon={<LinkedInIcon />} />
                       <LinkRow href={WEBSITE_URL} label="Website" detail="arindamtripathi.com" icon={<GlobeIcon />} />
 
                       <a className={styles.cvButton} href={CV_URL} target="_blank" rel="noreferrer">

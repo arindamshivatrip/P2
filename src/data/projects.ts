@@ -686,7 +686,7 @@ export const projects: Project[] = [
     links: [
       {
         label: "View on Chrome Web Store",
-        href: "https://chromewebstore.google.com/detail/snapt-chatgpt-chat-optimi/dcgfnddkkikbpicaomnaddfgleakcjci?hl=en&authuser=2&pageId=none",
+        href: "https://chromewebstore.google.com/detail/snapt-chatgpt-chat-optimi/dcgfnddkkikbpicaomnaddfgleakcjci",
         kind: "external"
       }
     ],
