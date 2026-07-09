@@ -1,7 +1,7 @@
-import Image from "next/image";
+import { AboutBio } from "@/components/about/about-bio";
+import { PortraitPixel } from "@/components/about/portrait-pixel";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { BodyText } from "@/components/typography/body-text";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Eyebrow } from "@/components/typography/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
@@ -13,43 +13,28 @@ export function AboutHero() {
     <Section spacing="compact" className="pb-4 md:pb-5">
       <Container>
         <div className="grid gap-6 md:gap-8 lg:grid-cols-[minmax(18rem,24rem)_minmax(0,1fr)] lg:gap-10 lg:items-start">
-          <Reveal className="group relative aspect-[4/5] overflow-hidden rounded-[0.95rem] bg-surface/65">
-            <Image
+          <Reveal>
+            <PortraitPixel
               src={aboutContent.portrait.src}
               alt={aboutContent.portrait.alt}
-              fill
-              sizes="(max-width: 768px) 92vw, (max-width: 1280px) 38vw, 24rem"
-              quality={95}
-              unoptimized
-              className="scale-[1.46] object-cover object-[60%_34%] transition-transform duration-500 motion-safe:group-hover:scale-[1.5]"
-              priority
             />
           </Reveal>
 
           <div className="pt-1 md:pt-2">
             <Eyebrow>About</Eyebrow>
-            <DisplayHeading as="h1" className="mt-3 max-w-[18ch] text-display-md">
+            <DisplayHeading as="h1" className="mt-3 max-w-[20ch] text-display-md">
               <TextReveal
                 lines={[
-                  <span key="how">Engineering taught me how.</span>,
-                  <span key="why">
-                    <span className="font-serif italic text-accent">People</span> taught me why.
+                  <span key="work">Making it work is one thing.</span>,
+                  <span key="matter">
+                    Making it <span className="font-serif italic text-accent">matter</span> is harder.
                   </span>
                 ]}
               />
             </DisplayHeading>
             <Reveal delay={0.35}>
-              <BodyText tone="secondary" className="mt-4 max-w-3xl text-body-lg">
-                {aboutContent.openingIdea}
-              </BodyText>
-            </Reveal>
-            <Reveal delay={0.45}>
-              <div className="mt-5 space-y-4 md:mt-6 md:max-w-[62ch]">
-                {aboutContent.introParagraphs.map((paragraph) => (
-                  <BodyText key={paragraph} tone="secondary">
-                    {paragraph}
-                  </BodyText>
-                ))}
+              <div className="mt-5 md:mt-6">
+                <AboutBio />
               </div>
             </Reveal>
           </div>
