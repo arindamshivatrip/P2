@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { AboutHero } from "@/components/about/about-hero";
 import { AboutPersonalStrip } from "@/components/about/about-personal-strip";
 import { AboutSnapshot } from "@/components/about/about-snapshot";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About — Arindam Tripathi",
+export const metadata: Metadata = buildPageMetadata({
+  title: "About",
   description:
-    "Designer-engineer working across HCI, data, and interactive systems. HCI master's at the University of Maryland; previously L'Oréal Singapore and SP Digital."
-};
+    "Arindam Tripathi’s path from computer engineering and product systems to human-computer interaction, XR, human-AI interaction, and research-led prototyping.",
+  path: "/about"
+});
 
 export default function AboutPage() {
   return (

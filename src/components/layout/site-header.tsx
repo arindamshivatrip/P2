@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ function HeaderNavLink({ href, label, isActive }: HeaderNavLinkProps) {
       href={href}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "relative pb-1 font-body text-base font-medium text-foreground/80 hover:text-foreground",
+        "relative pb-1 font-body text-base text-foreground/80 hover:text-foreground",
         isActive && "text-foreground"
       )}
     >
@@ -37,7 +38,9 @@ function HeaderNavLink({ href, label, isActive }: HeaderNavLinkProps) {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const prefersReducedMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuDuration = prefersReducedMotion ? 0.01 : 0.3;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -98,16 +101,32 @@ export function SiteHeader() {
         </button>
       </Container>
       {menuOpen ? (
-        <>
-          <button
-            type="button"
-            aria-label="Close mobile menu"
-            className="fixed inset-0 top-[4.4rem] z-20 bg-transparent md:hidden"
-            onClick={() => setMenuOpen(false)}
-          />
-          <div className="relative z-30 border-t border-border/60 bg-background/95 md:hidden">
+        <button
+          type="button"
+          aria-label="Close mobile menu"
+          className="fixed inset-0 top-[4.4rem] z-20 bg-transparent md:hidden"
+          onClick={() => setMenuOpen(false)}
+        />
+      ) : null}
+      <AnimatePresence initial={false}>
+        {menuOpen ? (
+          <motion.div
+            key="mobile-menu"
+            className="relative z-30 overflow-hidden border-t border-border/60 bg-background/95 md:hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: menuDuration, ease: [0.22, 0.61, 0.36, 1] }}
+          >
             <Container>
-              <nav aria-label="Mobile primary" className="flex flex-col py-3">
+              <motion.nav
+                aria-label="Mobile primary"
+                className="flex flex-col py-3"
+                initial={{ y: prefersReducedMotion ? 0 : -6, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: menuDuration, ease: [0.22, 0.61, 0.36, 1] }}
+              >
                 {navItems.map((item) => {
                   const isHome = item.href === "/";
                   const isActive = isHome ? pathname === "/" : pathname.startsWith(item.href);
@@ -119,7 +138,7 @@ export function SiteHeader() {
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => setMenuOpen(false)}
                       className={cn(
-                        "block py-2.5 font-body text-[0.98rem] text-foreground/85 transition-colors hover:text-foreground",
+                        "block py-2.5 font-body text-base text-foreground/85 transition-colors hover:text-foreground",
                         isActive && "text-foreground"
                       )}
                     >
@@ -127,11 +146,11 @@ export function SiteHeader() {
                     </Link>
                   );
                 })}
-              </nav>
+              </motion.nav>
             </Container>
-          </div>
-        </>
-      ) : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

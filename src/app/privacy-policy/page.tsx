@@ -1,7 +1,13 @@
-﻿import { Container } from "@/components/layout/container";
+﻿import type { Metadata } from "next";
+import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { BodyText } from "@/components/typography/body-text";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Privacy policy for SnaPT, a ChatGPT chat optimizer browser extension."
+};
 
 export default function PrivacyPolicyPage() {
   return (

@@ -50,7 +50,7 @@ export function ExperimentDetailLegacyShell({
       <Container size="default">
         <div className="border-t border-border/55 pt-5 md:pt-6">
           <div className="mx-auto max-w-[46rem] min-w-0">
-            <p className="font-body text-[0.66rem] uppercase tracking-[0.13em] text-text-muted">
+            <p className="font-body text-label uppercase text-text-muted">
               {getProjectTypeLine(project)}
             </p>
 
@@ -88,19 +88,19 @@ export function ExperimentDetailLegacyShell({
             <dl className="mt-5 max-w-3xl border-t border-border/45 pt-4 font-body text-sm text-text-secondary">
               <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Role</dt>
+                  <dt className="text-label uppercase text-text-muted">Role</dt>
                   <dd className="mt-1.5 text-foreground/88">{meta.role}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Team</dt>
+                  <dt className="text-label uppercase text-text-muted">Team</dt>
                   <dd className="mt-1.5 text-foreground/88">{meta.team}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Timeline</dt>
+                  <dt className="text-label uppercase text-text-muted">Timeline</dt>
                   <dd className="mt-1.5 text-foreground/88">{meta.timeline}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Skills</dt>
+                  <dt className="text-label uppercase text-text-muted">Skills</dt>
                   <dd className="mt-1.5">
                     <ul className="space-y-1">
                       {meta.skills.map((skill) => (

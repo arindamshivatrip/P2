@@ -1,28 +1,25 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { WorkCta } from "@/components/work/work-cta";
-import { WorkFilters } from "@/components/work/work-filters";
 import { WorkGrid } from "@/components/work/work-grid";
 import { WorkHeader } from "@/components/work/work-header";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Work — Arindam Tripathi",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Work",
   description:
-    "Case studies across AI systems, interaction design, research, and XR — including work at L'Oréal Singapore and the University of Maryland."
-};
+    "Selected case studies across XR, data-driven product systems, UX research, and interactive engineering.",
+  path: "/work"
+});
 
-type WorkPageProps = {
-  searchParams?: Promise<{ focus?: string }>;
-};
-
-export default async function WorkPage({ searchParams }: WorkPageProps) {
-  const params = (await searchParams) ?? {};
-  const focus = params.focus ?? "all";
-
+export default function WorkPage() {
   return (
     <>
       <WorkHeader />
-      <WorkFilters activeFilter={focus} />
-      <WorkGrid activeFilter={focus} section="work" />
+      {/* Suspense lets the client index read ?focus= while the page stays static */}
+      <Suspense fallback={null}>
+        <WorkGrid section="work" />
+      </Suspense>
       <WorkCta />
     </>
   );

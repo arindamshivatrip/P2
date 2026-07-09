@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="border-t border-border/70 py-12">
       <Container>
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <p className="font-body text-sm font-medium uppercase tracking-[0.08em] text-foreground">
+          <p className="font-body text-label-lg uppercase text-foreground">
             Designed and coded with ♡ by Arindam
           </p>
 
@@ -19,7 +19,7 @@ export function SiteFooter() {
               <a
                 href="https://www.linkedin.com/in/arindamtrip/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hover:text-foreground"
               >
                 LinkedIn
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <a
                 href="https://github.com/arindamshivatrip"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hover:text-foreground"
               >
                 GitHub

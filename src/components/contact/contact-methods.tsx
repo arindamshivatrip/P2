@@ -65,7 +65,7 @@ export function ContactMethods() {
       <Container>
         <div className="pt-1 md:pt-2">
           <Eyebrow>Methods</Eyebrow>
-          <DisplayHeading as="h2" className="mt-2 text-4xl md:text-5xl">
+          <DisplayHeading as="h2" className="mt-2">
             {contactContent.methodsHeading}
           </DisplayHeading>
           <BodyText tone="secondary" className="mt-3 max-w-[62ch]">
@@ -86,7 +86,7 @@ export function ContactMethods() {
                 <div className="mt-3 min-h-[3.35rem] min-w-0">
                   {method.id === "email" ? (
                     <div className="flex min-w-0 items-center gap-1.5">
-                      <p className="truncate font-body text-[1.04rem] text-foreground/95">{method.primaryLine}</p>
+                      <p className="truncate font-body text-body-lg text-foreground/95">{method.primaryLine}</p>
                       <button
                         type="button"
                         onClick={handleCopyPrimaryEmail}
@@ -101,30 +101,26 @@ export function ContactMethods() {
                       </button>
                     </div>
                   ) : method.primaryLine ? (
-                    <p className="truncate font-body text-[1.04rem] text-foreground/95">{method.primaryLine}</p>
+                    <p className="truncate font-body text-body-lg text-foreground/95">{method.primaryLine}</p>
                   ) : null}
                   {method.id === "email" && method.secondaryLine ? (
-                    <p className="mt-1 truncate font-body text-[0.72rem] tracking-[0.025em] text-text-secondary">
+                    <p className="mt-1 truncate font-body text-caption text-text-secondary">
                       {method.secondaryLine}
                     </p>
-                  ) : (
-                    <p className="mt-1 truncate font-body text-[0.72rem] text-transparent" aria-hidden="true">
-                      spacer
-                    </p>
-                  )}
+                  ) : null}
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center gap-2.5">
                   {method.id === "email" ? (
-                    <Button asChild className="px-4 py-2.5 text-[0.86rem]">
+                    <Button asChild className="px-4 py-2.5 text-sm">
                       <Link href={method.href}>{method.ctaLabel}</Link>
                     </Button>
                   ) : (
-                    <Button asChild variant="ghost" className="px-4 py-2.5 text-[0.86rem]">
+                    <Button asChild variant="ghost" className="px-4 py-2.5 text-sm">
                       <Link
                         href={method.href}
                         target={method.external ? "_blank" : undefined}
-                        rel={method.external ? "noreferrer" : undefined}
+                        rel={method.external ? "noopener noreferrer" : undefined}
                       >
                         {method.ctaLabel}
                       </Link>

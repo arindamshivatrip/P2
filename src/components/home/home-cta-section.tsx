@@ -13,7 +13,7 @@ export function HomeCtaSection() {
       <Container>
         <Reveal>
           <div className="max-w-4xl text-left">
-            <DisplayHeading as="h2" className="mb-5 text-5xl md:mb-6 md:text-[4rem]">
+            <DisplayHeading as="h2" className="mb-5 text-display-md md:mb-6">
               {closingCtaContent.heading}
             </DisplayHeading>
             <BodyText tone="secondary" className="max-w-2xl">

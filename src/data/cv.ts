@@ -11,12 +11,13 @@ export const cvPageContent = {
   intro:
     "A focused view of my work across AI systems, interaction design, and engineering.",
   primaryLabel: "Primary version",
-  primaryTitle: "Human-Centered AI Systems",
+  primaryTitle: "Human-Centered AI & Interaction Systems",
   primaryDescription:
-    "The version I use most often for AI systems, product thinking, and interaction design work.",
+    "The version I reach for most — AI systems, product thinking, and interaction design in one place.",
   primaryHref: "/files/arindam-tripathi-main-cv.pdf",
-  primaryCta: "Download CV",
+  primaryCta: "Download CV (PDF)",
   contactCta: "Contact me",
+  lastUpdated: "Updated March 2026 · PDF, one page",
   secondaryLabel: "Other versions",
   secondaryIntro:
     "Alternate versions for different kinds of roles.",

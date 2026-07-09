@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ExperimentDetailShell } from "@/components/experiments/experiment-detail-shell";
 import { ExperimentDetailLegacyShell } from "@/components/experiments/experiment-detail-legacy-shell";
-import { getProjectBySlug, getProjectsBySection } from "@/data/projects";
+import { JsonLd } from "@/components/seo/json-ld";
+import {
+  getExperimentDetailHref,
+  getProjectBySlug,
+  getProjectsBySection
+} from "@/data/projects";
 import { getProjectAssetAvailability } from "@/lib/project-assets.server";
+import { breadcrumbJsonLd, buildPageMetadata, projectOgImage } from "@/lib/seo";
 import type { Project } from "@/types/project";
 
 type ExperimentDetailPageProps = {
@@ -45,15 +51,26 @@ export async function generateMetadata({
   const project = getExperimentProject(slug);
 
   if (!project) {
-    return {
-      title: "Experiment not found"
-    };
+    return buildPageMetadata({
+      title: "Experiments",
+      description:
+        "Smaller prototypes and explorations across XR, mobile, AI-assisted tools, creative coding, and interaction design.",
+      path: "/experiments"
+    });
   }
 
-  return {
-    title: `${project.title} | Experiments`,
-    description: project.summary
-  };
+  // Only reference a real OG image that exists on disk; otherwise the helper
+  // falls back to the sitewide default.
+  const availability = await getProjectAssetAvailability(project);
+  const image = projectOgImage(availability, project);
+
+  return buildPageMetadata({
+    title: project.title,
+    description: project.summary,
+    path: getExperimentDetailHref(project.slug),
+    image,
+    imageAlt: project.title
+  });
 }
 
 export default async function ExperimentDetailPage({ params }: ExperimentDetailPageProps) {
@@ -67,21 +84,37 @@ export default async function ExperimentDetailPage({ params }: ExperimentDetailP
   const availability = await getProjectAssetAvailability(project);
   const renderer = getExperimentRenderer(project);
 
+  const breadcrumb = (
+    <JsonLd
+      data={breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Experiments", path: "/experiments" },
+        { name: project.title, path: getExperimentDetailHref(project.slug) }
+      ])}
+    />
+  );
+
   if (renderer === "structured") {
     return (
-      <ExperimentDetailShell
-        project={project}
-        hasCoverAsset={availability.coverImage}
-        hasVideoAsset={availability.video}
-      />
+      <>
+        {breadcrumb}
+        <ExperimentDetailShell
+          project={project}
+          hasCoverAsset={availability.coverImage}
+          hasVideoAsset={availability.video}
+        />
+      </>
     );
   }
 
   return (
-    <ExperimentDetailLegacyShell
-      project={project}
-      hasCoverAsset={availability.coverImage}
-      hasVideoAsset={availability.video}
-    />
+    <>
+      {breadcrumb}
+      <ExperimentDetailLegacyShell
+        project={project}
+        hasCoverAsset={availability.coverImage}
+        hasVideoAsset={availability.video}
+      />
+    </>
   );
 }

@@ -9,6 +9,8 @@ export const instrumentSerif = Instrument_Serif({
   display: "swap"
 });
 
+// Display renders at a single real weight everywhere — heavier cuts were
+// shipped but never used, so they are no longer loaded.
 export const neueRegrade = localFont({
   variable: "--font-display",
   display: "swap",
@@ -22,40 +24,12 @@ export const neueRegrade = localFont({
       path: "./fonts/neue-regrade/Neue Regrade Regular Italic.otf",
       weight: "400",
       style: "italic"
-    },
-    {
-      path: "./fonts/neue-regrade/Neue Regrade Medium.otf",
-      weight: "500",
-      style: "normal"
-    },
-    {
-      path: "./fonts/neue-regrade/Neue Regrade Medium Italic.otf",
-      weight: "500",
-      style: "italic"
-    },
-    {
-      path: "./fonts/neue-regrade/Neue Regrade Semibold.otf",
-      weight: "600",
-      style: "normal"
-    },
-    {
-      path: "./fonts/neue-regrade/Neue Regrade SemiBold Italic.otf",
-      weight: "600",
-      style: "italic"
-    },
-    {
-      path: "./fonts/neue-regrade/Neue Regrade Bold.otf",
-      weight: "700",
-      style: "normal"
-    },
-    {
-      path: "./fonts/neue-regrade/Neue Regrade Bold Italic.otf",
-      weight: "700",
-      style: "italic"
     }
   ]
 });
 
+// Epoch has exactly one cut (400). Never pair it with font-medium/semibold —
+// browsers synthesize fake weights and body copy turns muddy.
 export const epoch = localFont({
   variable: "--font-body",
   display: "swap",

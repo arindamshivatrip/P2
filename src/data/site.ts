@@ -13,8 +13,19 @@ export const navItems: NavItem[] = [
 ];
 
 export const siteMeta = {
-  title: "Arindam Tripathi - Builder, researcher, technologist",
+  url: "https://arindamtripathi.com",
+  name: "Arindam Tripathi",
+  formalName: "Arindam Shiva Tripathi",
+  title: "Arindam Tripathi — HCI, XR & Product Systems",
   description:
-    "Arindam Tripathi — designer-engineer building human-centered AI systems, interfaces, and XR experiences. HCI master's at the University of Maryland; previously L'Oréal Singapore.",
+    "Portfolio of Arindam Tripathi, an HCI graduate student and builder working across XR, human-AI interaction, data-driven tools, and accessible product systems.",
+  // Sitewide social-preview image. Landscape source photo used as a stopgap —
+  // a purpose-built 1200x630 card should replace this before launch.
+  ogImage: "/images/about/brooklyn-main-portrait.jpg",
+  ogImageAlt: "Arindam Tripathi",
+  sameAs: [
+    "https://www.linkedin.com/in/arindamtrip/",
+    "https://github.com/arindamshivatrip"
+  ],
   owner: "Ari"
 };

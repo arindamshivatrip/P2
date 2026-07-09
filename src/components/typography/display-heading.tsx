@@ -14,7 +14,7 @@ export function DisplayHeading<T extends ElementType = "h1">({
 
   return createElement(Component, {
     className: cn(
-        "font-display text-4xl leading-tight tracking-tight md:text-6xl",
+        "font-display text-display-sm tracking-tight",
         className
     ),
     ...props

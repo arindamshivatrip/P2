@@ -16,7 +16,8 @@ export function BodyText<T extends ElementType = "p">({
 
   return createElement(Component, {
     className: cn(
-        "font-body font-light text-base leading-relaxed [&_b]:font-medium [&_b]:text-foreground [&_strong]:font-medium [&_strong]:text-foreground",
+        // true 400 only — Epoch has no lighter/heavier cuts to fake
+        "font-body font-normal text-body [&_b]:text-foreground [&_strong]:text-foreground",
         tone === "default" && "text-foreground",
         tone === "secondary" && "text-text-secondary",
         tone === "muted" && "text-text-muted",

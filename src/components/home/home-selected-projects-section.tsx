@@ -1,106 +1,75 @@
 import Link from "next/link";
+import { HomeSelectedProjects, type SelectedWorkItem } from "@/components/home/home-selected-projects";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { getFallbackCoverImage } from "@/components/work/tile-media";
 import { DisplayHeading } from "@/components/typography/display-heading";
-import { ProjectCard } from "@/components/ui/project-card";
 import { Reveal } from "@/components/ui/reveal";
 import { projectsContent } from "@/data/home";
 import { getHomeFeaturedProjects, getProjectDestinationHref } from "@/data/projects";
+import { getProjectAssetAvailability } from "@/lib/project-assets.server";
 import type { Project } from "@/types/project";
 
-const featuredProjects = getHomeFeaturedProjects();
-const featuredProject = featuredProjects[0];
-const supportingProjects = featuredProjects.slice(1, 3);
-
-const visualByTone = {
-  featured: "min-h-[260px] md:min-h-[420px] bg-gradient-to-br from-zinc-700 via-zinc-900 to-[#17343f]",
-  supportingA: "min-h-[180px] bg-gradient-to-br from-emerald-900 via-zinc-800 to-zinc-700",
-  supportingB: "min-h-[170px] bg-gradient-to-br from-zinc-500 via-zinc-700 to-zinc-900"
-} as const;
-
-function getFeaturedVisualClass(project: Project): string {
-  if (project.tileMediaAspect === "widescreen-16-9") {
-    return "aspect-[16/9] bg-gradient-to-br from-zinc-700 via-zinc-900 to-[#17343f]";
+// Honest, single-word context per project — derived, mirrors the /work index.
+function getStatusLabel(project: Project): string {
+  if (project.nda?.isRestricted) {
+    return "Confidential";
   }
-
-  return visualByTone.featured;
+  if (project.entryType === "research") {
+    return "Research";
+  }
+  if (project.status === "In Progress") {
+    return "In progress";
+  }
+  if (project.status === "Case Study") {
+    return "Case study";
+  }
+  return project.status;
 }
 
-export function HomeSelectedProjectsSection() {
-  if (!featuredProject) {
+export async function HomeSelectedProjectsSection() {
+  const featured = getHomeFeaturedProjects().slice(0, 3);
+
+  if (featured.length === 0) {
     return null;
   }
 
+  const items: SelectedWorkItem[] = await Promise.all(
+    featured.map(async (project) => {
+      const availability = await getProjectAssetAvailability(project);
+      return {
+        id: project.id,
+        href: getProjectDestinationHref(project),
+        title: project.title,
+        oneLiner: project.oneLiner,
+        year: project.meta.year,
+        org: project.meta.org,
+        statusLabel: getStatusLabel(project),
+        fallbackGradient: getFallbackCoverImage(project, "standard"),
+        cover: availability.coverImage ? project.coverImage : undefined,
+        video: availability.video ? project.video?.src : undefined
+      };
+    })
+  );
+
   return (
-    <Section className="bg-background pt-3 md:pt-5 pb-8 md:pb-10">
+    <Section className="bg-background pt-3 pb-8 md:pt-5 md:pb-10">
       <Container>
         <div className="flex items-end justify-between gap-4">
           <Reveal>
-            <DisplayHeading as="h2" className="text-4xl md:text-[3.2rem]">
-              {projectsContent.title}
-            </DisplayHeading>
+            <DisplayHeading as="h2">{projectsContent.title}</DisplayHeading>
           </Reveal>
           <Reveal delay={0.04}>
             <Link
               href="/work"
-              className="pb-1 font-body text-sm uppercase tracking-[0.12em] text-text-muted transition-colors hover:text-foreground"
+              className="pb-1 font-body text-label-lg uppercase text-text-muted transition-colors hover:text-foreground"
             >
               View all work
             </Link>
           </Reveal>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.58fr)_minmax(0,0.92fr)] lg:items-start">
-          <div className="space-y-5">
-            <Reveal>
-              <Link href={getProjectDestinationHref(featuredProject)} className="block">
-                <ProjectCard
-                  title={featuredProject.title}
-                  summary={featuredProject.oneLiner}
-                  tags={(featuredProject.tags ?? featuredProject.categories).slice(0, 3)}
-                  tone="featured"
-                  visualClassName={getFeaturedVisualClass(featuredProject)}
-                  visualVideoSrc={featuredProject.video?.src}
-                  visualVideoTitle={featuredProject.video?.title}
-                  className="h-full p-5 md:p-6"
-                  interactive
-                />
-              </Link>
-            </Reveal>
-          </div>
-
-          <div className="space-y-5">
-            {supportingProjects[0] ? (
-              <Reveal delay={0.06}>
-                <Link href={getProjectDestinationHref(supportingProjects[0])} className="block">
-                  <ProjectCard
-                    title={supportingProjects[0].title}
-                    summary={supportingProjects[0].oneLiner}
-                    tags={(supportingProjects[0].tags ?? supportingProjects[0].categories).slice(0, 3)}
-                    tone="supportingA"
-                    visualClassName={visualByTone.supportingA}
-                    interactive
-                  />
-                </Link>
-              </Reveal>
-            ) : null}
-
-            {supportingProjects[1] ? (
-              <Reveal delay={0.12}>
-                <Link href={getProjectDestinationHref(supportingProjects[1])} className="block">
-                  <ProjectCard
-                    title={supportingProjects[1].title}
-                    summary={supportingProjects[1].oneLiner}
-                    tags={(supportingProjects[1].tags ?? supportingProjects[1].categories).slice(0, 3)}
-                    tone="supportingB"
-                    visualClassName={visualByTone.supportingB}
-                    interactive
-                  />
-                </Link>
-              </Reveal>
-            ) : null}
-          </div>
-        </div>
+        <HomeSelectedProjects items={items} />
       </Container>
     </Section>
   );

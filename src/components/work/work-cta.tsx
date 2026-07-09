@@ -13,7 +13,7 @@ export function WorkCta() {
           <DisplayHeading as="h2" className="text-5xl md:text-[4rem]">
             Curious about the work?
           </DisplayHeading>
-          <BodyText tone="secondary" className="mt-3 max-w-[58ch] text-[1.02rem] leading-relaxed">
+          <BodyText tone="secondary" className="mt-3 max-w-[58ch] text-body-lg">
             I&apos;m happy to share more context on process, decisions, and outcomes behind any of
             these projects.
           </BodyText>

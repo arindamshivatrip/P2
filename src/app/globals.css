@@ -47,10 +47,11 @@
     font-weight: 400;
   }
 
+  /* Epoch has a single 400 cut — emphasis is color, never synthesized bold */
   .font-body strong,
   .font-body b {
     color: rgb(var(--color-foreground));
-    font-weight: 500;
+    font-weight: 400;
   }
 
   a {

@@ -10,7 +10,7 @@ export function HomeLensesSection() {
       <Container>
         <div className="border-t border-border pt-10 md:pt-14">
           <Reveal>
-            <DisplayHeading as="h2" className="text-4xl md:text-[3.15rem]">
+            <DisplayHeading as="h2">
               {lensesContent.headingLineOne}
               <br />
               <span className="font-serif italic">{lensesContent.headingLineTwo}</span>

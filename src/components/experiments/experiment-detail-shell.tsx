@@ -4,6 +4,8 @@ import { Container } from "@/components/layout/container";
 import { DisplayHeading } from "@/components/typography/display-heading";
 import { Section } from "@/components/layout/section";
 import { ExperimentBackLink } from "@/components/experiments/experiment-back-link";
+import { ExperimentStamp } from "@/components/experiments/experiment-stamp";
+import { getExperimentStamp } from "@/components/experiments/experiment-meta";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 import type { Project, ProjectDetailSection, ProjectDetailSectionInlineMedia } from "@/types/project";
@@ -188,7 +190,7 @@ function renderLineWithLeadingEmphasis(line: string) {
   const [, label, rest] = match;
   return (
     <>
-      <strong className="font-medium text-foreground">{label}</strong>
+      <strong className="text-foreground">{label}</strong>
       {rest ? (
         <>
           {" "}
@@ -239,7 +241,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
   if (section.type === "text") {
     return (
       <section id={section.id} className="scroll-mt-24 border-t border-border/40 pt-8">
-        <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+        <h2 className="font-display text-display-xs tracking-tight">
           {section.title}
         </h2>
         <div className="mt-4 max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>
@@ -250,7 +252,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
   if (section.type === "text-bullets") {
     return (
       <section id={section.id} className="scroll-mt-24 border-t border-border/40 pt-8">
-        <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+        <h2 className="font-display text-display-xs tracking-tight">
           {section.title}
         </h2>
         <div className="mt-4 max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>
@@ -273,7 +275,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
 
     return (
       <section id={section.id} className="scroll-mt-24 border-t border-border/40 pt-8">
-        <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+        <h2 className="font-display text-display-xs tracking-tight">
           {section.title}
         </h2>
         <div className="mt-5 grid gap-5 md:grid-cols-2 md:gap-6">
@@ -290,7 +292,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
   if (section.type === "media") {
     return (
       <section id={section.id} className="scroll-mt-24 border-t border-border/40 pt-8">
-        <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+        <h2 className="font-display text-display-xs tracking-tight">
           {section.title}
         </h2>
         <div className="mt-5">{renderMediaBlock(section)}</div>
@@ -304,7 +306,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
   if (section.type === "quote") {
     return (
       <section id={section.id} className="scroll-mt-24 border-t border-border/40 pt-8">
-        <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+        <h2 className="font-display text-display-xs tracking-tight">
           {section.title}
         </h2>
         <blockquote className="mt-5 border-l border-border/70 pl-4 md:pl-6">
@@ -326,7 +328,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
 
   return (
     <section id={section.id} className="scroll-mt-24 border-t border-border/40 pt-8">
-      <h2 className="font-display text-3xl leading-tight tracking-tight md:text-[2.35rem]">
+      <h2 className="font-display text-display-xs tracking-tight">
         {section.title}
       </h2>
       <div className="mt-4 max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div>
@@ -365,7 +367,7 @@ export function ExperimentDetailShell({
                 <div className="sticky top-16 border-l border-border/45 pl-3">
                   <ExperimentBackLink />
                   <nav className="mt-6" aria-label="Section index">
-                    <p className="font-body text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-foreground/72">
+                    <p className="font-body text-label uppercase text-foreground/72">
                       Sections
                     </p>
                     <ol className="mt-2.5 space-y-1.5">
@@ -386,11 +388,14 @@ export function ExperimentDetailShell({
             ) : null}
 
             <div className="min-w-0">
-              <p className="font-body text-[0.66rem] uppercase tracking-[0.13em] text-text-muted">
-                {getProjectTypeLine(project)}
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="font-body text-label uppercase text-text-muted">
+                  {getProjectTypeLine(project)}
+                </p>
+                <ExperimentStamp label={getExperimentStamp(project)} />
+              </div>
 
-              <DisplayHeading as="h1" className="mt-3 text-5xl md:text-[4rem]">
+              <DisplayHeading as="h1" className="mt-3 text-display-md">
                 {project.title}
               </DisplayHeading>
 
@@ -434,19 +439,19 @@ export function ExperimentDetailShell({
               <dl className="mt-4 max-w-3xl border-t border-border/45 pt-3 font-body text-sm text-text-secondary">
                 <div className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
                   <div>
-                    <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Role</dt>
+                    <dt className="text-label uppercase text-text-muted">Role</dt>
                     <dd className="mt-1.5 text-foreground/88">{meta.role}</dd>
                   </div>
                   <div>
-                    <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Team</dt>
+                    <dt className="text-label uppercase text-text-muted">Team</dt>
                     <dd className="mt-1.5 text-foreground/88">{meta.team}</dd>
                   </div>
                   <div>
-                    <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Timeline</dt>
+                    <dt className="text-label uppercase text-text-muted">Timeline</dt>
                     <dd className="mt-1.5 text-foreground/88">{meta.timeline}</dd>
                   </div>
                   <div>
-                    <dt className="text-[0.68rem] uppercase tracking-[0.12em] text-text-muted">Skills</dt>
+                    <dt className="text-label uppercase text-text-muted">Skills</dt>
                     <dd className="mt-1.5">
                       <ul className="space-y-1">
                         {meta.skills.map((skill) => (
@@ -463,7 +468,7 @@ export function ExperimentDetailShell({
               {hasStructuredSections ? (
                 <div className="mt-10 space-y-10">
                 <nav className="lg:hidden" aria-label="Section index">
-                    <p className="font-body text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-foreground/72">
+                    <p className="font-body text-label uppercase text-foreground/72">
                       Sections
                     </p>
                     <ol className="mt-2.5 grid gap-1.5 sm:grid-cols-2">

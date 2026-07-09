@@ -1,8 +1,9 @@
 import type { Transition, Variants } from "framer-motion";
 
-export const transitions: Record<"base" | "smooth", Transition> = {
+export const transitions: Record<"base" | "smooth" | "quick", Transition> = {
   base: { duration: 0.5, ease: [0.22, 0.61, 0.36, 1] },
-  smooth: { duration: 0.72, ease: [0.2, 0.8, 0.2, 1] }
+  smooth: { duration: 0.72, ease: [0.2, 0.8, 0.2, 1] },
+  quick: { duration: 0.22, ease: [0.22, 0.61, 0.36, 1] }
 };
 
 export const fadeUp: Variants = {
