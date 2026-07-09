@@ -181,7 +181,6 @@ export function PortraitPixel({ src, alt }: PortraitPixelProps) {
         fill
         sizes={IMAGE_SIZES}
         quality={95}
-        unoptimized
         priority
         className="scale-[1.46] object-cover object-[60%_34%]"
       />

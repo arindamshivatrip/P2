@@ -6,6 +6,7 @@ import { siteMeta } from "@/data/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteMeta.url),
   title: siteMeta.title,
   description: siteMeta.description,
   icons: {

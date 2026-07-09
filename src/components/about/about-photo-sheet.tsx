@@ -79,7 +79,6 @@ function Polaroid({ item, rotation }: { item: AboutGalleryItem; rotation: number
                   fill
                   sizes="(max-width: 768px) 44vw, 15.5rem"
                   quality={92}
-                  unoptimized
                   className="object-cover object-center"
                 />
               </div>

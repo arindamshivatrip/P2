@@ -107,11 +107,7 @@ export function ContactMethods() {
                     <p className="mt-1 truncate font-body text-caption text-text-secondary">
                       {method.secondaryLine}
                     </p>
-                  ) : (
-                    <p className="mt-1 truncate font-body text-caption text-transparent" aria-hidden="true">
-                      spacer
-                    </p>
-                  )}
+                  ) : null}
                 </div>
 
                 <div className="mt-4 flex flex-wrap items-center gap-2.5">

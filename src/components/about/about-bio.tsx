@@ -664,7 +664,6 @@ function SidePolaroid({
               fill
               sizes="190px"
               quality={92}
-              unoptimized
               className="object-cover object-center"
             />
           </span>
