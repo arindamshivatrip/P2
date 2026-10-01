@@ -10,7 +10,7 @@ const MAX_TILT = 12;
 const QR_URL = "https://arindamtripathi.com/mobile_card";
 const WEBSITE_URL = "https://arindamtripathi.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/arindamtrip/";
-const CV_URL = "/files/arindam-tripathi-xr-interactive-systems-cv.pdf";
+const CV_URL = "/files/arindam-tripathi-main-cv.pdf";
 const PORTRAIT_URL = "/images/about/brooklyn-main-portrait.jpg";
 
 const TICKET_MASK =

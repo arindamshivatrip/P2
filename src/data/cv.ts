@@ -11,13 +11,13 @@ export const cvPageContent = {
   intro:
     "A focused view of my work across AI systems, interaction design, and engineering.",
   primaryLabel: "Primary version",
-  primaryTitle: "Human-Centered AI & Interaction Systems",
+  primaryTitle: "Creative Technologist / XR",
   primaryDescription:
-    "The version I reach for most — AI systems, product thinking, and interaction design in one place.",
+    "The version I reach for most — XR builds, prototypes, and working demos, with the portfolio carrying the rest.",
   primaryHref: "/files/arindam-tripathi-main-cv.pdf",
   primaryCta: "Download CV (PDF)",
   contactCta: "Contact me",
-  lastUpdated: "Updated March 2026 · PDF, one page",
+  lastUpdated: "Updated September 2026 · PDF, one page",
   secondaryLabel: "Other versions",
   secondaryIntro:
     "Alternate versions for different kinds of roles.",
@@ -27,10 +27,10 @@ export const cvPageContent = {
 
 export const cvVersions: CvVersion[] = [
   {
-    title: "UX Engineering",
+    title: "Applied AI",
     description:
-      "For interaction-heavy product and frontend roles.",
-    href: "/files/arindam-tripathi-ux-engineering-cv.pdf",
+      "For AI-product teams — production React/TypeScript and Python, with a design background.",
+    href: "/files/arindam-tripathi-applied-ai-cv.pdf",
     cta: "Download"
   },
   {
@@ -41,17 +41,17 @@ export const cvVersions: CvVersion[] = [
     cta: "Download"
   },
   {
-    title: "XR / Interactive Systems",
+    title: "Software Engineering",
     description:
-      "For spatial computing and immersive interaction roles.",
-    href: "/files/arindam-tripathi-xr-interactive-systems-cv.pdf",
+      "For shipping-focused software roles.",
+    href: "/files/arindam-tripathi-software-product-engineering-cv.pdf",
     cta: "Download"
   },
   {
-    title: "Software / Product Engineering",
+    title: "Product Management",
     description:
-      "For shipping-focused software and product roles.",
-    href: "/files/arindam-tripathi-software-product-engineering-cv.pdf",
+      "For APM roles — product decisions, stakeholder work, and metric-driven outcomes.",
+    href: "/files/arindam-tripathi-product-management-cv.pdf",
     cta: "Download"
   }
 ];
