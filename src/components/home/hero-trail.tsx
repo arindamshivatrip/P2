@@ -21,6 +21,10 @@ const EXIT_DRIFT = 64;
 const SOFT_MIN_OPACITY = 0.22;
 const SOFT_FALLOFF = 46;
 const ZONE_PADDING = 14;
+// Fallback floor when a fragment still ends up over (or drifts onto) the
+// paragraph / CTA copy — avoidance is a heuristic, this guarantees legibility.
+const HARD_MIN_OPACITY = 0.08;
+const AVOID_PASSES = 6;
 
 const HALF_SIZE: Record<HeroTrailFragment["kind"], { hw: number; hh: number }> = {
   tile: { hw: 58, hh: 58 },
@@ -124,7 +128,7 @@ function avoidHardZones(
   let y = py;
   const hard = zones.filter((z) => !z.soft).map((z) => z.rect);
 
-  for (let pass = 0; pass < 3; pass++) {
+  for (let pass = 0; pass < AVOID_PASSES; pass++) {
     let moved = false;
     for (const zone of hard) {
       const left = zone.left - hw - ZONE_PADDING;
@@ -159,27 +163,27 @@ function avoidHardZones(
   };
 }
 
-// Opacity multiplier for the headline soft zone: full strength in open
+// Opacity multiplier from the protected zones: full strength in open
 // whitespace, easing down to SOFT_MIN over the headline ink so words stay
-// readable without the trail going invisible.
-function softOpacity(x: number, y: number, hw: number, hh: number, zones: Zone[]) {
+// readable without the trail going invisible. Hard zones (paragraph, CTA) are
+// normally avoided by placement; if a fragment overlaps one anyway it drops to
+// HARD_MIN so the copy never sits on a full-strength tile.
+function zoneOpacity(x: number, y: number, hw: number, hh: number, zones: Zone[]) {
   let factor = 1;
   for (const { rect, soft } of zones) {
-    if (!soft) {
-      continue;
-    }
+    const min = soft ? SOFT_MIN_OPACITY : HARD_MIN_OPACITY;
     const left = rect.left - hw;
     const right = rect.right + hw;
     const top = rect.top - hh;
     const bottom = rect.bottom + hh;
     if (x > left && x < right && y > top && y < bottom) {
-      factor = Math.min(factor, SOFT_MIN_OPACITY);
+      factor = Math.min(factor, min);
     } else {
       const dx = Math.max(left - x, x - right, 0);
       const dy = Math.max(top - y, y - bottom, 0);
       const d = Math.hypot(dx, dy);
       if (d < SOFT_FALLOFF) {
-        factor = Math.min(factor, SOFT_MIN_OPACITY + (1 - SOFT_MIN_OPACITY) * (d / SOFT_FALLOFF));
+        factor = Math.min(factor, min + (1 - min) * (d / SOFT_FALLOFF));
       }
     }
   }
@@ -262,7 +266,14 @@ export function HeroTrail() {
         height: rect.height
       });
       const base = fragment.kind === "tile" ? 1 : 0.9;
-      const peak = base * softOpacity(placement.x, placement.y, hw, hh, zones);
+      // Sample the rest point and the end of the exit drift: a fragment placed
+      // just clear of the copy can still coast onto it while visible.
+      const peak =
+        base *
+        Math.min(
+          zoneOpacity(placement.x, placement.y, hw, hh, zones),
+          zoneOpacity(placement.x + dirX * EXIT_DRIFT, placement.y + dirY * EXIT_DRIFT, hw, hh, zones)
+        );
       const rotation = Math.max(-7, Math.min(7, dirX * 7));
 
       setSpawned((previous) =>
