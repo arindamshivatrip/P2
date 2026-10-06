@@ -5,8 +5,9 @@ import { DisplayHeading } from "@/components/typography/display-heading";
 import { Section } from "@/components/layout/section";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
-import type { Project } from "@/types/project";
+import type { Project, ProjectFigure } from "@/types/project";
 import { LogoTile } from "@/components/ui/logo-tile";
+import { cn } from "@/lib/utils";
 
 type WorkDetailShellProps = {
   project: Project;
@@ -44,6 +45,57 @@ function FigureCaption({ number, caption }: { number: number; caption: string })
   );
 }
 
+function FigureSection({
+  title,
+  figures,
+  startNumber
+}: {
+  title: string;
+  figures: ProjectFigure[];
+  startNumber: number;
+}) {
+  return (
+    <section className="mt-10 border-t border-border/40 pt-8">
+      <h2 className="font-display text-display-xs tracking-tight">{title}</h2>
+      <div className="mt-6 space-y-10">
+        {figures.map((figure, index) => (
+          <div key={figure.src}>
+            <figure>
+              {figure.kind === "video" ? (
+                <video
+                  className="w-full rounded-[0.95rem] bg-surface"
+                  src={figure.src}
+                  poster={figure.poster}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  aria-label={figure.alt}
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  className="w-full rounded-[0.95rem] bg-surface"
+                  src={figure.src}
+                  alt={figure.alt}
+                  loading="lazy"
+                />
+              )}
+              <FigureCaption number={startNumber + index} caption={figure.caption} />
+            </figure>
+            {figure.description ? (
+              <BodyText tone="secondary" className="mt-3 max-w-3xl">
+                {figure.description}
+              </BodyText>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function WorkDetailShell({
   project,
   hasCoverAsset = false,
@@ -61,6 +113,7 @@ export function WorkDetailShell({
     project.detailPage?.showMetrics === false ? [] : project.metrics ?? [];
   const isConfidential = project.visibility === "confidential-summary";
   const figures = project.figures ?? [];
+  const photos = project.photos ?? [];
   const figureOffset = project.heroCaption ? 1 : 0;
 
   return (
@@ -90,7 +143,11 @@ export function WorkDetailShell({
 
             <figure className="mt-6">
               <div
-                className="relative min-h-[280px] overflow-hidden rounded-[0.95rem] bg-cover bg-center md:min-h-[460px]"
+                className={cn(
+                  "relative overflow-hidden rounded-[0.95rem] bg-cover bg-center",
+                  // Videos are cut at 16:9; anything else keeps the taller frame.
+                  hasVideoAsset && project.video?.src ? "aspect-video" : "min-h-[280px] md:min-h-[460px]"
+                )}
                 style={{ backgroundImage: mediaBackground }}
                 aria-hidden="true"
               >
@@ -166,46 +223,19 @@ export function WorkDetailShell({
             </section>
 
             {figures.length > 0 ? (
-              <section className="mt-10 border-t border-border/40 pt-8">
-                <h2 className="font-display text-display-xs tracking-tight">
-                  {project.figuresTitle ?? "Gallery"}
-                </h2>
-                <div className="mt-6 space-y-10">
-                  {figures.map((figure, index) => (
-                    <div key={figure.src}>
-                      <figure>
-                        {figure.kind === "video" ? (
-                          <video
-                            className="w-full rounded-[0.95rem] bg-surface"
-                            src={figure.src}
-                            poster={figure.poster}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            preload="metadata"
-                            aria-label={figure.alt}
-                          />
-                        ) : (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            className="w-full rounded-[0.95rem] bg-surface"
-                            src={figure.src}
-                            alt={figure.alt}
-                            loading="lazy"
-                          />
-                        )}
-                        <FigureCaption number={figureOffset + index + 1} caption={figure.caption} />
-                      </figure>
-                      {figure.description ? (
-                        <BodyText tone="secondary" className="mt-3 max-w-3xl">
-                          {figure.description}
-                        </BodyText>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              </section>
+              <FigureSection
+                title={project.figuresTitle ?? "Gallery"}
+                figures={figures}
+                startNumber={figureOffset + 1}
+              />
+            ) : null}
+
+            {photos.length > 0 ? (
+              <FigureSection
+                title={project.photosTitle ?? "Photos"}
+                figures={photos}
+                startNumber={figureOffset + figures.length + 1}
+              />
             ) : null}
 
             {highlights.length > 0 ? (

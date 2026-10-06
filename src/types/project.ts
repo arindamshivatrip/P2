@@ -217,6 +217,9 @@ export interface Project {
   heroCaption?: string;
   figures?: ProjectFigure[];
   figuresTitle?: string;
+  // A second figure section (e.g. event photos); numbering continues on.
+  photos?: ProjectFigure[];
+  photosTitle?: string;
   tileMediaAspect?: ProjectTileMediaAspect;
   logoTile?: ProjectLogoTile;
 

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { CardQr } from "@/components/mobile-card/card-qr";
+import styles from "@/components/mobile-card/mobile-card-page.module.css";
 import { CARD_URL, cardContact, cardFeatures, cardIdentity, type CardFeature } from "@/data/card";
 import { LogoTile } from "@/components/ui/logo-tile";
 import { getProjectBySlug, getWorkDetailHref } from "@/data/projects";
+import { cn } from "@/lib/utils";
 
 function Icon({ children }: { children: ReactNode }) {
   return (
@@ -99,9 +101,17 @@ function FeatureCard({ feature }: { feature: CardFeature }) {
 
 export function MobileCardPage() {
   return (
-    <main className="min-h-[100svh] bg-background text-foreground">
-      <div className="mx-auto w-full max-w-[28rem] px-4 pb-[max(env(safe-area-inset-bottom),2rem)] pt-[max(env(safe-area-inset-top),2rem)]">
-        <header className="flex items-center gap-4">
+    <main className={cn("min-h-[100svh] bg-background text-foreground", styles.theme)}>
+      <div className="mx-auto w-full max-w-[28rem] px-4 pb-[max(env(safe-area-inset-bottom),2rem)] pt-[max(env(safe-area-inset-top),1.5rem)]">
+        {/* QR first: the phone gets handed over or held up, and this is what gets scanned. */}
+        <section aria-label="QR code for this card" className="flex flex-col items-center">
+          <div className="rounded-[1.25rem] bg-white p-3 shadow-card">
+            <CardQr value={CARD_URL} />
+          </div>
+          <p className="mt-3 font-body text-label-lg uppercase text-text-muted">Scan to open this card</p>
+        </section>
+
+        <header className="mt-8 flex items-center gap-4 border-t border-border pt-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={cardIdentity.avatar}
@@ -178,18 +188,6 @@ export function MobileCardPage() {
               CV (PDF)
             </a>
           </p>
-
-          <details className="group mt-6 rounded-card border border-border bg-surface/50">
-            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between px-4 font-body text-body-sm text-text-secondary [&::-webkit-details-marker]:hidden">
-              Show QR code to share
-              <span aria-hidden="true" className="transition-transform group-open:rotate-45">
-                +
-              </span>
-            </summary>
-            <div className="flex justify-center px-4 pb-5 pt-1">
-              <CardQr value={CARD_URL} />
-            </div>
-          </details>
         </footer>
       </div>
     </main>

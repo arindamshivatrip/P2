@@ -1,0 +1,25 @@
+/*
+ * The card follows the visitor's device theme. The site itself is light-only,
+ * so the dark palette is scoped here by redefining the shared color tokens.
+ */
+.theme {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme {
+    color-scheme: dark;
+    --color-background: 15 17 19;
+    --color-surface: 28 32 36;
+    --color-foreground: 245 244 237;
+    --color-text-secondary: 207 207 207;
+    --color-text-muted: 156 163 175;
+    --color-border: 48 54 60;
+    --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.28);
+  }
+
+  /* Match the page behind the card so overscroll doesn't flash cream. */
+  :global(body):has(.theme) {
+    background-color: rgb(15 17 19);
+  }
+}

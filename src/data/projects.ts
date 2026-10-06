@@ -310,13 +310,14 @@ export const projects: Project[] = [
     caseStudyDepth: "light",
     visible: true,
     themeKey: "XR",
-    thumbnail: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
-    coverImage: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
+    thumbnail: "/images/projects/reframed-passthrough-ar/hero-loop-poster.jpg",
+    coverImage: "/images/projects/reframed-passthrough-ar/hero-loop-poster.jpg",
     video: {
-      src: "/images/projects/reframed-passthrough-ar/hero.mp4",
-      poster: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
-      title: "Reframed: physical artworks extending into mixed reality"
+      src: "/images/projects/reframed-passthrough-ar/hero-loop.mp4",
+      poster: "/images/projects/reframed-passthrough-ar/hero-loop-poster.jpg",
+      title: "Reframed highlights: paintings stepping out of their frames"
     },
+    // 4:3 cut of the same edit, framed for the home and /work preview panels.
     previewVideo: {
       src: "/images/projects/reframed-passthrough-ar/thumbnail-loop.mp4",
       poster: "/images/projects/reframed-passthrough-ar/thumbnail-loop-poster.jpg",
@@ -361,6 +362,41 @@ export const projects: Project[] = [
         caption: "Moving around the work reveals the depth between the physical painting and its virtual layers.",
         description:
           "From the front, the physical and digital imagery can appear closely aligned. As the viewer moves sideways, parallax reveals the separation between virtual layers, making the three-dimensional construction of the scene visible through movement alone."
+      }
+    ],
+    photosTitle: "In the room",
+    photos: [
+      {
+        kind: "image",
+        src: "/images/projects/reframed-passthrough-ar/room-installation.jpg",
+        alt: "Arindam guides a visitor wearing a Quest 3 headset past framed prints of the five artworks on easels.",
+        caption: "The installation at NextNOW Fest, with a visitor starting the hunt.",
+        description:
+          "Reframed ran as a walk-up experience over two days and drew 50+ visitors. I hosted the station, getting each person into the headset and through their first artwork."
+      },
+      {
+        kind: "image",
+        src: "/images/projects/reframed-passthrough-ar/room-floor-marker.jpg",
+        alt: "Arindam points a headset-wearing visitor toward a printed marker on the floor.",
+        caption: "Every session starts at a printed floor marker, which the headset recognizes before the hunt begins."
+      },
+      {
+        kind: "image",
+        src: "/images/projects/reframed-passthrough-ar/room-observing.jpg",
+        alt: "Arindam watches a visitor in a Quest 3 headset move between the easels.",
+        caption: "Watching a visitor work through the hunt."
+      },
+      {
+        kind: "image",
+        src: "/images/projects/reframed-passthrough-ar/room-five-artworks.jpg",
+        alt: "The five printed artworks on easels in a row, with a small floor marker in front.",
+        caption: "The five registered artworks, with the floor marker in front."
+      },
+      {
+        kind: "image",
+        src: "/images/projects/reframed-passthrough-ar/room-lab-test.jpg",
+        alt: "A tester in a Quest 3 headset looks at a print of The Great Wave taped to a wall.",
+        caption: "Testing recognition on a single print on a wall."
       }
     ],
     highlights: [
