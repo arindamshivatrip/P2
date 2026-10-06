@@ -62,8 +62,6 @@ export const cardFeatures: CardFeature[] = [
     kicker: "AI decision support · 2023–25",
     mark: "200+ users · 10+ markets",
     blurb: "ML-backed promotion planning used by 200+ people across 10+ APAC markets.",
-    clip: "/images/card/loreal-loop.mp4",
-    poster: "/images/card/loreal-poster.jpg",
     gradient: "linear-gradient(135deg, #0f1e47 0%, #2a2550 55%, #ff8a4c 120%)"
   }
 ];

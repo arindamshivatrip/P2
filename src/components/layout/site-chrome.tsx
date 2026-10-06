@@ -11,7 +11,7 @@ type SiteChromeProps = {
 
 export function SiteChrome({ children }: SiteChromeProps) {
   const pathname = usePathname();
-  const isStandaloneRoute = pathname === "/mobile_card";
+  const isStandaloneRoute = pathname === "/mobile_card" || pathname === "/my_card";
 
   if (isStandaloneRoute) {
     return <>{children}</>;

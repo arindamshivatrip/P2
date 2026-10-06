@@ -7,7 +7,8 @@
   --color-surface: 238 234 225;
   --color-foreground: 31 31 31;
   --color-text-secondary: 90 90 90;
-  --color-text-muted: 138 138 138;
+  /* 4.8:1 on the cream background (WCAG AA for small text). */
+  --color-text-muted: 107 107 107;
   --color-accent: 255 153 50;
   --color-border: 212 212 200;
 

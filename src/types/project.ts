@@ -84,9 +84,11 @@ export interface ProjectFigure {
 // Animated brand tile used when a project has no cover or video. `motion`
 // picks the scene so tiles don't all move alike: "zoom" (mark grows in the
 // centre), "scan" (laser sweep reveals the mark), "android-walk" (Android robot
-// walks in and the wordmark follows). Without `src` the wordmark text stands in.
+// walks in and the wordmark follows), "aura-desk" (glowing title with the robot
+// as a corner badge), "dashboard" (pastel chart cards behind the wordmark).
+// Without `src` the wordmark text stands in.
 export interface ProjectLogoTile {
-  motion?: "zoom" | "scan" | "android-walk";
+  motion?: "zoom" | "scan" | "android-walk" | "aura-desk" | "dashboard";
   src?: string;
   alt: string;
   wordmark: string;

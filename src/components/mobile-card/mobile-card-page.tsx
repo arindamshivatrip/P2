@@ -99,19 +99,31 @@ function FeatureCard({ feature }: { feature: CardFeature }) {
   );
 }
 
-export function MobileCardPage() {
+// Always encodes the visitor page, so scanning /my_card never lands on the owner copy.
+function QrBlock({ className }: { className?: string }) {
+  return (
+    <section aria-label="QR code for this card" className={cn("flex flex-col items-center", className)}>
+      <div className="rounded-[1.25rem] bg-white p-3 shadow-card">
+        <CardQr value={CARD_URL} />
+      </div>
+      <p className="mt-3 font-body text-label-lg uppercase text-text-muted">Scan to open this card</p>
+    </section>
+  );
+}
+
+type MobileCardPageProps = {
+  // /my_card (owner, held up for scanning) leads with the QR; /mobile_card
+  // (visitors who already tapped or scanned) leads with the profile.
+  qrFirst?: boolean;
+};
+
+export function MobileCardPage({ qrFirst = false }: MobileCardPageProps) {
   return (
     <main className={cn("min-h-[100svh] bg-background text-foreground", styles.theme)}>
       <div className="mx-auto w-full max-w-[28rem] px-4 pb-[max(env(safe-area-inset-bottom),2rem)] pt-[max(env(safe-area-inset-top),1.5rem)]">
-        {/* QR first: the phone gets handed over or held up, and this is what gets scanned. */}
-        <section aria-label="QR code for this card" className="flex flex-col items-center">
-          <div className="rounded-[1.25rem] bg-white p-3 shadow-card">
-            <CardQr value={CARD_URL} />
-          </div>
-          <p className="mt-3 font-body text-label-lg uppercase text-text-muted">Scan to open this card</p>
-        </section>
+        {qrFirst ? <QrBlock /> : null}
 
-        <header className="mt-8 flex items-center gap-4 border-t border-border pt-6">
+        <header className={cn("flex items-center gap-4", qrFirst && "mt-8 border-t border-border pt-6")}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={cardIdentity.avatar}
@@ -188,6 +200,8 @@ export function MobileCardPage() {
               CV (PDF)
             </a>
           </p>
+
+          {qrFirst ? null : <QrBlock className="mt-8" />}
         </footer>
       </div>
     </main>

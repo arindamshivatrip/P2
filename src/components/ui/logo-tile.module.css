@@ -197,6 +197,330 @@
   100% { transform: translateX(0); opacity: 0; }
 }
 
+/* Tiles size their contents off the tile itself (cqw), so the same scene
+   works in a 4:3 preview, a 16:9 hero and a phone card. */
+.tile {
+  container-type: size;
+}
+
+/* ---------- aura-desk: glowing "Aura", "Desk" slides out onto a desk ---------- */
+
+.auraBlobs {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(38% 34% at 30% 42%, rgba(91, 231, 255, 0.16), transparent 70%),
+    radial-gradient(34% 30% at 62% 58%, rgba(255, 122, 200, 0.13), transparent 70%),
+    radial-gradient(30% 28% at 48% 30%, rgba(143, 123, 255, 0.14), transparent 70%);
+  filter: blur(18px);
+  animation: aura-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes aura-drift {
+  from { transform: translate3d(-4%, -2%, 0) rotate(0deg); }
+  to { transform: translate3d(4%, 3%, 0) rotate(8deg); }
+}
+
+/* Periodic gradient (colours repeat twice) so a one-width shift loops seamlessly. */
+.auraWord,
+.auraGlow {
+  background-image: linear-gradient(
+    100deg,
+    #5be7ff 0%, #8f7bff 12.5%, #ff7ac8 25%, #ffb067 37.5%,
+    #5be7ff 50%, #8f7bff 62.5%, #ff7ac8 75%, #ffb067 87.5%, #5be7ff 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aura-flow 6s linear infinite;
+}
+
+@keyframes aura-flow {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+.auraWordWrap {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  animation: aura-in 7s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.auraGlow {
+  position: absolute;
+  inset: 0;
+  filter: blur(0.22em);
+  opacity: 0.75;
+  animation: aura-flow 6s linear infinite, aura-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes aura-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.95; }
+}
+
+@keyframes aura-in {
+  0% { opacity: 0; transform: scale(0.94); filter: blur(10px); }
+  12% { opacity: 1; transform: scale(1); filter: blur(0); }
+  88% { opacity: 1; transform: scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: scale(1.02); filter: blur(4px); }
+}
+
+/* A window that starts at Aura's right edge: Desk slides in from behind it. */
+.deskReveal {
+  position: relative;
+  display: inline-block;
+  /* Room above for the floating widgets and below for the desk legs. */
+  padding: 0.5em 0.05em 0.5em;
+  margin: -0.5em 0 -0.5em 0.22em;
+  overflow: hidden;
+}
+
+.deskSlide {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  animation: desk-slide 7s infinite;
+}
+
+@keyframes desk-slide {
+  0%, 13% { transform: translateX(-108%); opacity: 0; animation-timing-function: cubic-bezier(0.2, 0.9, 0.25, 1.12); }
+  14% { opacity: 1; }
+  31% { transform: translateX(0); opacity: 1; }
+  88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+
+.deskWord {
+  color: #f5f4ed;
+}
+
+.desk {
+  display: block;
+  width: 112%;
+  margin-left: -6%;
+  height: 0.42em;
+  /* Pull the tabletop up past the font's descender space so the word sits on it. */
+  margin-top: -0.3em;
+}
+
+/* Glanceable widgets that light up, floating above the desk, once Desk lands. */
+.widget {
+  position: absolute;
+  height: 0.16em;
+  border-radius: 0.05em;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  animation: widget-pop 7s cubic-bezier(0.34, 1.5, 0.64, 1) infinite;
+}
+
+.widgetA {
+  right: 6%;
+  width: 0.34em;
+  top: -0.16em;
+  background: linear-gradient(135deg, #5be7ff, #8f7bff);
+  box-shadow: 0 0 0.25em rgba(91, 231, 255, 0.7);
+}
+
+.widgetB {
+  right: 48%;
+  width: 0.22em;
+  top: -0.1em;
+  background: linear-gradient(135deg, #ff7ac8, #ffb067);
+  box-shadow: 0 0 0.25em rgba(255, 122, 200, 0.6);
+  animation-delay: 0.18s;
+}
+
+@keyframes widget-pop {
+  0%, 33% { opacity: 0; transform: translateY(0.1em) scale(0.4); }
+  40% { opacity: 1; transform: translateY(0) scale(1); }
+  88% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+
+/* ---------- dashboard: abstract pastel cards drifting behind a wordmark ---------- */
+
+.dash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  position: absolute;
+  display: flex;
+  padding: 1.6cqw 1.8cqw;
+  border-radius: 1.8cqw;
+  background: var(--card-bg);
+  animation-name: drift-a;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Back layer: bigger, out of focus, faint. Front layer: smaller, sharper. */
+.layer-back {
+  opacity: 0.5;
+  filter: blur(0.45cqw);
+}
+
+.layer-front {
+  opacity: 0.72;
+  box-shadow: 0 0.8cqw 2.4cqw rgba(60, 40, 30, 0.06);
+}
+
+.tone-lavender { --card-bg: #ebe5ff; --ink: #a597f2; }
+.tone-mint { --card-bg: #dcf3e8; --ink: #6cc2a0; }
+.tone-peach { --card-bg: #ffe6d6; --ink: #f2a57c; }
+.tone-sky { --card-bg: #dfeaff; --ink: #8db2ee; }
+.tone-butter { --card-bg: #fff3cc; --ink: #e8c35c; }
+.tone-rose { --card-bg: #fde4ee; --ink: #ef9dbd; }
+
+.drift-a { animation-name: drift-a; }
+.drift-b { animation-name: drift-b; }
+.drift-c { animation-name: drift-c; }
+
+@keyframes drift-a {
+  0% { transform: translate3d(0, 0, 0) rotate(-0.6deg); }
+  100% { transform: translate3d(2.5cqw, -1.5cqh, 0) rotate(0.6deg); }
+}
+
+@keyframes drift-b {
+  0% { transform: translate3d(0, 0, 0) rotate(0.5deg); }
+  100% { transform: translate3d(-3cqw, -2cqh, 0) rotate(-0.8deg); }
+}
+
+@keyframes drift-c {
+  0% { transform: translate3d(0, 0, 0) rotate(0.8deg); }
+  100% { transform: translate3d(-1.5cqw, 2.5cqh, 0) rotate(-0.4deg); }
+}
+
+.bars {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 8%;
+}
+
+.bar {
+  flex: 1;
+  height: 100%;
+  border-radius: 0.6cqw 0.6cqw 0.2cqw 0.2cqw;
+  background: var(--ink);
+  transform-origin: 50% 100%;
+  animation: bar-wave 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes bar-wave {
+  from { transform: scaleY(0.5); }
+  to { transform: scaleY(0.92); }
+}
+
+.lineChart {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  align-self: center;
+}
+
+.area {
+  fill: var(--ink);
+  opacity: 0.18;
+}
+
+.linePath {
+  stroke: var(--ink);
+  stroke-dasharray: 100;
+  animation: line-draw 8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes line-draw {
+  0% { stroke-dashoffset: 100; }
+  50%, 80% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -100; }
+}
+
+.donut {
+  width: 100%;
+  height: 100%;
+  animation: donut-spin 24s linear infinite;
+}
+
+.donutTrack {
+  stroke: var(--ink);
+  opacity: 0.2;
+}
+
+.donutArc {
+  stroke: var(--ink);
+  stroke-linecap: round;
+  stroke-dasharray: 60 100;
+  animation: donut-fill 7s ease-in-out infinite alternate;
+}
+
+@keyframes donut-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes donut-fill {
+  from { stroke-dasharray: 45 100; }
+  to { stroke-dasharray: 72 100; }
+}
+
+.rows {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18%;
+}
+
+.row {
+  display: block;
+  height: 1.2cqw;
+  border-radius: 1cqw;
+  background: var(--ink);
+  opacity: 0.6;
+  transform-origin: 0 50%;
+  animation: row-grow 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes row-grow {
+  from { transform: scaleX(0.6); }
+  to { transform: scaleX(1); }
+}
+
+.dots {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+.dot {
+  width: 1.6cqw;
+  height: 1.6cqw;
+  border-radius: 50%;
+  background: var(--ink);
+  animation: dot-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes dot-pulse {
+  from { transform: scale(0.7); opacity: 0.6; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Wide, soft clear zone so the wordmark owns the centre. */
+.wordmarkPlate {
+  position: relative;
+  z-index: 2;
+  padding: 5cqw 9cqw;
+  background: radial-gradient(closest-side, rgba(252, 248, 243, 0.98) 0%, rgba(252, 248, 243, 0.9) 55%, rgba(252, 248, 243, 0));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .zoom,
   .scanGrid,
@@ -209,8 +533,25 @@
   .armB,
   .head,
   .glasses,
-  .wordmark {
+  .wordmark,
+  .auraBlobs,
+  .auraWord,
+  .auraGlow,
+  .auraWordWrap,
+  .deskSlide,
+  .widget,
+  .card,
+  .bar,
+  .donut,
+  .donutArc,
+  .linePath,
+  .row,
+  .dot {
     animation: none !important;
+  }
+
+  .widget {
+    opacity: 1;
   }
 
   .scanTrack,

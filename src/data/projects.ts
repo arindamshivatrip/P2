@@ -44,10 +44,12 @@ export const projects: Project[] = [
     themeKey: "AI",
     thumbnail: "/images/projects/loreal-ml-planning-suite/thumbnail.jpg",
     coverImage: "/images/projects/loreal-ml-planning-suite/cover.jpg",
-    video: {
-      src: "/videos/loreal/L1.mp4",
-      poster: "/videos/loreal/L1-poster.jpg",
-      title: "L'Oréal ML Planning Suite preview"
+    logoTile: {
+      motion: "dashboard",
+      src: "/images/logos/loreal-wordmark.png",
+      alt: "L'Oréal",
+      wordmark: "L'ORÉAL",
+      background: "linear-gradient(160deg, #fcf8f3 0%, #f4ede6 100%)"
     },
     tileMediaAspect: "widescreen-16-9",
     highlights: [
@@ -458,7 +460,7 @@ export const projects: Project[] = [
     visible: true,
     themeKey: "XR",
     logoTile: {
-      motion: "android-walk",
+      motion: "aura-desk",
       src: "/images/logos/android-xr-white.svg",
       alt: "Android XR",
       wordmark: "Android XR",
