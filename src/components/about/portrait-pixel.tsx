@@ -15,17 +15,17 @@ type PortraitPixelProps = {
 const COLS = 56;
 const ROWS = 70;
 
-// Must mirror the base image's crop (cover + object-[60%_34%] + scale-1.46)
+// Must mirror the base image's crop (cover + object-position + ZOOM)
 // closely enough that the block version reads as the same picture.
-const ZOOM = 1.46;
-const ANCHOR_X = 0.6;
-const ANCHOR_Y = 0.34;
+// The source is pre-cropped to 4:5, so it renders as-is: no zoom, centered.
+const ZOOM = 1;
+const ANCHOR_X = 0.5;
+const ANCHOR_Y = 0.5;
 
 const FRAME_CLASS =
   "relative aspect-[4/5] w-full overflow-hidden rounded-[0.95rem] bg-surface/65";
-// Each term is the frame size × ZOOM: the image renders under scale-[1.46], so
-// Next/Image must fetch enough pixels for the post-scale size, not the frame.
-const IMAGE_SIZES = "(max-width: 768px) 134vw, (max-width: 1280px) 55vw, 35rem";
+// The frame spans the full width on mobile and a 24rem column on desktop.
+const IMAGE_SIZES = "(max-width: 1024px) 100vw, 24rem";
 
 // Cell-aligned stud + hairline overlay that sells "built from blocks": one
 // highlight dot per cell plus a faint grid. Sized in fractions of the frame so
@@ -57,7 +57,7 @@ function usePixelatedPortrait(src: string): string | null {
       const ih = image.naturalHeight;
       // Reproduce the base layer's CSS exactly: object-fit cover places the
       // image at a scale s0 with an offset given by object-position, and the
-      // scale-1.46 transform then magnifies about the frame's center. Nominal
+      // ZOOM transform then magnifies about the frame's center. Nominal
       // frame units cancel out; only the 4:5 aspect matters.
       const frameW = 800;
       const frameH = 1000;
@@ -184,7 +184,7 @@ export function PortraitPixel({ src, alt }: PortraitPixelProps) {
         sizes={IMAGE_SIZES}
         quality={95}
         priority
-        className="scale-[1.46] object-cover object-[60%_34%]"
+        className="object-cover object-center"
       />
 
       {pixelUrl ? (

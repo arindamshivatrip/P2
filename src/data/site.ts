@@ -19,9 +19,8 @@ export const siteMeta = {
   title: "Arindam Tripathi — HCI, XR & Product Systems",
   description:
     "Portfolio of Arindam Tripathi, an HCI graduate student and builder working across XR, human-AI interaction, data-driven tools, and accessible product systems.",
-  // Sitewide social-preview image. Landscape source photo used as a stopgap —
-  // a purpose-built 1200x630 card should replace this before launch.
-  ogImage: "/images/about/brooklyn-main-portrait.jpg",
+  // Sitewide social-preview image, cropped to 1200x630.
+  ogImage: "/images/about/capitol-og.jpg",
   ogImageAlt: "Arindam Tripathi",
   sameAs: [
     "https://www.linkedin.com/in/arindamtrip/",

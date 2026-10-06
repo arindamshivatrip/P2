@@ -160,7 +160,7 @@ export const aboutContent = {
     }
   ],
   portrait: {
-    src: "/images/about/brooklyn-main-portrait.jpg",
-    alt: "standing portrait by brooklyn waterfront"
+    src: "/images/about/capitol-main-portrait.jpg",
+    alt: "Arindam at sunset on the National Mall, with the U.S. Capitol behind him"
   }
 } as const;
