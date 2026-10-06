@@ -11,7 +11,7 @@ export const contactContent = {
   eyebrow: "Contact",
   heading: "Open to thoughtful collaboration.",
   supporting:
-    "I’m finishing my master’s in human-computer interaction at the University of Maryland, and I’m looking for 2026 internships and full-time roles in human-AI interaction, UX engineering, and XR. If you’re building with XR, AI, research, or product systems — or want a second set of hands on a messy problem — I’d love to hear about it.",
+    "I’m finishing my master’s in human-computer interaction at the University of Maryland, and I’m looking for full-time roles starting in 2027, plus co-ops, in human-AI interaction, UX engineering, and XR. If you’re building with XR, AI, research, or product systems — or want a second set of hands on a messy problem — I’d love to hear about it.",
   primaryCta: {
     label: "Say hello",
     href: "mailto:aritrip@umd.edu"

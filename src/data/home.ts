@@ -81,6 +81,6 @@ export const footerContent = {
   name: "Arindam Shiva Tripathi",
   description:
     "A modular portfolio exploring AI systems, interaction design, and spatial computing.",
-  availability: "Open to 2026 internships & full-time roles",
+  availability: "Open to full-time roles starting 2027, plus co-ops",
   note: "Built with care and a questionable amount of iteration."
 };

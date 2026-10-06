@@ -9,7 +9,7 @@ export const cardIdentity = {
   avatar: "/images/card/avatar.jpg",
   badge: "Google Trusted Developer, Android XR",
   line: "MS HCI, University of Maryland",
-  availability: "Open to full-time roles in XR, UX engineering & human-AI interaction"
+  availability: "Open to 2027 full-time roles & co-ops in XR, UX engineering & human-AI interaction"
 };
 
 export const cardContact = {
