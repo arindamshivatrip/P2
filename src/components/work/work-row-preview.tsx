@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { springs, transitions } from "@/lib/motion";
 import type { WorkIndexItem } from "@/components/work/work-index";
+import { LogoTile } from "@/components/ui/logo-tile";
 
 type WorkRowPreviewProps = {
   item: WorkIndexItem | null;
@@ -75,6 +76,8 @@ export function WorkRowPreview({ item, pointerX, pointerY }: WorkRowPreviewProps
               preload="metadata"
               tabIndex={-1}
             />
+          ) : item.logo ? (
+            <LogoTile logo={item.logo} />
           ) : item.cover ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img

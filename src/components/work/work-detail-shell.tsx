@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/section";
 import { getProjectCoverSrc } from "@/data/projects";
 import { getFallbackCoverImage } from "@/components/work/tile-media";
 import type { Project } from "@/types/project";
+import { LogoTile } from "@/components/ui/logo-tile";
 
 type WorkDetailShellProps = {
   project: Project;
@@ -107,6 +108,8 @@ export function WorkDetailShell({
                     tabIndex={-1}
                     title={project.video.title}
                   />
+                ) : !hasRealCover && project.logoTile ? (
+                  <LogoTile logo={project.logoTile} size="lg" />
                 ) : null}
               </div>
               {project.heroCaption ? (

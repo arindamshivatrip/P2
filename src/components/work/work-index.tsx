@@ -9,6 +9,7 @@ import { WorkFilters, workFilters } from "@/components/work/work-filters";
 import { WorkRowPreview } from "@/components/work/work-row-preview";
 import { transitions } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import type { ProjectLogoTile } from "@/types/project";
 
 export type WorkIndexItem = {
   id: string;
@@ -23,6 +24,7 @@ export type WorkIndexItem = {
   fallbackGradient: string;
   cover?: string;
   video?: string;
+  logo?: ProjectLogoTile;
 };
 
 type WorkIndexProps = {

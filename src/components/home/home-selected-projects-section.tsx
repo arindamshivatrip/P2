@@ -28,7 +28,7 @@ function getStatusLabel(project: Project): string {
 }
 
 export async function HomeSelectedProjectsSection() {
-  const featured = getHomeFeaturedProjects().slice(0, 3);
+  const featured = getHomeFeaturedProjects().slice(0, 4);
 
   if (featured.length === 0) {
     return null;
@@ -47,7 +47,9 @@ export async function HomeSelectedProjectsSection() {
         statusLabel: getStatusLabel(project),
         fallbackGradient: getFallbackCoverImage(project, "standard"),
         cover: availability.coverImage ? project.coverImage : undefined,
-        video: availability.video ? project.video?.src : undefined
+        video: availability.video ? project.video?.src : undefined,
+        poster: availability.videoPoster ? project.video?.poster : undefined,
+        logo: project.logoTile
       };
     })
   );

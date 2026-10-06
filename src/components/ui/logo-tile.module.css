@@ -1,0 +1,220 @@
+/*
+ * Motion for the brand tiles. Base styles are the finished frame, so reduced
+ * motion (animation: none) lands on a complete, readable composition.
+ */
+
+/* ---------- zoom: mark grows in the centre (generic fallback) ---------- */
+
+.zoom {
+  animation: zoom 4.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@keyframes zoom {
+  0% { transform: scale(0.55); opacity: 0; }
+  18% { opacity: 1; }
+  72% { transform: scale(1); opacity: 1; }
+  92% { transform: scale(1.03); opacity: 1; }
+  100% { transform: scale(1.04); opacity: 0; }
+}
+
+/* ---------- scan: laser line sweeps down and reveals the mark ---------- */
+
+.scanGrid {
+  background-image: radial-gradient(rgba(67, 81, 92, 0.16) 1px, transparent 1.3px);
+  background-size: 14px 14px;
+  animation: grid-drift 12s linear infinite;
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 28px 14px; }
+}
+
+.scanStage {
+  position: relative;
+}
+
+.scanGhost {
+  opacity: 0.12;
+  filter: blur(0.4px);
+}
+
+.scanReveal {
+  position: absolute;
+  inset: 0;
+  animation: scan-reveal 5.6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes scan-reveal {
+  0%, 8% { clip-path: inset(0 0 100% 0); opacity: 1; }
+  46% { clip-path: inset(0 0 0 0); opacity: 1; }
+  86% { clip-path: inset(0 0 0 0); opacity: 1; }
+  100% { clip-path: inset(0 0 0 0); opacity: 0; }
+}
+
+/* Full-height track whose top edge is the laser; translating by its own
+   height moves the line from the top of the mark to the bottom. */
+.scanTrack {
+  position: absolute;
+  inset: -6% -8%;
+  opacity: 0;
+  animation: scan-line 5.6s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.scanTrack::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff8a3c 18%, #ffb070 50%, #ff8a3c 82%, transparent);
+  box-shadow: 0 0 10px 2px rgba(255, 138, 60, 0.45);
+}
+
+.scanTrack::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -26px;
+  height: 26px;
+  background: linear-gradient(180deg, transparent, rgba(255, 138, 60, 0.12));
+}
+
+@keyframes scan-line {
+  0%, 6% { transform: translateY(0); opacity: 0; }
+  9% { opacity: 1; }
+  46% { transform: translateY(100%); opacity: 1; }
+  52%, 100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* ---------- android-walk: robot walks in, puts on glasses, XR appears ---------- */
+
+.walkScene {
+  overflow: visible;
+}
+
+.walkScene * {
+  transform-box: fill-box;
+}
+
+.walker {
+  animation: walker 7s cubic-bezier(0.33, 0, 0.3, 1) infinite;
+}
+
+@keyframes walker {
+  0% { transform: translateX(-190px); opacity: 0; }
+  4% { opacity: 1; }
+  38% { transform: translateX(0); }
+  88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+
+/* Body bob in step with the legs, settling once the robot stops. */
+.bob {
+  animation: bob 7s linear infinite;
+}
+
+@keyframes bob {
+  0%, 8%, 16%, 24%, 32% { transform: translateY(0); }
+  4%, 12%, 20%, 28%, 36% { transform: translateY(-3px); }
+  38%, 100% { transform: translateY(0); }
+}
+
+.legA,
+.legB,
+.armA,
+.armB {
+  transform-origin: 50% 8%;
+}
+
+.legA { animation: swing-a 7s linear infinite; }
+.legB { animation: swing-b 7s linear infinite; }
+.armA { animation: swing-b 7s linear infinite; }
+.armB { animation: swing-a 7s linear infinite; }
+
+@keyframes swing-a {
+  0%, 8%, 16%, 24%, 32% { transform: rotate(22deg); }
+  4%, 12%, 20%, 28%, 36% { transform: rotate(-22deg); }
+  39%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes swing-b {
+  0%, 8%, 16%, 24%, 32% { transform: rotate(-22deg); }
+  4%, 12%, 20%, 28%, 36% { transform: rotate(22deg); }
+  39%, 100% { transform: rotate(0deg); }
+}
+
+.head {
+  transform-origin: 50% 100%;
+  animation: head 7s ease-in-out infinite;
+}
+
+@keyframes head {
+  0%, 46% { transform: rotate(0deg); }
+  50% { transform: rotate(-7deg); }
+  55%, 100% { transform: rotate(0deg); }
+}
+
+.glasses {
+  animation: glasses 7s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+}
+
+@keyframes glasses {
+  0%, 40% { transform: translateY(-46px); opacity: 0; }
+  42% { opacity: 1; }
+  49% { transform: translateY(0); opacity: 1; }
+  88% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.ring {
+  transform-origin: 50% 50%;
+  opacity: 0;
+  animation: ring 7s ease-out infinite;
+}
+
+.ringLate {
+  animation-delay: 0.35s;
+}
+
+@keyframes ring {
+  0%, 38% { transform: scale(0.3); opacity: 0; }
+  40% { opacity: 0.7; }
+  58% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.wordmark {
+  animation: wordmark 7s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@keyframes wordmark {
+  0%, 50% { transform: translateX(-18px); opacity: 0; }
+  62% { transform: translateX(0); opacity: 1; }
+  88% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom,
+  .scanGrid,
+  .scanReveal,
+  .walker,
+  .bob,
+  .legA,
+  .legB,
+  .armA,
+  .armB,
+  .head,
+  .glasses,
+  .wordmark {
+    animation: none !important;
+  }
+
+  .scanTrack,
+  .ring {
+    display: none;
+  }
+}

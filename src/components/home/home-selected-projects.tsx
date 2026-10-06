@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { LogoTile } from "@/components/ui/logo-tile";
 import { cn } from "@/lib/utils";
+import type { ProjectLogoTile } from "@/types/project";
 
 export type SelectedWorkItem = {
   id: string;
@@ -16,6 +18,8 @@ export type SelectedWorkItem = {
   fallbackGradient: string;
   cover?: string;
   video?: string;
+  poster?: string;
+  logo?: ProjectLogoTile;
 };
 
 type HomeSelectedProjectsProps = {
@@ -31,6 +35,7 @@ function PreviewMedia({ item }: { item: SelectedWorkItem }) {
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src={item.video}
+        poster={item.poster}
         autoPlay
         loop
         muted
@@ -53,6 +58,10 @@ function PreviewMedia({ item }: { item: SelectedWorkItem }) {
         decoding="async"
       />
     );
+  }
+
+  if (item.logo) {
+    return <LogoTile logo={item.logo} />;
   }
 
   return (
