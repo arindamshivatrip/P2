@@ -27,7 +27,7 @@ export const cvPageContent = {
 
 export const cvVersions: CvVersion[] = [
   {
-    title: "Applied AI",
+    title: "Applied AI Builder",
     description:
       "For AI-product teams — production React/TypeScript and Python, with a design background.",
     href: "/files/arindam-tripathi-applied-ai-cv.pdf",
