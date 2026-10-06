@@ -35,6 +35,7 @@ export const projects: Project[] = [
     tech: ["ML", "Analytics Interfaces", "Dashboards", "Agile"],
     tags: ["Enterprise", "Decision Support"],
     featured: true,
+    homeOrder: 1,
     priority: 1,
     cardSize: "xl",
     status: "Case Study",
@@ -176,6 +177,7 @@ export const projects: Project[] = [
     tech: ["Unity3D", "C#", "MQTT", "Vuforia"],
     tags: ["AR", "Multiplayer", "Physical Computing"],
     featured: true,
+    homeOrder: 2,
     priority: 3,
     cardSize: "lg",
     status: "Case Study",
@@ -271,6 +273,283 @@ export const projects: Project[] = [
   },
 
   {
+    id: "reframed-passthrough-ar",
+    slug: "reframed-passthrough-ar",
+    title: "Reframed",
+    oneLiner:
+      "A Quest 3 passthrough AR experience where classic artworks animate beyond their frames and become a treasure hunt.",
+    summary:
+      "Developed independently during UMD’s New Works Incubator, Reframed recognizes printed artworks on a wall and anchors animated digital content to each one using on-device computer vision. A hidden-object search across five artworks turns it into a playable experience rather than a technical demo. It went from prototype to a public showcase and is the basis for my master’s thesis.",
+    section: "work",
+    visibility: "public",
+    entryType: "project",
+    role: "Solo Developer & Designer",
+    contributionTag: "M.S. Thesis",
+    meta: {
+      org: "University of Maryland",
+      teamType: "solo",
+      year: "2026",
+      sortDate: "2026-03-01",
+      dateRange: "Mar 2026 – Present",
+      location: "College Park, MD"
+    },
+    metaStrip: {
+      roleValue: "Solo Developer & Designer",
+      timelineValue: "Mar 2026 – Present",
+      teamValue: "Solo; thesis advised by Prof. Ming Lin and Dr. Beth Bonsignore",
+      focusValue: ["Passthrough AR", "Image tracking", "Pose estimation", "Playable experience"]
+    },
+    categories: ["XR / Spatial", "Engineering", "Interaction Design"],
+    tech: ["Unity", "C#", "OpenCV", "Meta XR SDK"],
+    tags: ["Quest 3", "Passthrough AR", "Computer Vision"],
+    featured: false,
+    priority: 5,
+    cardSize: "md",
+    status: "In Progress",
+    caseStudyDepth: "light",
+    visible: true,
+    themeKey: "XR",
+    thumbnail: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
+    coverImage: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
+    video: {
+      src: "/images/projects/reframed-passthrough-ar/hero.mp4",
+      poster: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
+      title: "Reframed: physical artworks extending into mixed reality"
+    },
+    heroCaption:
+      "Reframed transforms physical artworks into spatial mixed-reality experiences that animate and extend beyond the frame.",
+    figuresTitle: "The experience",
+    figures: [
+      {
+        kind: "video",
+        src: "/images/projects/reframed-passthrough-ar/vangogh-overlay-activation.mp4",
+        poster: "/images/projects/reframed-passthrough-ar/vangogh-overlay-activation-poster.jpg",
+        alt: "Through the Quest 3 headset, a digital layer registers onto the printed Van Gogh painting on an easel.",
+        caption: "The virtual layer first aligns with the physical composition before extending beyond it.",
+        description:
+          "The augmentation begins with close registration between the digital and physical imagery. This creates visual continuity between the original artwork and its mixed-reality extension, helping the viewer perceive the effect as emerging from the painting itself."
+      },
+      {
+        kind: "video",
+        src: "/images/projects/reframed-passthrough-ar/wave-overlay-activation.mp4",
+        poster: "/images/projects/reframed-passthrough-ar/wave-overlay-activation-poster.jpg",
+        alt: "The printed Great Wave activates in the headset and begins to animate into depth.",
+        caption: "The Great Wave transitions from a static print into a layered spatial scene.",
+        description:
+          "The physical print remains present as the foundation of the experience while digital elements animate and begin to occupy additional depth. The original work is not replaced; it becomes part of the final mixed-reality composition."
+      },
+      {
+        kind: "video",
+        src: "/images/projects/reframed-passthrough-ar/cypress-comes-to-life.mp4",
+        poster: "/images/projects/reframed-passthrough-ar/cypress-comes-to-life-poster.jpg",
+        alt: "Elements of Wheat Field with Cypresses separate from the framed print and extend out into the room.",
+        caption: "Elements of the painting separate from the flat image and emerge into the viewer’s space.",
+        description:
+          "In this sequence, elements from Wheat Field with Cypresses begin to separate from the two-dimensional composition and extend outward into the room. The frame becomes a threshold between the original image and a spatial version of the scene."
+      },
+      {
+        kind: "video",
+        src: "/images/projects/reframed-passthrough-ar/spatial-anchoring-walkaround.mp4",
+        poster: "/images/projects/reframed-passthrough-ar/spatial-anchoring-walkaround-poster.jpg",
+        alt: "Walking sideways around the Great Wave artwork reveals parallax between the print and its virtual layers.",
+        caption: "Moving around the work reveals the depth between the physical painting and its virtual layers.",
+        description:
+          "From the front, the physical and digital imagery can appear closely aligned. As the viewer moves sideways, parallax reveals the separation between virtual layers, making the three-dimensional construction of the scene visible through movement alone."
+      }
+    ],
+    highlights: [
+      "Built a Quest 3 passthrough AR system that recognizes physical printed artworks and anchors animated content to each one, using on-device ORB feature matching, homography, and 6-DoF solvePnP pose estimation.",
+      "Wove a hidden-object search across five registered artworks so the piece works as a playable experience, not just a technical demo.",
+      "Took it from prototype to a public showcase at UMD’s NextNOW Fest, drawing 50+ visitors over two days.",
+      "Basis for my master’s thesis, advised by Prof. Ming Lin (VR/spatial computing) and Dr. Beth Bonsignore (HCI)."
+    ],
+    metrics: [
+      { label: "Showcase visitors", value: "50+" },
+      { label: "Registered artworks", value: "5" }
+    ],
+    detailPage: {
+      showHeroImage: true,
+      showMetaStrip: true,
+      showMetrics: true,
+      showGallery: false,
+      showPdfEmbed: false,
+      showVideo: false,
+      showOutcomeStrip: true
+    }
+  },
+
+  {
+    id: "aura-desk-android-xr",
+    slug: "aura-desk-android-xr",
+    title: "Aura Desk",
+    oneLiner:
+      "An ambient AR desk surface built natively for pre-release Android XR smart glasses, with on-device AI and voice.",
+    summary:
+      "I built a working app on pre-release Android XR smart glasses during Google’s Project Aura hackathon, before the hardware or SDK were public, and earned Google Trusted Developer status. I kept building afterwards: Aura Desk turns a physical desk into an ambient computing surface with glanceable widgets anchored in the user’s space, and handles natural-language requests hands-free with on-device AI.",
+    section: "work",
+    visibility: "public",
+    entryType: "project",
+    role: "Developer, Google Trusted Developer",
+    contributionTag: "Android XR",
+    meta: {
+      org: "Google Android XR — Project Aura early access",
+      teamType: "solo",
+      year: "2026",
+      sortDate: "2026-06-01",
+      dateRange: "Jun 2026 – Present"
+    },
+    metaStrip: {
+      roleValue: "Developer, Google Trusted Developer",
+      timelineValue: "Jun 2026 – Present",
+      teamValue: "Independent",
+      focusValue: ["Smart glasses", "Ambient AR", "On-device AI", "Voice interaction"]
+    },
+    categories: ["XR / Spatial", "AI Systems", "Engineering"],
+    tech: ["Kotlin", "Jetpack XR SDK", "Android XR", "Unity", "On-device AI"],
+    tags: ["Android XR", "Smart Glasses", "Project Aura"],
+    featured: false,
+    priority: 6,
+    cardSize: "md",
+    status: "In Progress",
+    caseStudyDepth: "light",
+    visible: true,
+    themeKey: "XR",
+    highlights: [
+      "Built a working app on pre-release Android XR smart glasses during Google’s Project Aura hackathon, before the hardware or SDK were public, and earned Google Trusted Developer status.",
+      "Built the Aura Desk MVP natively with the Jetpack XR SDK in Kotlin, with glanceable Pomodoro, task, calendar, and music widgets anchored to the desk.",
+      "Integrated on-device AI and voice commands so the surface handles natural-language requests hands-free, with no internet connection.",
+      "Worked through unreleased-hardware constraints firsthand: streaming crashes, firmware flashing, and SDK gaps on an undocumented device."
+    ],
+    metrics: [{ label: "Program status", value: "Google Trusted Developer" }],
+    detailPage: {
+      showHeroImage: true,
+      showMetaStrip: true,
+      showMetrics: true,
+      showGallery: false,
+      showPdfEmbed: false,
+      showVideo: false,
+      showOutcomeStrip: true
+    }
+  },
+
+  {
+    id: "light-helmets-scan-to-fitment",
+    slug: "light-helmets-scan-to-fitment",
+    title: "Helmet Scan-to-Fitment Pipeline",
+    oneLiner:
+      "A deterministic pipeline that turns 3D head and helmet scans into a per-station padding prescription.",
+    summary:
+      "As the sole developer during my internship at LIGHT Helmets, I built a seven-stage pipeline that takes a 3D head scan and a helmet-interior scan and produces a per-station pad-and-shim prescription, end to end for two helmet families and five shell sizes. I designed it to be auditable: measurements are byte-reproducible, and validation gates refuse to emit output when a check fails.",
+    section: "work",
+    visibility: "public",
+    entryType: "professional",
+    role: "3D Scanning & Fitment Software Intern",
+    contributionTag: "Sole Developer",
+    meta: {
+      org: "LIGHT Helmets",
+      teamType: "solo",
+      year: "2026",
+      sortDate: "2026-08-01",
+      dateRange: "May 2026 – Aug 2026",
+      location: "Carlsbad, CA (Remote)"
+    },
+    metaStrip: {
+      roleValue: "3D Scanning & Fitment Software Intern",
+      timelineValue: "May 2026 – Aug 2026",
+      teamValue: "LIGHT Helmets · sole developer",
+      focusValue: ["3D mesh processing", "Pose search", "Measurement design", "Validation"]
+    },
+    categories: ["Engineering", "Data", "Mobile"],
+    tech: ["Python", "NumPy", "Open3D", "trimesh", "Blender", "Kotlin", "ARCore"],
+    tags: ["3D Scanning", "Mesh Processing", "Fitment"],
+    featured: false,
+    priority: 7,
+    cardSize: "md",
+    status: "Case Study",
+    caseStudyDepth: "light",
+    visible: true,
+    themeKey: "Data",
+    highlights: [
+      "Built all seven stages: scan cleanup and mesh repair, a canonical coordinate frame derived from geometry, texture-based station labeling, a 4-D seated-pose search, per-station gap measurement, and automated output on the company’s fitment form.",
+      "Replaced a coordinate-descent pose solver that stalled at its first iteration with a derivative-free grid search over 52,052 seating poses, cutting head-shell interference from 141 penetrating points to 0.",
+      "Designed a deterministic, byte-reproducible measurement instrument and validation gates that block unverified output across a 4,500-file project tree.",
+      "Built an Android head-scanning app in Kotlin using ARCore’s Depth API to capture head geometry for the pipeline."
+    ],
+    metrics: [
+      { label: "Penetrating points", value: "141 → 0" },
+      { label: "Seating poses searched", value: "52,052" },
+      { label: "Pipeline stages", value: "7" }
+    ],
+    detailPage: {
+      showHeroImage: true,
+      showMetaStrip: true,
+      showMetrics: true,
+      showGallery: false,
+      showPdfEmbed: false,
+      showVideo: false,
+      showOutcomeStrip: true
+    }
+  },
+
+  {
+    id: "trailtogether-group-hiking-app",
+    slug: "trailtogether-group-hiking-app",
+    title: "TrailTogether",
+    oneLiner:
+      "A group hiking coordination app, taken from user interviews to a tested 40-screen hi-fi prototype.",
+    summary:
+      "In a 3-person team, we ran end-to-end UX research and hi-fi prototyping for planning group hikes. Interviews and a competitive analysis showed no product owns the full flow from discovery to a committed trip, which shaped the concept. We built a 40-screen Figma prototype and turned usability-study findings directly into redesigns.",
+    section: "work",
+    visibility: "public",
+    entryType: "course",
+    role: "UX Researcher & Designer",
+    contributionTag: "UX Research",
+    meta: {
+      org: "University of Maryland (INST711)",
+      teamType: "team",
+      year: "2026",
+      sortDate: "2026-05-01",
+      dateRange: "Jan 2026 – May 2026",
+      location: "College Park, MD"
+    },
+    metaStrip: {
+      roleValue: "UX Researcher & Designer",
+      timelineValue: "Jan 2026 – May 2026",
+      teamValue: "3-person team",
+      focusValue: ["User interviews", "Competitive analysis", "Hi-fi prototyping", "Usability testing"]
+    },
+    categories: ["Research", "Interaction Design", "Mobile"],
+    tech: ["Figma", "User Interviews", "Usability Testing", "Prototyping"],
+    tags: ["UX Research", "Mobile", "Prototyping"],
+    featured: false,
+    priority: 8,
+    cardSize: "md",
+    status: "Case Study",
+    caseStudyDepth: "light",
+    visible: true,
+    themeKey: "Research",
+    highlights: [
+      "Ran 4 user interviews that surfaced 10 categorized pain points around group coordination, transportation, and tool fragmentation.",
+      "Compared Meetup, AllTrails, and Partiful across 6 criteria and found no product owns the flow from discovery to committed trip.",
+      "Designed and built a 40-screen hi-fi Figma prototype (8 desktop, 32 mobile) covering sign-up, discovery, booking, carpool and gear management, and trust settings.",
+      "Moderated a usability study across hosting and joining scenarios, then decoupled the request-approval-payment flow and added driver-versus-rider pricing."
+    ],
+    metrics: [
+      { label: "Prototype screens", value: "40" },
+      { label: "Pain points surfaced", value: "10" }
+    ],
+    detailPage: {
+      showHeroImage: true,
+      showMetaStrip: true,
+      showMetrics: true,
+      showGallery: false,
+      showPdfEmbed: false,
+      showVideo: false,
+      showOutcomeStrip: true
+    }
+  },
+
+  {
     id: "revamping-shopeepay",
     slug: "revamping-shopeepay",
     title: "Revamping ShopeePay",
@@ -301,7 +580,8 @@ export const projects: Project[] = [
     tech: ["Qualtrics", "MTurk", "MATLAB", "Statistical Analysis"],
     tags: ["Quantitative UX", "Experiment Design"],
     featured: false,
-    priority: 5,
+    homeOrder: 3,
+    priority: 9,
     cardSize: "md",
     status: "Case Study",
     caseStudyDepth: "medium",
@@ -366,7 +646,7 @@ export const projects: Project[] = [
     tech: ["Unity3D", "C#", "XR Interaction Toolkit", "Oculus"],
     tags: ["VR", "Education", "Interaction Design"],
     featured: false,
-    priority: 6,
+    priority: 10,
     cardSize: "md",
     status: "Case Study",
     caseStudyDepth: "medium",
@@ -422,7 +702,7 @@ export const projects: Project[] = [
     tech: ["Unity", "C#", "Niantic Spatial SDK"],
     tags: ["Location-aware AR", "Geospatial"],
     featured: false,
-    priority: 7,
+    priority: 11,
     cardSize: "md",
     status: "In Progress",
     caseStudyDepth: "light",
@@ -477,7 +757,7 @@ export const projects: Project[] = [
     tech: ["Power BI", "Power Platform", "Databases", "Information Architecture"],
     tags: ["Internal Tools"],
     featured: false,
-    priority: 8,
+    priority: 12,
     cardSize: "md",
     status: "Case Study",
     caseStudyDepth: "light",
@@ -543,7 +823,7 @@ export const projects: Project[] = [
     tech: ["React", "JavaScript", "Frontend Components", "QA"],
     tags: ["Production UI"],
     featured: false,
-    priority: 9,
+    priority: 13,
     cardSize: "md",
     status: "Case Study",
     caseStudyDepth: "light",
@@ -606,7 +886,7 @@ export const projects: Project[] = [
     tech: ["Python", "NLP", "LLMs", "Evaluation"],
     tags: ["LLM Evaluation", "Bias", "Robustness"],
     featured: false,
-    priority: 10,
+    priority: 14,
     cardSize: "md",
     status: "In Progress",
     caseStudyDepth: "light",
@@ -921,7 +1201,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "TypeScript", "Tailwind", "Framer Motion"],
     tags: ["Meta", "Portfolio", "AI-assisted build"],
     featured: true,
-    priority: 1,
+    priority: 2,
     cardSize: "lg",
     status: "In Progress",
     caseStudyDepth: "light",
@@ -977,7 +1257,7 @@ export const projects: Project[] = [
     tech: ["Flutter", "Firebase", "Google Maps API", "Figma", "Dart"],
     tags: ["Mobile App", "Maps", "Discovery"],
     featured: true,
-    priority: 2,
+    priority: 3,
     cardSize: "md",
     status: "Prototype",
     caseStudyDepth: "light",
@@ -1033,7 +1313,7 @@ export const projects: Project[] = [
     tech: ["Unity", "Pico XR SDK", "C#"],
     tags: ["VR", "Locomotion", "Jam"],
     featured: false,
-    priority: 3,
+    priority: 4,
     cardSize: "sm",
     status: "Prototype",
     caseStudyDepth: "light",
@@ -1088,7 +1368,7 @@ export const projects: Project[] = [
     tech: ["Figma", "User Research", "Prototyping", "Usability Testing"],
     tags: ["UX", "Concept"],
     featured: false,
-    priority: 4,
+    priority: 5,
     cardSize: "sm",
     status: "Prototype",
     caseStudyDepth: "light",
@@ -1129,12 +1409,6 @@ export const experimentProjects = projects
 
 export const featuredWorkProjects = workProjects.filter((project) => project.featured);
 export const featuredExperimentProjects = experimentProjects.filter((project) => project.featured);
-
-const homeFeaturedProjectSlugs = [
-  "loreal-ml-planning-suite",
-  "shoot-it-ar-laser-tag-system",
-  "revamping-shopeepay"
-] as const;
 
 const byPriority = (a: Project, b: Project) => a.priority - b.priority;
 
@@ -1185,13 +1459,10 @@ export const getFeaturedProjectsBySection = (section: ProjectSection): Project[]
     .filter((project) => project.section === section && project.visible && project.featured)
     .sort(byPriority);
 
-export const getHomeFeaturedProjects = (): Project[] => {
-  const bySlug = new Map(workProjects.map((project) => [project.slug, project] as const));
-
-  return homeFeaturedProjectSlugs
-    .map((slug) => bySlug.get(slug))
-    .filter((project): project is Project => Boolean(project));
-};
+export const getHomeFeaturedProjects = (): Project[] =>
+  workProjects
+    .filter((project) => project.homeOrder !== undefined)
+    .sort((a, b) => (a.homeOrder ?? 0) - (b.homeOrder ?? 0));
 
 export const getVisibleProjects = (): Project[] =>
   projects.filter((project) => project.visible).sort(byPriority);

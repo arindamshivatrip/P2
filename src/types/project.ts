@@ -70,6 +70,17 @@ export interface ProjectVideo {
   title?: string;
 }
 
+// A numbered figure on the work detail page: short caption under the media,
+// optional longer explanation as body text right after it.
+export interface ProjectFigure {
+  kind: "image" | "video";
+  src: string;
+  alt: string;
+  poster?: string;
+  caption: string;
+  description?: string;
+}
+
 export interface ProjectNDA {
   isRestricted: boolean;
   visibility: "summary-only" | "private-walkthrough";
@@ -170,6 +181,9 @@ export interface Project {
   tags?: string[];
 
   featured: boolean;
+  // Set to show on the home page's Selected Work; lower comes first. Kept
+  // separate from `featured` so home can be curated independently of /work.
+  homeOrder?: number;
   priority: number;
   cardSize: ProjectCardSize;
   status: ProjectStatus;
@@ -183,6 +197,10 @@ export interface Project {
   gallery?: ProjectImage[];
   pdf?: ProjectPdf;
   video?: ProjectVideo;
+  // Captions the hero as Figure 1; `figures` then continue the numbering.
+  heroCaption?: string;
+  figures?: ProjectFigure[];
+  figuresTitle?: string;
   tileMediaAspect?: ProjectTileMediaAspect;
 
   highlights?: string[];
