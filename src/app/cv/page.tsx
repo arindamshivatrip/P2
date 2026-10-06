@@ -12,7 +12,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "CV",
   description:
-    "Download Arindam Tripathi’s CV and alternate resume versions for HCI, UX engineering, XR, research, and software/product roles.",
+    "Download Arindam Tripathi’s CV — creative technologist / XR — and alternate versions for applied AI, UX research, software engineering, and product management roles.",
   path: "/cv"
 });
 
