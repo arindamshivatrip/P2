@@ -31,6 +31,8 @@ export async function getProjectAssetAvailability(project: Project) {
     pdfEmbed: await publicAssetExists(project.pdf?.embedUrl),
     pdfDownload: await publicAssetExists(project.pdf?.downloadUrl),
     video: await publicAssetExists(project.video?.src),
-    videoPoster: await publicAssetExists(project.video?.poster)
+    videoPoster: await publicAssetExists(project.video?.poster),
+    previewVideo: await publicAssetExists(project.previewVideo?.src),
+    previewVideoPoster: await publicAssetExists(project.previewVideo?.poster)
   };
 }

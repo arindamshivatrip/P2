@@ -317,6 +317,11 @@ export const projects: Project[] = [
       poster: "/images/projects/reframed-passthrough-ar/hero-poster.jpg",
       title: "Reframed: physical artworks extending into mixed reality"
     },
+    previewVideo: {
+      src: "/images/projects/reframed-passthrough-ar/thumbnail-loop.mp4",
+      poster: "/images/projects/reframed-passthrough-ar/thumbnail-loop-poster.jpg",
+      title: "Reframed highlights: paintings stepping out of their frames"
+    },
     heroCaption:
       "Reframed transforms physical artworks into spatial mixed-reality experiences that animate and extend beyond the frame.",
     figuresTitle: "The experience",

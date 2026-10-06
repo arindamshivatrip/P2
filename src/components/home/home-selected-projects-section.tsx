@@ -47,8 +47,18 @@ export async function HomeSelectedProjectsSection() {
         statusLabel: getStatusLabel(project),
         fallbackGradient: getFallbackCoverImage(project, "standard"),
         cover: availability.coverImage ? project.coverImage : undefined,
-        video: availability.video ? project.video?.src : undefined,
-        poster: availability.videoPoster ? project.video?.poster : undefined,
+        video: availability.previewVideo
+          ? project.previewVideo?.src
+          : availability.video
+            ? project.video?.src
+            : undefined,
+        poster: availability.previewVideo
+          ? availability.previewVideoPoster
+            ? project.previewVideo?.poster
+            : undefined
+          : availability.videoPoster
+            ? project.video?.poster
+            : undefined,
         logo: project.logoTile
       };
     })

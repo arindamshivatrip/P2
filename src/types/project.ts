@@ -210,6 +210,9 @@ export interface Project {
   gallery?: ProjectImage[];
   pdf?: ProjectPdf;
   video?: ProjectVideo;
+  // Edited, titled loop for home and /work previews; the detail page keeps
+  // `video` as its clean hero.
+  previewVideo?: ProjectVideo;
   // Captions the hero as Figure 1; `figures` then continue the numbering.
   heroCaption?: string;
   figures?: ProjectFigure[];

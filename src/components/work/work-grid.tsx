@@ -45,7 +45,11 @@ export async function WorkGrid({ section }: WorkGridProps) {
         featured: project.featured,
         fallbackGradient: getFallbackCoverImage(project, "standard"),
         cover: availability.coverImage ? project.coverImage : undefined,
-        video: availability.video ? project.video?.src : undefined,
+        video: availability.previewVideo
+          ? project.previewVideo?.src
+          : availability.video
+            ? project.video?.src
+            : undefined,
         logo: project.logoTile
       };
     })
