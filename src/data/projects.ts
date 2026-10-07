@@ -123,6 +123,12 @@ export const projects: Project[] = [
     themeKey: "Research",
     thumbnail: "/images/projects/smartphone-use-mental-wellbeing/thumbnail.jpg",
     coverImage: "/images/projects/smartphone-use-mental-wellbeing/cover.jpg",
+    logoTile: {
+      motion: "diary-clusters",
+      alt: "Smartphone Use & Mental Wellbeing",
+      wordmark: "Smartphone Use & Wellbeing",
+      background: "linear-gradient(160deg, #2a2452 0%, #5b3f72 45%, #d98a7e 100%)"
+    },
     pdf: {
       embedUrl: "/pdfs/smartphone-use-mental-wellbeing.pdf",
       downloadUrl: "/pdfs/smartphone-use-mental-wellbeing.pdf",
@@ -188,10 +194,11 @@ export const projects: Project[] = [
     themeKey: "XR",
     thumbnail: "/images/projects/shoot-it/thumbnail.jpg",
     coverImage: "/images/projects/shoot-it/cover.jpg",
-    video: {
-      src: "/videos/shoot-it/demo.mp4",
-      poster: "/images/projects/shoot-it/video-poster.jpg",
-      title: "ShooT IT demo video"
+    logoTile: {
+      motion: "laser-tag",
+      alt: "ShooT IT",
+      wordmark: "ShooT IT",
+      background: "linear-gradient(170deg, #06141a 0%, #0b2a2e 55%, #12383a 100%)"
     },
     highlights: [
       "Engineered a real-time multiplayer AR gameplay system using MQTT for event synchronization.",
@@ -205,7 +212,7 @@ export const projects: Project[] = [
       showMetrics: true,
       showGallery: true,
       showPdfEmbed: false,
-      showVideo: true,
+      showVideo: false,
       showOutcomeStrip: true
     }
   },
@@ -648,6 +655,13 @@ export const projects: Project[] = [
     themeKey: "Research",
     thumbnail: "/images/projects/revamping-shopeepay/thumbnail.jpg",
     coverImage: "/images/projects/revamping-shopeepay/cover.jpg",
+    logoTile: {
+      motion: "ab-race",
+      alt: "Revamping ShopeePay",
+      wordmark: "Revamping ShopeePay",
+      background:
+        "radial-gradient(50% 45% at 50% 58%, rgba(255, 255, 255, 0.55), transparent 75%), linear-gradient(150deg, #fff7f0 0%, #ffe3cf 55%, #ffc9a8 100%)"
+    },
     pdf: {
       embedUrl: "/pdfs/revamping-shopeepay.pdf",
       downloadUrl: "/pdfs/revamping-shopeepay.pdf",

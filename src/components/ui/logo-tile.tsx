@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { ProjectLogoTile } from "@/types/project";
 import { cn } from "@/lib/utils";
 import styles from "./logo-tile.module.css";
@@ -279,6 +280,273 @@ function DashboardScene({ logo, size }: SceneProps) {
   );
 }
 
+type CssVars = CSSProperties & Record<`--${string}`, string | number>;
+
+/* ---------- diary-clusters: phone moments -> diary cards -> clusters ---------- */
+
+type Mood = "stress" | "boredom" | "calm";
+
+type DiaryMoment = {
+  mood: Mood;
+  // Phone position on the day arc and the card's offset into its cluster, in
+  // tile percentages (so cqw on x, cqh on y).
+  x: number;
+  y: number;
+  dx: number;
+  dy: number;
+  rot: number;
+};
+
+// Arc box spans x 10-90%, y 42-56%; y = 42 + 14 * (1 - 2u)^2 along it.
+const DIARY_ROW_Y = 66;
+const DIARY_MOMENTS: DiaryMoment[] = [
+  { mood: "stress", x: 16.4, y: 51.9, dx: 4.1, dy: 4, rot: -6 },
+  { mood: "boredom", x: 27.6, y: 46.4, dx: 19.4, dy: 5, rot: 4 },
+  { mood: "stress", x: 38.8, y: 43.1, dx: -11.3, dy: 6.5, rot: 5 },
+  { mood: "calm", x: 50, y: 42, dx: 23, dy: 5, rot: -4 },
+  { mood: "boredom", x: 61.2, y: 43.1, dx: -8.2, dy: 9.5, rot: 3 },
+  { mood: "stress", x: 72.4, y: 46.4, dx: -48.9, dy: 10.5, rot: -3 },
+  { mood: "calm", x: 83.6, y: 51.9, dx: -4.6, dy: 9.5, rot: 6 }
+];
+
+const DIARY_CLUSTERS: { mood: Mood; x: number }[] = [
+  { mood: "stress", x: 24 },
+  { mood: "boredom", x: 50 },
+  { mood: "calm", x: 76 }
+];
+
+// 10s loop. Moment i is logged at 0.3s + i * 0.24s and lands as a card 2s later.
+function DiaryClustersScene({ logo }: SceneProps) {
+  return (
+    <div role="img" aria-label={logo.alt} className={cn("absolute inset-0", styles.diary)}>
+      <div className={styles.diaryGlow} aria-hidden="true" />
+
+      <div className={styles.diaryHeading} aria-hidden="true">
+        <span className={styles.diaryTitle}>
+          Smartphone Use
+          <br />
+          &amp; Wellbeing
+        </span>
+      </div>
+
+      <div className={styles.diaryDay} aria-hidden="true">
+        <svg className={styles.diaryArc} viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M0 100 Q50 -100 100 100" pathLength="100" vectorEffect="non-scaling-stroke" />
+        </svg>
+        <span className={styles.diarySun} />
+        <span className={styles.diaryMoon} />
+        {DIARY_MOMENTS.map((m, i) => (
+          <span
+            key={i}
+            className={styles.diaryPhone}
+            style={{ left: `${m.x}%`, top: `${m.y}%`, animationDelay: `${0.2 + i * 0.24}s` }}
+          />
+        ))}
+      </div>
+
+      {DIARY_CLUSTERS.map((c) => (
+        <span
+          key={c.mood}
+          aria-hidden="true"
+          className={cn(styles.diaryHalo, styles[`mood-${c.mood}`])}
+          style={{ left: `${c.x}%` }}
+        />
+      ))}
+
+      {DIARY_MOMENTS.map((m, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className={cn(styles.diaryDot, styles[`mood-${m.mood}`])}
+          style={
+            {
+              left: `${m.x}%`,
+              top: `${m.y}%`,
+              "--fall": `${DIARY_ROW_Y - m.y}cqh`,
+              animationDelay: `${0.3 + i * 0.24}s`
+            } as CssVars
+          }
+        />
+      ))}
+
+      {DIARY_MOMENTS.map((m, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className={cn(styles.diarySlot, styles[`mood-${m.mood}`])}
+          style={
+            {
+              left: `${m.x}%`,
+              top: `${DIARY_ROW_Y}%`,
+              "--dx": `${m.dx}cqw`,
+              "--dy": `${m.dy}cqh`,
+              "--rot": `${m.rot}deg`,
+              animationDelay: `${i * 0.06}s`
+            } as CssVars
+          }
+        >
+          <span className={styles.diaryCard} style={{ animationDelay: `${2.2 + i * 0.24}s` }}>
+            <i />
+            <i />
+            <i />
+          </span>
+        </span>
+      ))}
+
+      {DIARY_CLUSTERS.map((c, i) => (
+        <span
+          key={c.mood}
+          aria-hidden="true"
+          className={cn(styles.diaryPill, styles[`mood-${c.mood}`])}
+          style={{ left: `${c.x}%`, animationDelay: `${i * 0.12}s` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ---------- laser-tag: aim, lock, fire, sync, hit, haptics ---------- */
+
+// 8s loop. Target sits at (64%, 36%); the shot comes from the phone at (58%, 89%).
+function LaserTagScene({ logo }: SceneProps) {
+  return (
+    <div role="img" aria-label={logo.alt} className={cn("absolute inset-0", styles.laser)}>
+      <div className={styles.laserFloor} aria-hidden="true">
+        <div className={styles.laserGrid} />
+      </div>
+
+      <svg className={styles.laserLines} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path className={styles.laserArc} d="M11 27 Q50 -3 89 27" />
+        <path className={styles.laserBeam} d="M58 87 L64 36" pathLength="100" />
+      </svg>
+
+      <span className={cn(styles.laserDevice, styles.laserDeviceA)} aria-hidden="true" />
+      <span className={cn(styles.laserDevice, styles.laserDeviceB)} aria-hidden="true" />
+      <span className={styles.laserPacket} aria-hidden="true">
+        <span className={cn(styles.sceneLabel, styles.laserPacketLabel)}>~50ms</span>
+      </span>
+
+      <span className={styles.laserHealth} aria-hidden="true">
+        <span className={styles.laserHealthFill} />
+      </span>
+
+      <span className={styles.laserTarget} aria-hidden="true">
+        <span className={styles.laserHitGlow} />
+        <svg viewBox="0 0 40 40" className={styles.laserTargetMark}>
+          <circle cx="20" cy="20" r="16" fill="none" strokeWidth="1.6" />
+          <path d="M20 13 L27 20 L20 27 L13 20 Z" strokeWidth="1.6" />
+        </svg>
+        <svg viewBox="0 0 40 40" className={styles.laserHit}>
+          <path d="M9 9 L17 17 M31 9 L23 17 M9 31 L17 23 M31 31 L23 23" strokeWidth="3.4" strokeLinecap="round" />
+        </svg>
+      </span>
+
+      <span className={styles.laserBrackets} aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+
+      <span className={styles.laserReticle} aria-hidden="true">
+        <svg viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="15" fill="none" strokeWidth="1.4" />
+          <path d="M20 1 V10 M20 30 V39 M1 20 H10 M30 20 H39" strokeWidth="1.4" strokeLinecap="round" />
+          <circle cx="20" cy="20" r="1.4" />
+        </svg>
+      </span>
+
+      <span className={styles.laserPhone} aria-hidden="true" />
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className={cn(styles.laserRing, i === 0 && styles.laserRingFirst)}
+          style={{ animationDelay: `${i * 0.22}s` }}
+        />
+      ))}
+
+      <div className={styles.laserHeading} aria-hidden="true">
+        <span className={styles.laserTitle}>{logo.wordmark}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- ab-race: same payment task on two layouts, revised wins ---------- */
+
+function RacePhone({ variant }: { variant: "original" | "revised" }) {
+  const revised = variant === "revised";
+  return (
+    <span className={cn(styles.racePhone, revised && styles.racePhoneRevised)}>
+      <span className={styles.raceScreen}>
+        {revised ? (
+          <span className={styles.raceHeader} />
+        ) : (
+          <span className={styles.raceTopMenu}>
+            <i />
+            <i />
+            <i />
+          </span>
+        )}
+        <span className={styles.raceAmount} />
+        <span className={styles.raceRow} />
+        <span className={styles.raceRow} />
+        <span className={styles.raceRow} />
+        <span className={styles.racePay} />
+        {revised ? (
+          <span className={styles.raceNav}>
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+        ) : null}
+        <span className={cn(styles.raceCursor, revised ? styles.raceCursorRevised : styles.raceCursorOriginal)}>
+          <span className={styles.raceDot} />
+          <span className={cn(styles.raceTap, revised ? styles.raceTapRevised : styles.raceTapOriginal)} />
+        </span>
+      </span>
+    </span>
+  );
+}
+
+// 9s loop. Revised taps three times via the bottom nav and finishes first;
+// original detours to the top menu between steps and finishes a beat later.
+function AbRaceScene({ logo }: SceneProps) {
+  return (
+    <div role="img" aria-label={logo.alt} className={cn("absolute inset-0", styles.race)}>
+      <div className={styles.raceHeading} aria-hidden="true">
+        <span className={styles.raceTitle}>{logo.wordmark}</span>
+      </div>
+
+      <div className={styles.raceStage} aria-hidden="true">
+        {(["original", "revised"] as const).map((variant) => {
+          const revised = variant === "revised";
+          return (
+            <div key={variant} className={cn(styles.raceCol, revised && styles.raceColRevised)}>
+              <RacePhone variant={variant} />
+              <span className={cn(styles.sceneLabel, styles.raceCaption)}>{variant}</span>
+              <span className={styles.raceBar}>
+                <span className={cn(styles.raceFill, revised ? styles.raceFillRevised : styles.raceFillOriginal)} />
+                {revised ? (
+                  <span className={styles.raceResult}>
+                    <svg viewBox="0 0 20 20" className={styles.raceCheck}>
+                      <circle cx="10" cy="10" r="10" />
+                      <path d="M5.5 10.4 L8.6 13.3 L14.5 7" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className={cn(styles.sceneLabel, styles.racePill)}>Faster</span>
+                  </span>
+                ) : null}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // Brand tile for projects without a cover or video. Each project picks its own
 // motion so the tiles don't all move the same way.
 export function LogoTile({ logo, size = "sm" }: LogoTileProps) {
@@ -289,7 +557,13 @@ export function LogoTile({ logo, size = "sm" }: LogoTileProps) {
       className={cn("absolute inset-0 flex items-center justify-center overflow-hidden", styles.tile)}
       style={{ backgroundImage: logo.background }}
     >
-      {motion === "aura-desk" ? (
+      {motion === "diary-clusters" ? (
+        <DiaryClustersScene logo={logo} size={size} />
+      ) : motion === "laser-tag" ? (
+        <LaserTagScene logo={logo} size={size} />
+      ) : motion === "ab-race" ? (
+        <AbRaceScene logo={logo} size={size} />
+      ) : motion === "aura-desk" ? (
         <AuraDeskScene logo={logo} size={size} />
       ) : motion === "dashboard" ? (
         <DashboardScene logo={logo} size={size} />

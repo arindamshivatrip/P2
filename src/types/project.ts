@@ -85,10 +85,22 @@ export interface ProjectFigure {
 // picks the scene so tiles don't all move alike: "zoom" (mark grows in the
 // centre), "scan" (laser sweep reveals the mark), "android-walk" (Android robot
 // walks in and the wordmark follows), "aura-desk" (glowing title with the robot
-// as a corner badge), "dashboard" (pastel chart cards behind the wordmark).
-// Without `src` the wordmark text stands in.
+// as a corner badge), "dashboard" (pastel chart cards behind the wordmark),
+// "diary-clusters" (phone moments become diary cards that sort into clusters),
+// "laser-tag" (aim, fire, MQTT sync, hit and haptic ripple) and "ab-race" (two
+// layouts run the same payment task side by side; the revised one wins).
+// Without `src` the wordmark text stands in; the last three scenes draw their
+// own title from `wordmark`.
 export interface ProjectLogoTile {
-  motion?: "zoom" | "scan" | "android-walk" | "aura-desk" | "dashboard";
+  motion?:
+    | "zoom"
+    | "scan"
+    | "android-walk"
+    | "aura-desk"
+    | "dashboard"
+    | "diary-clusters"
+    | "laser-tag"
+    | "ab-race";
   src?: string;
   alt: string;
   wordmark: string;

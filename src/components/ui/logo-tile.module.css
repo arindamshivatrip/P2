@@ -521,6 +521,939 @@
   background: radial-gradient(closest-side, rgba(252, 248, 243, 0.98) 0%, rgba(252, 248, 243, 0.9) 55%, rgba(252, 248, 243, 0));
 }
 
+/* ---------- shared bits for the illustrated scenes ---------- */
+
+/* Epoch has no "·" or "×": labels use "/" and "x". */
+.sceneLabel {
+  font-family: var(--font-body);
+  font-size: clamp(8.5px, 1.9cqw, 13px);
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mood-stress { --mood: #ff8f7a; --halo: rgba(255, 143, 122, 0.34); }
+.mood-boredom { --mood: #b9a8ff; --halo: rgba(185, 168, 255, 0.34); }
+.mood-calm { --mood: #9fd8b8; --halo: rgba(159, 216, 184, 0.34); }
+
+/* ---------- diary-clusters: 10s loop ----------
+   0-20 the day: arc draws, phones light up in turn and drop a dot
+   20-50 entries: each dot lands as a cream diary card
+   50-75 affinity mapping: cards drift into three clusters, halos fade in
+   75-92 profiles: unlabelled pills under each cluster, hold
+   92-100 everything but the title fades out */
+
+.diary {
+  color: #f5f4ed;
+}
+
+.diaryGlow {
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(42% 42% at 82% 86%, rgba(255, 196, 160, 0.25), transparent 72%);
+  animation: diary-breathe 20s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes diary-breathe {
+  from { opacity: 0.7; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: 1; transform: translate3d(-1.5cqw, -1cqh, 0) scale(1.06); }
+}
+
+.diaryHeading {
+  position: absolute;
+  z-index: 3;
+  left: 7%;
+  top: 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8cqh;
+}
+
+.diaryTitle {
+  font-family: var(--font-display);
+  font-size: min(5.6cqw, 8.6cqh);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+
+.diaryDay {
+  position: absolute;
+  inset: 0;
+  animation: diary-day 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes diary-day {
+  0% { opacity: 0; }
+  3% { opacity: 1; }
+  90% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+
+/* Arc box spans x 10-90%, y 42-56%, peaking in the middle. */
+.diaryArc {
+  position: absolute;
+  left: 10%;
+  top: 42%;
+  width: 80%;
+  height: 14%;
+  overflow: visible;
+  clip-path: inset(-30% 0 -30% 0);
+  animation: diary-arc 10s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.diaryArc path {
+  fill: none;
+  stroke: rgba(255, 246, 234, 0.45);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+@keyframes diary-arc {
+  0%, 2% { clip-path: inset(-30% 100% -30% 0); }
+  16%, 100% { clip-path: inset(-30% 0 -30% 0); }
+}
+
+.diarySun,
+.diaryMoon {
+  position: absolute;
+  top: 56%;
+  width: 2.4cqw;
+  height: 2.4cqw;
+  margin: -1.2cqw 0 0 -1.2cqw;
+  border-radius: 50%;
+}
+
+.diarySun {
+  left: 10%;
+  background: #ffd9a6;
+  box-shadow: 0 0 1.4cqw rgba(255, 217, 166, 0.7);
+}
+
+/* Crescent: a transparent disc whose offset shadow is the moon. */
+.diaryMoon {
+  left: 90%;
+  box-shadow: 0.55cqw -0.2cqw 0 0 #fff6ea;
+  transform: translateX(-0.4cqw);
+  animation: diary-moon 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes diary-moon {
+  0%, 13% { opacity: 0; }
+  18%, 100% { opacity: 1; }
+}
+
+.diaryPhone {
+  position: absolute;
+  width: 2.1cqw;
+  height: 3.5cqw;
+  margin: -1.75cqw 0 0 -1.05cqw;
+  border: max(1px, 0.28cqw) solid rgba(255, 246, 234, 0.9);
+  border-radius: 0.55cqw;
+  background: #3d2f62;
+  opacity: 0.55;
+  animation: diary-phone 10s cubic-bezier(0.34, 1.4, 0.64, 1) infinite backwards;
+}
+
+@keyframes diary-phone {
+  0% { opacity: 0.55; transform: scale(1); background-color: #3d2f62; box-shadow: 0 0 0 rgba(255, 230, 200, 0); }
+  3% { opacity: 1; transform: scale(1.18); background-color: #8a6f8e; box-shadow: 0 0 1.4cqw rgba(255, 230, 200, 0.6); }
+  9% { opacity: 1; transform: scale(1); background-color: #8a6f8e; box-shadow: 0 0 1.4cqw rgba(255, 230, 200, 0.6); }
+  20%, 100% { opacity: 0.55; transform: scale(1); background-color: #3d2f62; box-shadow: 0 0 0 rgba(255, 230, 200, 0); }
+}
+
+/* "A moment logged": a coloured dot pops out of the phone, then falls to the card row. */
+.diaryDot {
+  position: absolute;
+  z-index: 2;
+  width: 1.5cqw;
+  height: 1.5cqw;
+  margin: -0.75cqw 0 0 -0.75cqw;
+  border-radius: 50%;
+  background: var(--mood);
+  box-shadow: 0 0 1cqw var(--mood);
+  opacity: 0;
+  animation: diary-dot 10s infinite backwards;
+}
+
+@keyframes diary-dot {
+  0% { opacity: 0; transform: translateY(0) scale(0.3); animation-timing-function: cubic-bezier(0.34, 1.5, 0.64, 1); }
+  3% { opacity: 1; transform: translateY(3.4cqh) scale(1); }
+  9% { opacity: 1; transform: translateY(3.4cqh) scale(1); animation-timing-function: cubic-bezier(0.55, 0, 0.75, 0.45); }
+  19% { opacity: 1; transform: translateY(var(--fall)) scale(0.9); animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); }
+  21%, 100% { opacity: 0; transform: translateY(var(--fall)) scale(1.8); }
+}
+
+/* Card slot: sits on the row, then drifts into its cluster. Base = clustered. */
+.diarySlot {
+  position: absolute;
+  z-index: 2;
+  width: 7.4cqw;
+  height: 5.2cqw;
+  margin: -2.6cqw 0 0 -3.7cqw;
+  transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+  animation: diary-slot 10s infinite backwards;
+}
+
+@keyframes diary-slot {
+  0%, 19% { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  20% { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  50% { opacity: 1; transform: translate(0, 0) rotate(0deg); animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1); }
+  72% { opacity: 1; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); }
+  90% { opacity: 1; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); }
+  97%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); }
+}
+
+/* Pops in when its dot lands (delay per card); visible for 70% of the loop. */
+.diaryCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7cqw;
+  width: 100%;
+  height: 100%;
+  padding: 0 1cqw 0 1.6cqw;
+  overflow: hidden;
+  border-radius: 0.9cqw;
+  background: rgba(255, 246, 234, 0.92);
+  box-shadow: 0 0.6cqw 1.6cqw rgba(30, 20, 50, 0.25);
+  animation: diary-card 10s infinite backwards;
+}
+
+.diaryCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.55cqw;
+  background: var(--mood);
+}
+
+.diaryCard i {
+  display: block;
+  height: 0.45cqw;
+  border-radius: 0.3cqw;
+  background: rgba(60, 50, 90, 0.22);
+}
+
+.diaryCard i:nth-child(2) { width: 80%; }
+.diaryCard i:nth-child(3) { width: 55%; }
+
+@keyframes diary-card {
+  0% { opacity: 0; transform: scale(0.35); animation-timing-function: cubic-bezier(0.34, 1.45, 0.64, 1); }
+  4% { opacity: 1; transform: scale(1); }
+  70% { opacity: 1; transform: scale(1); }
+  74%, 100% { opacity: 0; transform: scale(1); }
+}
+
+.diaryHalo {
+  position: absolute;
+  z-index: 1;
+  top: 73%;
+  width: 26cqw;
+  height: 22cqw;
+  margin: -11cqw 0 0 -13cqw;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--halo), transparent);
+  animation: diary-halo 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes diary-halo {
+  0%, 58% { opacity: 0; transform: scale(0.7); }
+  74% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; transform: scale(1); }
+  97%, 100% { opacity: 0; transform: scale(1); }
+}
+
+/* Profile pills: unlabelled until the real regulation-profile names are confirmed. */
+.diaryPill {
+  position: absolute;
+  z-index: 2;
+  top: 87%;
+  width: 9cqw;
+  height: 2.2cqw;
+  margin: -1.1cqw 0 0 -4.5cqw;
+  border: max(1px, 0.22cqw) solid var(--mood);
+  border-radius: 999px;
+  background: var(--halo);
+  animation: diary-pill 10s infinite backwards;
+}
+
+@keyframes diary-pill {
+  0%, 75% { opacity: 0; transform: scaleX(0.3); animation-timing-function: cubic-bezier(0.34, 1.5, 0.64, 1); }
+  80% { opacity: 1; transform: scaleX(1); }
+  90% { opacity: 1; transform: scaleX(1); }
+  97%, 100% { opacity: 0; transform: scaleX(1); }
+}
+
+/* ---------- laser-tag: 8s loop ----------
+   0-15 search: reticle drifts over the arena
+   15-30 lock: settles on the target, brackets snap in
+   30-38 fire: lime beam from the phone to the target
+   38-50 sync: MQTT packet hops between devices (~50ms)
+   50-58 hit: pink marker, one glow pulse, health drops to 75%
+   58-75 haptics: three rings ripple from the phone
+   75-100 hold, then the reticle fades and the loop resets */
+
+.laser {
+  color: #eafff9;
+}
+
+/* Perspective floor: the horizon sits at 50%, lines scroll toward the viewer.
+   Linear so the scroll loops seamlessly. */
+.laserFloor {
+  position: absolute;
+  left: -40%;
+  right: -40%;
+  top: 50%;
+  bottom: 0;
+  overflow: hidden;
+  perspective: 40cqh;
+  perspective-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 55%);
+}
+
+.laserGrid {
+  position: absolute;
+  inset: 0 0 -200% 0;
+  transform-origin: 50% 0;
+  transform: rotateX(70deg);
+  background-image:
+    linear-gradient(rgba(80, 255, 220, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 255, 220, 0.12) 1px, transparent 1px);
+  background-size: 7cqw 7cqw;
+  background-position: 50% 0;
+  animation: laser-floor 16s linear infinite;
+}
+
+@keyframes laser-floor {
+  from { background-position: 50% 0; }
+  to { background-position: 50% 7cqw; }
+}
+
+.laserLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.laserArc {
+  fill: none;
+  stroke: rgba(61, 224, 255, 0.4);
+  stroke-width: 0.35;
+  stroke-dasharray: 1.2 1.4;
+}
+
+.laserBeam {
+  fill: none;
+  stroke: #c6ff3d;
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: -100;
+  filter: drop-shadow(0 0 3px rgba(198, 255, 61, 0.8));
+  opacity: 0;
+  animation: laser-beam 8s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+}
+
+@keyframes laser-beam {
+  0%, 30% { stroke-dashoffset: 100; opacity: 1; }
+  34% { stroke-dashoffset: 0; opacity: 1; }
+  39% { stroke-dashoffset: -100; opacity: 1; }
+  40%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+
+.laserDevice {
+  position: absolute;
+  top: 27%;
+  width: 2.4cqw;
+  height: 4cqw;
+  margin: -2cqw 0 0 -1.2cqw;
+  border: max(1px, 0.3cqw) solid rgba(61, 224, 255, 0.75);
+  border-radius: 0.5cqw;
+  background: rgba(6, 20, 26, 0.8);
+}
+
+.laserDeviceA { left: 11%; }
+.laserDeviceB { left: 89%; }
+
+.laserPacket {
+  position: absolute;
+  z-index: 2;
+  left: 11%;
+  top: 27%;
+  width: 1.4cqw;
+  height: 1.4cqw;
+  margin: -0.7cqw 0 0 -0.7cqw;
+  border-radius: 50%;
+  background: #3de0ff;
+  box-shadow: 0 0 1.2cqw #3de0ff;
+  opacity: 0;
+  animation: laser-packet 8s infinite;
+}
+
+/* Hops along the dashed arc: ease in, cruise, ease out. */
+@keyframes laser-packet {
+  0%, 37% { opacity: 0; transform: translate(0, 0); }
+  38% { opacity: 1; transform: translate(0, 0); animation-timing-function: cubic-bezier(0.5, 0, 1, 1); }
+  41% { transform: translate(19.5cqw, -11.25cqh); animation-timing-function: linear; }
+  44% { transform: translate(39cqw, -15cqh); animation-timing-function: linear; }
+  47% { transform: translate(58.5cqw, -11.25cqh); animation-timing-function: cubic-bezier(0, 0, 0.5, 1); }
+  50% { opacity: 1; transform: translate(78cqw, 0); }
+  53%, 100% { opacity: 0; transform: translate(78cqw, 0); }
+}
+
+.laserPacketLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 180%;
+  transform: translateX(-50%);
+  color: #3de0ff;
+}
+
+.laserHealth {
+  position: absolute;
+  left: 64%;
+  top: 22%;
+  width: 12cqw;
+  height: 1.1cqw;
+  margin: -0.55cqw 0 0 -6cqw;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(234, 255, 249, 0.16);
+}
+
+.laserHealthFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #eafff9;
+  transform-origin: 0 50%;
+  transform: scaleX(0.75);
+  animation: laser-health 8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes laser-health {
+  0%, 51% { transform: scaleX(1); }
+  58% { transform: scaleX(0.75); }
+  92% { transform: scaleX(0.75); }
+  100% { transform: scaleX(1); }
+}
+
+/* Abstract opponent marker: a ring with a diamond, never a figure. */
+.laserTarget {
+  position: absolute;
+  left: 64%;
+  top: 36%;
+  width: 8cqw;
+  height: 8cqw;
+  margin: -4cqw 0 0 -4cqw;
+}
+
+.laserTargetMark {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  stroke: rgba(234, 255, 249, 0.75);
+  fill: rgba(234, 255, 249, 0.14);
+}
+
+.laserHit {
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  width: 130%;
+  height: 130%;
+  stroke: #ff3d7f;
+  filter: drop-shadow(0 0 0.6cqw rgba(255, 61, 127, 0.8));
+  animation: laser-hit 8s infinite;
+}
+
+@keyframes laser-hit {
+  0%, 49% { opacity: 0; transform: scale(0.4); animation-timing-function: cubic-bezier(0.34, 1.6, 0.64, 1); }
+  53% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; transform: scale(1); }
+  96%, 100% { opacity: 0; transform: scale(1); }
+}
+
+/* The loop's one flash. */
+.laserHitGlow {
+  position: absolute;
+  inset: -70%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 61, 127, 0.5), transparent);
+  opacity: 0;
+  animation: laser-glow 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes laser-glow {
+  0%, 49% { opacity: 0; }
+  52% { opacity: 1; }
+  59%, 100% { opacity: 0; }
+}
+
+.laserBrackets {
+  position: absolute;
+  left: 64%;
+  top: 36%;
+  width: 13cqw;
+  height: 13cqw;
+  margin: -6.5cqw 0 0 -6.5cqw;
+  animation: laser-brackets 8s infinite;
+}
+
+.laserBrackets i {
+  position: absolute;
+  width: 2.6cqw;
+  height: 2.6cqw;
+  border: 0 solid #c6ff3d;
+}
+
+.laserBrackets i:nth-child(1) { left: 0; top: 0; border-top-width: max(1.5px, 0.4cqw); border-left-width: max(1.5px, 0.4cqw); }
+.laserBrackets i:nth-child(2) { right: 0; top: 0; border-top-width: max(1.5px, 0.4cqw); border-right-width: max(1.5px, 0.4cqw); }
+.laserBrackets i:nth-child(3) { left: 0; bottom: 0; border-bottom-width: max(1.5px, 0.4cqw); border-left-width: max(1.5px, 0.4cqw); }
+.laserBrackets i:nth-child(4) { right: 0; bottom: 0; border-bottom-width: max(1.5px, 0.4cqw); border-right-width: max(1.5px, 0.4cqw); }
+
+@keyframes laser-brackets {
+  0%, 18% { opacity: 0; transform: scale(1.7); animation-timing-function: cubic-bezier(0.34, 1.6, 0.64, 1); }
+  25% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; transform: scale(1); }
+  96%, 100% { opacity: 0; transform: scale(1); }
+}
+
+.laserReticle {
+  position: absolute;
+  z-index: 2;
+  left: 64%;
+  top: 36%;
+  width: 11cqw;
+  height: 11cqw;
+  margin: -5.5cqw 0 0 -5.5cqw;
+  animation: laser-reticle 8s infinite;
+}
+
+.laserReticle svg {
+  width: 100%;
+  height: 100%;
+  stroke: #c6ff3d;
+  fill: #c6ff3d;
+  filter: drop-shadow(0 0 0.5cqw rgba(198, 255, 61, 0.45));
+}
+
+.laserReticle circle:first-child {
+  fill: none;
+}
+
+@keyframes laser-reticle {
+  0% { opacity: 0; transform: translate(-32cqw, 14cqh); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  4% { opacity: 1; }
+  8% { transform: translate(-15cqw, 20cqh); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  14% { transform: translate(10cqw, -7cqh); animation-timing-function: cubic-bezier(0.3, 1.35, 0.5, 1); }
+  21% { transform: translate(0, 0); }
+  90% { opacity: 1; transform: translate(0, 0); }
+  96%, 100% { opacity: 0; transform: translate(0, 0); }
+}
+
+.laserPhone {
+  position: absolute;
+  z-index: 2;
+  left: 58%;
+  top: 89%;
+  width: 3cqw;
+  height: 5cqw;
+  margin: -2.5cqw 0 0 -1.5cqw;
+  border: max(1px, 0.32cqw) solid #3de0ff;
+  border-radius: 0.6cqw;
+  background: #0b2a2e;
+}
+
+.laserRing {
+  position: absolute;
+  z-index: 1;
+  left: 58%;
+  top: 89%;
+  width: 7cqw;
+  height: 7cqw;
+  margin: -3.5cqw 0 0 -3.5cqw;
+  border: max(1px, 0.3cqw) solid #3de0ff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: laser-ring 8s cubic-bezier(0.2, 0.6, 0.35, 1) infinite backwards;
+}
+
+/* Reduced-motion frame keeps one static ring. */
+.laserRingFirst {
+  opacity: 0.45;
+  transform: scale(1.8);
+}
+
+@keyframes laser-ring {
+  0%, 57% { opacity: 0; transform: scale(0.5); }
+  59% { opacity: 0.85; transform: scale(0.6); }
+  73%, 100% { opacity: 0; transform: scale(3.2); }
+}
+
+.laserHeading {
+  position: absolute;
+  z-index: 3;
+  left: 7%;
+  bottom: 9%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8cqh;
+}
+
+.laserTitle {
+  font-family: var(--font-display);
+  font-size: min(8.6cqw, 13cqh);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 2cqw rgba(198, 255, 61, 0.18);
+}
+
+
+/* ---------- ab-race: 9s loop ----------
+   0-12 set up: both phones slide up into place
+   12-66 the run: same 3-step task; revised taps via the bottom nav and
+         finishes at ~46%, original detours to the top menu and lags
+   52-60 result: revised bar goes solid orange, check + FASTER pop
+   66 original finishes in slate; hold, then fade back to the start */
+
+.race {
+  color: #1f1f1f;
+}
+
+.raceHeading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6cqh;
+  text-align: center;
+}
+
+.raceTitle {
+  font-family: var(--font-display);
+  font-size: min(5.6cqw, 8.2cqh);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+
+/* Sized off the tile height so both phones fit at 1.2:1 and at 1.78:1. */
+.raceStage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 21%;
+  display: flex;
+  justify-content: center;
+  gap: 9cqh;
+}
+
+.raceCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8cqh;
+  animation: race-col 9s cubic-bezier(0.22, 0.61, 0.36, 1) infinite backwards;
+}
+
+.raceColRevised {
+  animation-delay: 0.12s;
+}
+
+@keyframes race-col {
+  0% { opacity: 0; transform: translateY(5cqh); }
+  10% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 1; transform: translateY(0); }
+  98%, 100% { opacity: 0; transform: translateY(0); }
+}
+
+.racePhone {
+  position: relative;
+  display: block;
+  width: 26cqh;
+  height: 50cqh;
+  padding: 2cqh 1.6cqh;
+  border: max(1.5px, 0.5cqh) solid #3b4250;
+  border-radius: 3.6cqh;
+  background: #fff;
+  box-shadow: 0 1.6cqh 3cqh rgba(120, 60, 20, 0.12);
+}
+
+.raceScreen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4cqh;
+  width: 100%;
+  height: 100%;
+}
+
+.raceTopMenu {
+  display: flex;
+  gap: 0.8cqh;
+  height: 3cqh;
+}
+
+.raceTopMenu i {
+  flex: 1;
+  border-radius: 0.6cqh;
+  background: rgba(59, 66, 80, 0.15);
+}
+
+.raceHeader {
+  width: 50%;
+  height: 3cqh;
+  border-radius: 0.6cqh;
+  background: rgba(59, 66, 80, 0.15);
+}
+
+.raceAmount {
+  height: 8.5cqh;
+  border-radius: 1cqh;
+  background: rgba(59, 66, 80, 0.15);
+}
+
+.raceRow {
+  height: 2.8cqh;
+  border-radius: 0.7cqh;
+  background: rgba(59, 66, 80, 0.1);
+}
+
+.racePay {
+  height: 4cqh;
+  margin-top: auto;
+  border-radius: 2cqh;
+  background: rgba(59, 66, 80, 0.22);
+}
+
+/* The persistent bottom nav the study recommended. */
+.raceNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 5cqh;
+  border: 1px solid rgba(255, 106, 61, 0.6);
+  border-radius: 1.2cqh;
+  background: rgba(255, 106, 61, 0.14);
+}
+
+.raceNav i {
+  width: 1.8cqh;
+  height: 1.8cqh;
+  border-radius: 50%;
+  background: rgba(255, 106, 61, 0.6);
+}
+
+/* Cursor layer covers the screen; translating it by % moves the dot in screen units. */
+.raceCursor {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.raceDot,
+.raceTap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3cqh;
+  height: 3cqh;
+  margin: -1.5cqh 0 0 -1.5cqh;
+  border-radius: 50%;
+}
+
+.raceDot {
+  background: rgba(31, 31, 31, 0.55);
+  box-shadow: 0 0 0 0.5cqh rgba(255, 255, 255, 0.75);
+}
+
+.raceTap {
+  border: max(1px, 0.4cqh) solid #3b4250;
+  opacity: 0;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.2, 0.6, 0.35, 1);
+}
+
+.raceCursorRevised {
+  animation: race-cursor-revised 9s infinite;
+}
+
+.raceCursorOriginal {
+  animation: race-cursor-original 9s infinite;
+}
+
+/* Revised: nav, nav, pay. All near the thumb. */
+@keyframes race-cursor-revised {
+  0%, 14% { opacity: 0; transform: translate(50%, 70%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  17% { opacity: 1; }
+  24% { transform: translate(38%, 94%); }
+  27% { transform: translate(38%, 94%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  34% { transform: translate(62%, 94%); }
+  37% { transform: translate(62%, 94%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  44% { transform: translate(50%, 80%); }
+  50% { opacity: 1; transform: translate(50%, 80%); }
+  54%, 100% { opacity: 0; transform: translate(50%, 80%); }
+}
+
+/* Original: every step detours up to the top menu and back. */
+@keyframes race-cursor-original {
+  0%, 14% { opacity: 0; transform: translate(50%, 70%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  17% { opacity: 1; }
+  22% { transform: translate(18%, 4%); }
+  24% { transform: translate(18%, 4%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  31% { transform: translate(50%, 35%); }
+  33% { transform: translate(50%, 35%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  40% { transform: translate(50%, 4%); }
+  42% { transform: translate(50%, 4%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  49% { transform: translate(50%, 44%); }
+  51% { transform: translate(50%, 44%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  57% { transform: translate(82%, 4%); }
+  59% { transform: translate(82%, 4%); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1); }
+  66% { transform: translate(50%, 95%); }
+  70% { opacity: 1; transform: translate(50%, 95%); }
+  74%, 100% { opacity: 0; transform: translate(50%, 95%); }
+}
+
+.raceTapRevised {
+  border-color: #ff6a3d;
+  animation-name: race-tap-revised;
+}
+
+.raceTapOriginal {
+  animation-name: race-tap-original;
+}
+
+@keyframes race-tap-revised {
+  0%, 23.9% { opacity: 0; transform: scale(0.5); }
+  24% { opacity: 0.9; transform: scale(0.5); }
+  28%, 33.9% { opacity: 0; transform: scale(2.2); }
+  34% { opacity: 0.9; transform: scale(0.5); }
+  38%, 43.9% { opacity: 0; transform: scale(2.2); }
+  44% { opacity: 0.9; transform: scale(0.5); }
+  48%, 100% { opacity: 0; transform: scale(2.2); }
+}
+
+@keyframes race-tap-original {
+  0%, 21.9% { opacity: 0; transform: scale(0.5); }
+  22% { opacity: 0.8; transform: scale(0.5); }
+  26%, 30.9% { opacity: 0; transform: scale(2.2); }
+  31% { opacity: 0.8; transform: scale(0.5); }
+  35%, 39.9% { opacity: 0; transform: scale(2.2); }
+  40% { opacity: 0.8; transform: scale(0.5); }
+  44%, 48.9% { opacity: 0; transform: scale(2.2); }
+  49% { opacity: 0.8; transform: scale(0.5); }
+  53%, 56.9% { opacity: 0; transform: scale(2.2); }
+  57% { opacity: 0.8; transform: scale(0.5); }
+  61%, 65.9% { opacity: 0; transform: scale(2.2); }
+  66% { opacity: 0.8; transform: scale(0.5); }
+  70%, 100% { opacity: 0; transform: scale(2.2); }
+}
+
+.raceCaption {
+  color: rgba(31, 31, 31, 0.62);
+}
+
+/* Unitless timer: no real times are published. */
+.raceBar {
+  position: relative;
+  display: block;
+  width: 26cqh;
+  height: 1.4cqh;
+  border-radius: 999px;
+  background: rgba(59, 66, 80, 0.14);
+}
+
+.raceFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: 0 50%;
+}
+
+.raceFillRevised {
+  background-color: #ff6a3d;
+  animation: race-fill-revised 9s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.raceFillOriginal {
+  background-color: rgba(59, 66, 80, 0.55);
+  transform: scaleX(0.667);
+  animation: race-fill-original 9s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+@keyframes race-fill-revised {
+  0%, 24% { transform: scaleX(0); background-color: rgba(255, 106, 61, 0.5); }
+  26%, 34% { transform: scaleX(0.333); background-color: rgba(255, 106, 61, 0.5); }
+  36%, 44% { transform: scaleX(0.667); background-color: rgba(255, 106, 61, 0.5); }
+  46%, 51% { transform: scaleX(1); background-color: rgba(255, 106, 61, 0.5); }
+  54%, 98% { transform: scaleX(1); background-color: #ff6a3d; }
+  100% { transform: scaleX(0); background-color: rgba(255, 106, 61, 0.5); }
+}
+
+@keyframes race-fill-original {
+  0%, 31% { transform: scaleX(0); }
+  33%, 49% { transform: scaleX(0.333); }
+  51%, 66% { transform: scaleX(0.667); }
+  68%, 98% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+
+.raceResult {
+  position: absolute;
+  left: calc(100% + 1.4cqh);
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.9cqh;
+  transform: translateY(-50%);
+}
+
+.raceCheck {
+  width: 3.6cqh;
+  height: 3.6cqh;
+  fill: #2fb37a;
+  stroke: #fff;
+  animation: race-check 9s infinite;
+}
+
+@keyframes race-check {
+  0%, 51% { opacity: 0; transform: scale(0.3); animation-timing-function: cubic-bezier(0.34, 1.6, 0.64, 1); }
+  55% { opacity: 1; transform: scale(1); }
+  92% { opacity: 1; transform: scale(1); }
+  97%, 100% { opacity: 0; transform: scale(1); }
+}
+
+.racePill {
+  padding: 0.7cqh 1.3cqh;
+  border-radius: 999px;
+  background: #ff6a3d;
+  color: #fff;
+  font-size: clamp(8px, 1.6cqw, 12px);
+  animation: race-pill 9s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@keyframes race-pill {
+  0%, 53% { opacity: 0; transform: translateX(-1cqh); }
+  58% { opacity: 1; transform: translateX(0); }
+  92% { opacity: 1; transform: translateX(0); }
+  97%, 100% { opacity: 0; transform: translateX(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .zoom,
   .scanGrid,
@@ -546,7 +1479,32 @@
   .donutArc,
   .linePath,
   .row,
-  .dot {
+  .dot,
+  .diaryGlow,
+  .diaryDay,
+  .diaryArc,
+  .diaryMoon,
+  .diaryPhone,
+  .diaryDot,
+  .diarySlot,
+  .diaryCard,
+  .diaryHalo,
+  .diaryPill,
+  .laserGrid,
+  .laserBeam,
+  .laserPacket,
+  .laserHealthFill,
+  .laserHit,
+  .laserHitGlow,
+  .laserBrackets,
+  .laserReticle,
+  .laserRing,
+  .raceCol,
+  .raceCursor,
+  .raceTap,
+  .raceFill,
+  .raceCheck,
+  .racePill {
     animation: none !important;
   }
 
