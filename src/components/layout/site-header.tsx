@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ChatLauncher } from "@/components/arillm/chat-launcher";
 import { Container } from "@/components/layout/container";
 import { homeHeader } from "@/data/home";
 import { navItems } from "@/data/site";
@@ -69,88 +70,92 @@ export function SiteHeader() {
               />
             );
           })}
+          <ChatLauncher variant="desktop" />
         </nav>
-        <button
-          type="button"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/65 text-foreground/90 transition-colors hover:bg-surface md:hidden"
-          onClick={() => setMenuOpen((previous) => !previous)}
-        >
-          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
-          <span className="relative block h-4 w-4">
-            <span
-              className={cn(
-                "absolute left-0 top-[3px] h-px w-4 bg-current transition-transform duration-200",
-                menuOpen && "translate-y-[4px] rotate-45"
-              )}
-            />
-            <span
-              className={cn(
-                "absolute left-0 top-[7px] h-px w-4 bg-current transition-opacity duration-200",
-                menuOpen && "opacity-0"
-              )}
-            />
-            <span
-              className={cn(
-                "absolute left-0 top-[11px] h-px w-4 bg-current transition-transform duration-200",
-                menuOpen && "-translate-y-[4px] -rotate-45"
-              )}
-            />
-          </span>
-        </button>
-      </Container>
-      {menuOpen ? (
-        <button
-          type="button"
-          aria-label="Close mobile menu"
-          className="fixed inset-0 top-[4.4rem] z-20 bg-transparent md:hidden"
-          onClick={() => setMenuOpen(false)}
-        />
-      ) : null}
-      <AnimatePresence initial={false}>
-        {menuOpen ? (
-          <motion.div
-            key="mobile-menu"
-            className="relative z-30 overflow-hidden border-t border-border/60 bg-background/95 md:hidden"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: menuDuration, ease: [0.22, 0.61, 0.36, 1] }}
+        <div className="flex items-center gap-2 md:hidden">
+          <ChatLauncher variant="mobile" />
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border/65 text-foreground/90 transition-colors hover:bg-surface md:hidden"
+            onClick={() => setMenuOpen((previous) => !previous)}
           >
-            <Container>
-              <motion.nav
-                aria-label="Mobile primary"
-                className="flex flex-col py-3"
-                initial={{ y: prefersReducedMotion ? 0 : -6, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: menuDuration, ease: [0.22, 0.61, 0.36, 1] }}
-              >
-                {navItems.map((item) => {
-                  const isHome = item.href === "/";
-                  const isActive = isHome ? pathname === "/" : pathname.startsWith(item.href);
-
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      aria-current={isActive ? "page" : undefined}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        "block py-2.5 font-body text-base text-foreground/85 transition-colors hover:text-foreground",
-                        isActive && "text-foreground"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </motion.nav>
-            </Container>
-          </motion.div>
+            <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+            <span className="relative block h-4 w-4">
+              <span
+                className={cn(
+                  "absolute left-0 top-[3px] h-px w-4 bg-current transition-transform duration-200",
+                  menuOpen && "translate-y-[4px] rotate-45"
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute left-0 top-[7px] h-px w-4 bg-current transition-opacity duration-200",
+                  menuOpen && "opacity-0"
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute left-0 top-[11px] h-px w-4 bg-current transition-transform duration-200",
+                  menuOpen && "-translate-y-[4px] -rotate-45"
+                )}
+              />
+            </span>
+          </button>
+          </div>
+        </Container>
+        {menuOpen ? (
+          <button
+            type="button"
+            aria-label="Close mobile menu"
+            className="fixed inset-0 top-[4.4rem] z-20 bg-transparent md:hidden"
+            onClick={() => setMenuOpen(false)}
+          />
         ) : null}
-      </AnimatePresence>
-    </header>
-  );
-}
+        <AnimatePresence initial={false}>
+          {menuOpen ? (
+            <motion.div
+              key="mobile-menu"
+              className="relative z-30 overflow-hidden border-t border-border/60 bg-background/95 md:hidden"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: menuDuration, ease: [0.22, 0.61, 0.36, 1] }}
+            >
+              <Container>
+                <motion.nav
+                  aria-label="Mobile primary"
+                  className="flex flex-col py-3"
+                  initial={{ y: prefersReducedMotion ? 0 : -6, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: menuDuration, ease: [0.22, 0.61, 0.36, 1] }}
+                >
+                  {navItems.map((item) => {
+                    const isHome = item.href === "/";
+                    const isActive = isHome ? pathname === "/" : pathname.startsWith(item.href);
+  
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        aria-current={isActive ? "page" : undefined}
+                        onClick={() => setMenuOpen(false)}
+                        className={cn(
+                          "block py-2.5 font-body text-base text-foreground/85 transition-colors hover:text-foreground",
+                          isActive && "text-foreground"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </motion.nav>
+              </Container>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+      </header>
+    );
+  }
