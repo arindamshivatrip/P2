@@ -1,0 +1,62 @@
+/* The wall: FigJam-style dot grid on the page's cream. */
+.board {
+  background-color: rgb(var(--color-surface) / 0.35);
+  background-image: radial-gradient(rgb(var(--color-border)) 1.1px, transparent 1.3px);
+  background-size: 22px 22px;
+  background-position: 11px 11px;
+}
+
+/* Paper stays paper in dark mode too: light stock, ink-dark text. */
+.paper {
+  color: #1f1f1f;
+  box-shadow:
+    0 1px 1px rgba(38, 31, 24, 0.06),
+    0 10px 22px -8px rgba(38, 31, 24, 0.22);
+}
+
+.butter { background: #ffedb8; }
+.peach { background: #ffd9b3; }
+.sage { background: #dde8d3; }
+.sky { background: #d7e4f2; }
+.lilac { background: #e7ddf2; }
+
+.polaroid {
+  background: #fbfaf6;
+}
+
+/* A strip of translucent tape holding each polaroid up. */
+.tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 64px;
+  height: 20px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgb(255 255 255 / 0.55);
+  border: 1px solid rgb(255 255 255 / 0.7);
+  box-shadow: 0 1px 2px rgba(38, 31, 24, 0.08);
+  backdrop-filter: blur(1px);
+}
+
+.note {
+  transition:
+    transform 260ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .note:hover {
+    transform: translateY(-3px) rotate(0deg) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note {
+    transition: none;
+  }
+}
+
+.canvas {
+  touch-action: none;
+  cursor: crosshair;
+}

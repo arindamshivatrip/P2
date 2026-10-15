@@ -66,14 +66,14 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/80 backdrop-blur">
-      <Container className="flex h-[4.4rem] items-center justify-between md:h-[4.8rem]">
+      <Container className="flex h-[4.4rem] items-center justify-between gap-6 md:h-[4.8rem]">
         <Link
           href="/"
-          className="max-w-[60%] truncate font-display text-sm tracking-tight sm:text-base md:max-w-none md:text-lg"
+          className="max-w-[60%] truncate font-display text-sm tracking-tight sm:text-base md:max-w-none lg:text-lg"
         >
           {homeHeader.wordmark}
         </Link>
-        <nav aria-label="Primary" className="hidden gap-8 md:flex">
+        <nav aria-label="Primary" className="hidden gap-4 md:flex lg:gap-8">
           {navItems.map((item) => {
             const isHome = item.href === "/";
             const isActive = isHome ? pathname === "/" : pathname.startsWith(item.href);
