@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "arillm:eval": "tsx scripts/arillm-eval.ts"
+    "arillm:eval": "tsx scripts/arillm-eval.ts",
+    "test": "tsx --test \"src/**/*.test.ts\""
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.79",
