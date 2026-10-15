@@ -135,13 +135,14 @@ export const aboutContent = {
       title: "Right now",
       items: [
         "Master's student in Human-Computer Interaction (HCIM) at the University of Maryland",
-        "Focused on user research, interaction design, and behavior-aware systems",
-        "Exploring qualitative methods, sensemaking, and design ethics through research-heavy studio coursework"
+        "Creative technologist focused on XR and spatial interaction; my thesis builds on Reframed, a passthrough AR piece on Quest 3",
+        "Building on Android XR as a Google Trusted Developer, and pairing the engineering with research: diary studies, usability tests, and statistics"
       ]
     },
     {
       title: "Before that",
       items: [
+        "3D Scanning & Fitment Software Intern, LIGHT Helmets (summer 2026)",
         "Data Analytics Specialist, L'Oréal Singapore",
         "Enterprise Architecture Intern, L'Oréal Singapore",
         "Full Stack Developer Intern, SP Digital",
@@ -151,10 +152,10 @@ export const aboutContent = {
     {
       title: "Interested in",
       items: [
-        "Well-being",
-        "Accessibility",
         "XR / spatial computing",
         "Human-AI interaction",
+        "Accessibility",
+        "Well-being",
         "Behavior-aware systems"
       ]
     }

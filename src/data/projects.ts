@@ -932,45 +932,45 @@ export const projects: Project[] = [
   {
     id: "media-framing-sentiment-pipeline",
     slug: "media-framing-sentiment-pipeline",
-    title: "Media Framing & Sentiment Transformation Pipeline",
+    title: "Media Framing & Content-Representation Study",
     oneLiner:
-      "A pipeline for converting unstructured media into structured framing and sentiment representations.",
+      "Does consumer sentiment change which kinds of movies succeed? Six ways of representing a plot, tested on 5,388 films.",
     summary:
-      "I’m building a research-oriented transformation pipeline that combines classical NLP and LLM-based approaches to analyze sentiment, framing, and robustness across media inputs, with a focus on evaluation quality and bias awareness.",
+      "A completed INST664 study asking whether consumer sentiment changes which kinds of movies succeed. I compared six ways of representing film plot summaries (genre labels, LDA topics, SBERT embeddings with PCA and K-means, lexicon affect, and theory-driven semantic axes) and modeled within-year box-office percentile against content-by-sentiment interactions on 5,388 films (1978–2012), with Benjamini-Hochberg FDR correction within each method. There was no aggregate sentiment effect, but there were real content-conditional shifts, written up as a full paper.",
     section: "work",
     visibility: "public",
     entryType: "research",
-    role: "Builder / Researcher",
-    contributionTag: "In Progress",
+    role: "Researcher",
+    contributionTag: "Quantitative Research",
     meta: {
-      org: "Personal / Academic",
+      org: "University of Maryland · INST664",
       teamType: "solo",
       year: "2026",
-      sortDate: "2026-03-01",
-      dateRange: "Mar 2026 – Present"
+      sortDate: "2026-01-01",
+      dateRange: "Jan – May 2026"
     },
     metaStrip: {
-      roleValue: "Builder / Researcher",
-      timelineValue: "Mar 2026 – Present",
-      teamValue: "Solo project",
-      focusValue: ["NLP pipelines", "LLM evaluation", "Bias analysis", "Structured outputs"]
+      roleValue: "Researcher",
+      timelineValue: "Jan – May 2026",
+      teamValue: "Course study (INST664)",
+      focusValue: ["Text representation", "Interaction modeling", "FDR correction", "Box-office analysis"]
     },
-    categories: ["AI Systems", "Research", "NLP"],
-    tech: ["Python", "NLP", "LLMs", "Evaluation"],
-    tags: ["LLM Evaluation", "Bias", "Robustness"],
+    categories: ["Research", "Data", "NLP"],
+    tech: ["Python", "scikit-learn", "SBERT", "LDA", "Statistics"],
+    tags: ["NLP", "Statistics", "FDR correction"],
     featured: false,
     priority: 14,
     cardSize: "md",
-    status: "In Progress",
+    status: "Completed",
     caseStudyDepth: "light",
     visible: true,
     themeKey: "AI",
     thumbnail: "/images/projects/media-framing-sentiment-pipeline/thumbnail.jpg",
     coverImage: "/images/projects/media-framing-sentiment-pipeline/cover.jpg",
     highlights: [
-      "Building a pipeline that transforms unstructured media into structured representations.",
-      "Comparing classical NLP and LLM-based approaches.",
-      "Evaluating outputs for robustness, bias, and significance."
+      "Compared six plot representations: genre labels, LDA topics, SBERT embeddings with PCA and K-means, lexicon affect, and theory-driven semantic axes.",
+      "Modeled box-office percentile against content-by-sentiment interactions on 5,388 films (1978–2012), with a TMDb-augmented 6,961-film sensitivity check.",
+      "No aggregate sentiment effect, but real content-conditional shifts: teen-setting stories gained relative advantage in higher-sentiment periods (q = 0.02)."
     ],
     detailPage: {
       showHeroImage: true,
@@ -1076,7 +1076,7 @@ export const projects: Project[] = [
         type: "text",
         body: [
           "SnaPT is a project born out of personal frustration. The longer I used ChatGPT for real work, the more obvious a specific issue became: the interface got slow and laggy right as the conversation became richer in context and history.",
-          "While fresh chats felt snappy, long working threads with multiple exchanges lagged and chugged along in a way that was not becoming of a $852 billion valuation firm.",
+          "While fresh chats felt snappy, long working threads with multiple exchanges lagged and chugged along in a way that didn't fit a product used at ChatGPT's scale.",
           "This issue annoyed me enough that, over a weekend in April, I decided to solve it myself.",
           "What started as a performance fix quickly turned into a broader systems and product problem involving systems design, performance optimization, interaction design, prototyping, privacy constraints, and the quagmire of getting something onto the Chrome Web Store."
         ]
@@ -1160,7 +1160,7 @@ export const projects: Project[] = [
           "**Phase 4: Make recovery and recent context usable**",
           "Older turns needed to come back as readable conversation, not as a dump of fragments. Early cached-history versions failed exactly that test. At the same time, aggressive trimming made the live thread feel too compressed. This phase was about making cached retrieval coherent and figuring out how much recent assistant activity to preserve in the live view without reintroducing lag. Getting thinking blocks right was the hardest part of this phase. Some versions dropped them entirely. Some surfaced only timer stubs like 'Thought for 1m 23s' because the cleanup logic caught simple duration formats but missed longer ones. The fix was treating thinking as structured assistant-side content inside a turn rather than whatever matched a text pattern.",
           "**Phase 5: Turn it into a product**",
-          "DThe later iterations focused on fit and finish. The popup moved away from a dev-utility aesthetic toward a calmer, cleaner surface with advanced options tucked behind a disclosure. Several technically valid but experientially wrong ideas got cut. The clearest example was a version that fixed a cached panel layout issue by turning it into a bounded internal scroll widget with its own nested control bar. It solved the local problem and made the extension feel like a mini-app bolted inside ChatGPT. It got pulled immediately. By the end of this phase, the extension had finally started feeling like a shippable product."
+          "The later iterations focused on fit and finish. The popup moved away from a dev-utility aesthetic toward a calmer, cleaner surface with advanced options tucked behind a disclosure. Several technically valid but experientially wrong ideas got cut. The clearest example was a version that fixed a cached panel layout issue by turning it into a bounded internal scroll widget with its own nested control bar. It solved the local problem and made the extension feel like a mini-app bolted inside ChatGPT. It got pulled immediately. By the end of this phase, the extension had finally started feeling like a shippable product."
         ],
         inlineMedia: [
           {

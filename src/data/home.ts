@@ -4,9 +4,9 @@ export const homeHeader = {
 
 export const heroContent = {
   supporting:
-    "I work across AI systems, interaction design, and spatial computing — building tools and experiences that stay clear under complexity and keep human judgment in the loop.",
+    "I'm a creative technologist working in XR and spatial computing — building on real, sometimes unreleased hardware, and using HCI research to test what actually works for people.",
   primaryCta: "Start a conversation",
-  signal: "MS HCI at the University of Maryland · previously L'Oréal Singapore & SP Digital"
+  signal: "MS HCI at the University of Maryland · previously LIGHT Helmets, L'Oréal Singapore & SP Digital"
 };
 
 export type HeroTrailFragment =
