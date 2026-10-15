@@ -47,7 +47,7 @@ export function ChatLauncher({ variant }: ChatLauncherProps) {
       title="Chat with an AI version of Ari (press /)"
       onClick={() => setOpen(!open)}
       className={cn(
-        "group relative inline-flex items-center gap-1.5 whitespace-nowrap pb-1 font-body text-base text-foreground/80 hover:text-foreground",
+        "group relative inline-flex items-center gap-1.5 whitespace-nowrap pb-1 font-body text-[0.9375rem] text-foreground/80 lg:text-base hover:text-foreground",
         // On desktop the open drawer's own "Ask Ari" header sits right beside this, so step aside.
         open && "text-foreground lg:hidden"
       )}

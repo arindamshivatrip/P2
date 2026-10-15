@@ -28,10 +28,10 @@ export const neueRegrade = localFont({
   ]
 });
 
-// Epoch has exactly one cut (400). Never pair it with font-medium/semibold —
-// browsers synthesize fake weights and body copy turns muddy.
-export const epoch = localFont({
+// Excon (Fontshare, variable 100–900). Body copy sits at 350 so it reads lighter
+// than the old single-cut Epoch; small labels step up to 400 (see tailwind fontSize).
+export const excon = localFont({
   variable: "--font-body",
   display: "swap",
-  src: [{ path: "./fonts/epoch/Epoch.otf", weight: "400", style: "normal" }]
+  src: [{ path: "./fonts/excon/Excon-Variable.woff2", weight: "100 900", style: "normal" }]
 });

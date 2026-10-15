@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { epoch, instrumentSerif, neueRegrade } from "@/app/fonts";
+import { excon, instrumentSerif, neueRegrade } from "@/app/fonts";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { siteMeta } from "@/data/site";
 import "./globals.css";
@@ -47,7 +47,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${neueRegrade.variable} ${instrumentSerif.variable} ${epoch.variable}`}
+      className={`${neueRegrade.variable} ${instrumentSerif.variable} ${excon.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground">
         <SiteChrome>{children}</SiteChrome>

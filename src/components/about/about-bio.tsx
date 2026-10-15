@@ -270,7 +270,7 @@ function Redaction({ reduced }: { reduced: boolean }) {
       <span className="sr-only">private for now</span>
       <span
         aria-hidden="true"
-        className="mx-[0.1em] inline-block min-w-[5.2em] rounded-[2px] bg-foreground px-[0.4em] text-center font-mono text-[0.78em] leading-snug text-background"
+        className="mx-[0.1em] inline-block min-w-[5.2em] rounded-[2px] bg-foreground px-[0.4em] text-center font-mono text-[max(11px,0.78em)] leading-snug text-background"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
@@ -323,7 +323,7 @@ function BehaviorBoard({ reduced }: { reduced: boolean }) {
         aria-expanded={open}
         aria-controls="bio-board-detail"
         onClick={handleClick}
-        className="mx-[0.1em] inline-flex min-w-[12.5em] items-center justify-center rounded-[0.28rem] bg-foreground px-[0.55em] py-[0.14em] align-[0.08em] font-body text-[0.62em] uppercase tracking-[0.1em] text-background transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="mx-[0.1em] inline-flex min-w-[12.5em] items-center justify-center rounded-[0.28rem] bg-foreground px-[0.55em] py-[0.14em] align-[0.08em] font-body text-[max(11px,0.62em)] uppercase tracking-[0.1em] text-background transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <span className="sr-only">{state.phrase}</span>
         <span aria-hidden="true" className="overflow-hidden [perspective:400px]">
@@ -396,7 +396,7 @@ function TerminalObject({ reduced }: { reduced: boolean }) {
       type="button"
       aria-label="build command"
       onClick={run}
-      className="mx-[0.12em] inline-block rounded-[0.25rem] bg-foreground px-[0.5em] py-[0.05em] align-[0.06em] font-mono text-[0.6em] leading-snug text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className="mx-[0.12em] inline-block rounded-[0.25rem] bg-foreground px-[0.5em] py-[0.05em] align-[0.06em] font-mono text-[max(11px,0.6em)] leading-snug text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <span aria-hidden="true" className="text-accent">
         ${" "}

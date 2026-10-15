@@ -523,7 +523,7 @@
 
 /* ---------- shared bits for the illustrated scenes ---------- */
 
-/* Epoch has no "·" or "×": labels use "/" and "x". */
+/* Labels use "/" and "x" rather than "·" and "×" (a holdover from the old body face). */
 .sceneLabel {
   font-family: var(--font-body);
   font-size: clamp(8.5px, 1.9cqw, 13px);

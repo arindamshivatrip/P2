@@ -25,7 +25,7 @@ function HeaderNavLink({ href, label, isActive, className }: HeaderNavLinkProps)
       href={href}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "relative whitespace-nowrap pb-1 font-body text-base text-foreground/80 hover:text-foreground",
+        "relative whitespace-nowrap pb-1 font-body text-[0.9375rem] text-foreground/80 lg:text-base hover:text-foreground",
         isActive && "text-foreground",
         className
       )}
@@ -72,7 +72,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/80 backdrop-blur">
       {/* The open chat drawer takes 380px from the page column on desktop, so below xl
           the header tightens: smaller wordmark, closer nav, and no Home (the wordmark links there). */}
-      <Container className="flex h-[4.4rem] items-center justify-between gap-6 md:h-[4.8rem]">
+      <Container className="flex h-[4.4rem] items-center justify-between gap-6 md:h-[4.8rem] md:gap-4">
         <Link
           href="/"
           className={cn(
@@ -84,7 +84,7 @@ export function SiteHeader() {
         </Link>
         <nav
           aria-label="Primary"
-          className={cn("hidden shrink-0 gap-4 md:flex lg:gap-8", chatOpen && "lg:gap-4 xl:gap-8")}
+          className={cn("hidden shrink-0 gap-3.5 md:flex lg:gap-8", chatOpen && "lg:gap-3.5 xl:gap-8")}
         >
           {navItems.map((item) => {
             const isHome = item.href === "/";

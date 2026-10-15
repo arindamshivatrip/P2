@@ -22,13 +22,13 @@ const config: Config = {
         body: ["var(--font-body)", "sans-serif"]
       },
       fontSize: {
-        // one voice for uppercase metadata/labels. Epoch is a single, fairly heavy
-        // cut, so nothing goes below 11px: smaller and the counters fill in.
-        "label-xs": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.12em" }],
-        label: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.12em" }],
-        "label-lg": ["0.8125rem", { lineHeight: "1.4", letterSpacing: "0.11em" }],
+        // one voice for uppercase metadata/labels. Nothing goes below 11px, and the
+        // small sizes sit at 400 so they don't go spindly next to 350 body copy.
+        "label-xs": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.12em", fontWeight: "400" }],
+        label: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.12em", fontWeight: "400" }],
+        "label-lg": ["0.8125rem", { lineHeight: "1.4", letterSpacing: "0.11em", fontWeight: "400" }],
         // body ladder; a hair of tracking keeps the small sizes from looking dense
-        caption: ["0.875rem", { lineHeight: "1.55", letterSpacing: "0.01em" }],
+        caption: ["0.875rem", { lineHeight: "1.55", letterSpacing: "0.01em", fontWeight: "400" }],
         "body-sm": ["0.9375rem", { lineHeight: "1.6", letterSpacing: "0.005em" }],
         body: ["1rem", { lineHeight: "1.65" }],
         "body-lg": ["1.08rem", { lineHeight: "1.6" }],

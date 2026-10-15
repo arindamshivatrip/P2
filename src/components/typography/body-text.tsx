@@ -16,8 +16,8 @@ export function BodyText<T extends ElementType = "p">({
 
   return createElement(Component, {
     className: cn(
-        // true 400 only — Epoch has no lighter/heavier cuts to fake
-        "font-body font-normal text-body [&_b]:text-foreground [&_strong]:text-foreground",
+        // inherits the 350 body weight from <body>
+        "font-body text-body [&_b]:text-foreground [&_strong]:text-foreground",
         tone === "default" && "text-foreground",
         tone === "secondary" && "text-text-secondary",
         tone === "muted" && "text-text-muted",

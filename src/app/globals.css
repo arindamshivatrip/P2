@@ -51,14 +51,14 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    font-weight: 400;
+    font-weight: 350;
   }
 
-  /* Epoch has a single 400 cut — emphasis is color, never synthesized bold */
+  /* Emphasis is mostly color; the variable body face adds just a touch of weight. */
   .font-body strong,
   .font-body b {
     color: rgb(var(--color-foreground));
-    font-weight: 400;
+    font-weight: 450;
   }
 
   a {
