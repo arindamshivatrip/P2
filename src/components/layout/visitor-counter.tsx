@@ -134,7 +134,7 @@ export function VisitorCounter() {
 
   return (
     <p
-      className="flex flex-wrap items-center gap-x-4 gap-y-2 font-body text-xs text-text-muted"
+      className="flex flex-wrap items-center gap-x-4 gap-y-2 font-body text-caption text-text-muted"
       aria-label={`${counts.total} visitors so far, ${counts.online} here now`}
     >
       <span className="inline-flex items-center gap-2">

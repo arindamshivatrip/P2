@@ -43,7 +43,7 @@ export function ExperimentCard({
         <p className="font-body text-label-xs uppercase text-text-muted">
           {item.metaLine}
         </p>
-        <ExperimentStamp label={item.stamp} className="text-[0.55rem]" />
+        <ExperimentStamp label={item.stamp} />
       </div>
 
       {featured && item.cover ? (

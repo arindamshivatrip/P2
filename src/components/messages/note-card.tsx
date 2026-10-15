@@ -30,7 +30,7 @@ function NameTag({ name, pinned, seed }: { name: string; pinned?: boolean; seed:
         <path d="M1 1l11 6.2-5 1.3-2.6 4.6L1 1z" fill={color.bg} stroke="#ffffff" strokeWidth="1.2" strokeLinejoin="round" />
       </svg>
       <span
-        className="mt-1 max-w-[9rem] truncate rounded-[5px] px-1.5 py-[3px] font-body text-[0.68rem] leading-none"
+        className="mt-1 max-w-[9rem] truncate rounded-[5px] px-1.5 py-[3px] font-body text-[0.75rem] leading-none"
         style={{ background: color.bg, color: color.fg }}
       >
         {name}
@@ -78,7 +78,7 @@ export function NoteCard({ note }: { note: MessageNote }) {
       )}
       style={style}
     >
-      <p className="whitespace-pre-line break-words font-body text-[0.8rem] leading-snug sm:text-body-sm">
+      <p className="whitespace-pre-line break-words font-body text-caption leading-snug sm:text-body-sm">
         {note.text}
       </p>
       <NameTag name={note.name} pinned={note.pinned} seed={seed} />

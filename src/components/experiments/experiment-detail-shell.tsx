@@ -93,7 +93,7 @@ function renderInlineMediaBlock(block: ProjectDetailSectionInlineMedia, key: str
   const mediaTopSpacing = block.spacing === "tight" ? "mt-3" : "mt-5";
   const captionTopSpacing = block.spacing === "tight" ? "mt-1" : "mt-2";
   const caption = block.caption ? (
-    <p className={`${captionTopSpacing} font-body text-xs tracking-[0.01em] text-text-secondary`}>{block.caption}</p>
+    <p className={`${captionTopSpacing} font-body text-caption text-text-secondary`}>{block.caption}</p>
   ) : null;
 
   if (block.secondaryMedia) {
@@ -283,7 +283,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
           {mediaFirst ? <div className="max-w-3xl">{renderSectionBody(section.body, section.inlineMedia)}</div> : renderMediaBlock(section)}
         </div>
         {section.caption ? (
-          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-secondary">{section.caption}</p>
+          <p className="mt-2 font-body text-label uppercase text-text-secondary">{section.caption}</p>
         ) : null}
       </section>
     );
@@ -297,7 +297,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
         </h2>
         <div className="mt-5">{renderMediaBlock(section)}</div>
         {section.caption ? (
-          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-secondary">{section.caption}</p>
+          <p className="mt-2 font-body text-label uppercase text-text-secondary">{section.caption}</p>
         ) : null}
       </section>
     );
@@ -320,7 +320,7 @@ function ExperimentDetailSectionBlock({ section }: { section: ProjectDetailSecti
           ))}
         </blockquote>
         {section.caption ? (
-          <p className="mt-2 font-body text-xs uppercase tracking-[0.11em] text-text-secondary">{section.caption}</p>
+          <p className="mt-2 font-body text-label uppercase text-text-secondary">{section.caption}</p>
         ) : null}
       </section>
     );
@@ -375,7 +375,7 @@ export function ExperimentDetailShell({
                         <li key={section.id}>
                           <a
                             href={`#${section.id}`}
-                            className="font-body text-xs leading-snug tracking-[0.01em] text-text-muted transition-colors hover:text-foreground"
+                            className="font-body text-caption leading-snug text-text-muted transition-colors hover:text-foreground"
                           >
                             {section.title}
                           </a>
@@ -476,7 +476,7 @@ export function ExperimentDetailShell({
                         <li key={section.id}>
                           <a
                             href={`#${section.id}`}
-                            className="font-body text-xs leading-snug tracking-[0.01em] text-text-muted transition-colors hover:text-foreground"
+                            className="font-body text-caption leading-snug text-text-muted transition-colors hover:text-foreground"
                           >
                             {section.title}
                           </a>

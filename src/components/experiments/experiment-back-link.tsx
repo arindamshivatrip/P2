@@ -30,7 +30,7 @@ export function ExperimentBackLink() {
     <button
       type="button"
       onClick={handleBack}
-      className="font-body text-xs leading-none tracking-[0.01em] text-text-muted transition-colors hover:text-foreground"
+      className="font-body text-caption leading-none text-text-muted transition-colors hover:text-foreground"
     >
       ← Back
     </button>

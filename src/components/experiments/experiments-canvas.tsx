@@ -372,7 +372,7 @@ function LabCanvas({ items }: { items: LabItem[] }) {
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <Eyebrow>The bench</Eyebrow>
-        <p className="font-body text-xs text-text-muted">
+        <p className="font-body text-caption text-text-muted">
           drag to look around · cards move · arrow keys pan
         </p>
       </div>

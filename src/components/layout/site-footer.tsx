@@ -8,12 +8,7 @@ export function SiteFooter() {
     <footer className="border-t border-border/70 py-12">
       <Container>
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <div className="flex flex-col gap-4">
-            <p className="font-body text-label-lg uppercase text-foreground">
-              Designed and coded with ♡ by Arindam
-            </p>
-            <VisitorCounter />
-          </div>
+          <VisitorCounter />
 
           <div className="md:text-right">
             <nav
@@ -46,7 +41,7 @@ export function SiteFooter() {
                 CV
               </Link>
             </nav>
-            <p className="mt-2 font-body text-xs text-text-muted">{footerContent.availability}</p>
+            <p className="mt-2 font-body text-caption text-text-muted">{footerContent.availability}</p>
           </div>
         </div>
       </Container>

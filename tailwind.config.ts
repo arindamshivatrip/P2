@@ -20,13 +20,14 @@ const config: Config = {
         body: ["var(--font-body)", "sans-serif"]
       },
       fontSize: {
-        // one voice for uppercase metadata/labels
-        "label-xs": ["0.6rem", { lineHeight: "1.4", letterSpacing: "0.13em" }],
-        label: ["0.68rem", { lineHeight: "1.4", letterSpacing: "0.13em" }],
-        "label-lg": ["0.78rem", { lineHeight: "1.4", letterSpacing: "0.12em" }],
-        // body ladder
-        caption: ["0.82rem", { lineHeight: "1.55" }],
-        "body-sm": ["0.9rem", { lineHeight: "1.6" }],
+        // one voice for uppercase metadata/labels. Epoch is a single, fairly heavy
+        // cut, so nothing goes below 11px: smaller and the counters fill in.
+        "label-xs": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.12em" }],
+        label: ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.12em" }],
+        "label-lg": ["0.8125rem", { lineHeight: "1.4", letterSpacing: "0.11em" }],
+        // body ladder; a hair of tracking keeps the small sizes from looking dense
+        caption: ["0.875rem", { lineHeight: "1.55", letterSpacing: "0.01em" }],
+        "body-sm": ["0.9375rem", { lineHeight: "1.6", letterSpacing: "0.005em" }],
         body: ["1rem", { lineHeight: "1.65" }],
         "body-lg": ["1.08rem", { lineHeight: "1.6" }],
         // display ladder — clamp replaces per-page vw/breakpoint stacks

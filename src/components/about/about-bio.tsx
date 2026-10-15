@@ -667,7 +667,7 @@ function SidePolaroid({
               className="object-cover object-center"
             />
           </span>
-          <figcaption className="px-1 pb-2.5 pt-2 text-center font-body text-[0.72rem] leading-snug text-text-secondary">
+          <figcaption className="px-1 pb-2.5 pt-2 text-center font-body text-caption leading-snug text-text-secondary">
             {reveal?.note}
           </figcaption>
         </>

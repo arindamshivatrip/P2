@@ -19,7 +19,7 @@ export function ExperimentsHeader() {
                 Experiments
                 <ExperimentStamp
                   label="ongoing"
-                  className="ml-4 hidden -translate-y-[0.8em] -rotate-3 align-baseline text-[0.6rem] md:inline-block"
+                  className="ml-4 hidden -translate-y-[0.8em] -rotate-3 align-baseline text-label-xs md:inline-block"
                 />
               </span>
             ]}
