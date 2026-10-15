@@ -10,10 +10,12 @@
   /* 4.8:1 on the cream background (WCAG AA for small text). */
   --color-text-muted: 107 107 107;
   --color-accent: 255 153 50;
-  /* The bright accent is ~1.9:1 on cream: fine for fills, borders and icons, not text.
-     strong = 3:1+ for display text (24px and up), ink = 4.5:1+ for small text, tinted cards included. */
+  /* One orange, two jobs. accent is the brand: fills, borders, rules, icons,
+     underlines, gradients. It's ~1.9:1 on cream, so it never carries text.
+     accent-strong is the same hue, deeper (3.7:1): the only orange text, kept to
+     display sizes (24px+) and arrows. Small text is never orange. If accent
+     changes, update ACCENT_HEX in src/lib/brand.ts too. */
   --color-accent-strong: 200 95 0;
-  --color-accent-ink: 160 76 0;
   --color-border: 212 212 200;
 
   --space-container: clamp(1rem, 4vw, 2rem);
@@ -33,7 +35,6 @@
   --color-text-muted: 156 163 175;
   --color-accent: 255 153 50;
   --color-accent-strong: 255 153 50;
-  --color-accent-ink: 255 153 50;
   --color-border: 42 63 75;
   --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.28);
   --shadow-card-hover: 0 18px 40px rgba(0, 0, 0, 0.42), 0 4px 12px rgba(0, 0, 0, 0.32);

@@ -17,11 +17,11 @@ export type HeroTrailFragment =
 // identity, varied so adjacent projects never share a wash. Full literal class
 // strings so Tailwind's content scan picks up the arbitrary values.
 const trailGradients = {
-  navyOrange: "bg-gradient-to-br from-[#0f1e47] via-[#2a2550] to-[#ff8a4c]",
-  ember: "bg-gradient-to-br from-[#ff8a4c] via-[#b1472a] to-[#3a1b16]",
-  plum: "bg-gradient-to-br from-[#4a2540] via-[#6b2f45] to-[#ff8a4c]",
+  navyOrange: "bg-gradient-to-br from-[#0f1e47] via-[#2a2550] to-accent",
+  ember: "bg-gradient-to-br from-accent via-[#b1472a] to-[#3a1b16]",
+  plum: "bg-gradient-to-br from-[#4a2540] via-[#6b2f45] to-accent",
   night: "bg-gradient-to-br from-[#0b1533] via-[#241a4a] to-[#4a2a6a]",
-  dusk: "bg-gradient-to-tr from-[#12203f] via-[#5a3a5c] to-[#ff9d5c]"
+  dusk: "bg-gradient-to-tr from-[#12203f] via-[#5a3a5c] to-accent"
 } as const;
 
 // Flow-follow trail deck: minimal project tiles (short company/category labels)

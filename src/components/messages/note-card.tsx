@@ -20,7 +20,7 @@ const cursorColors = [
   { bg: "#7a5af8", fg: "#ffffff" },
   { bg: "#1f1f1f", fg: "#f5f4ed" }
 ];
-const ariCursor = { bg: "#ff9932", fg: "#1f1f1f" };
+const ariCursor = { bg: "rgb(var(--color-accent))", fg: "#1f1f1f" };
 
 function NameTag({ name, pinned, seed }: { name: string; pinned?: boolean; seed: number }) {
   const color = pinned ? ariCursor : cursorColors[seed % cursorColors.length];

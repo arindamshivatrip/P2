@@ -44,7 +44,7 @@ export const cardFeatures: CardFeature[] = [
     kicker: "Android XR glasses · 2026",
     mark: "Android XR",
     blurb: "Turns a desk into an ambient surface: glanceable widgets plus hands-free, on-device AI.",
-    gradient: "linear-gradient(135deg, #0b1533 0%, #241a4a 55%, #ff8a4c 120%)"
+    gradient: "linear-gradient(135deg, #0b1533 0%, #241a4a 55%, rgb(var(--color-accent)) 120%)"
   },
   {
     slug: "reframed-passthrough-ar",
@@ -54,7 +54,7 @@ export const cardFeatures: CardFeature[] = [
     blurb: "Printed paintings step off the wall into the room. On-device CV, shown at NextNOW Fest.",
     clip: "/images/card/reframed-loop.mp4",
     poster: "/images/card/reframed-poster.jpg",
-    gradient: "linear-gradient(135deg, #12203f 0%, #5a3a5c 60%, #ff9d5c 120%)"
+    gradient: "linear-gradient(135deg, #12203f 0%, #5a3a5c 60%, rgb(var(--color-accent)) 120%)"
   },
   {
     slug: "loreal-ml-planning-suite",
@@ -62,6 +62,6 @@ export const cardFeatures: CardFeature[] = [
     kicker: "AI decision support · 2023–25",
     mark: "200+ users · 10+ markets",
     blurb: "ML-backed promotion planning used by 200+ people across 10+ APAC markets.",
-    gradient: "linear-gradient(135deg, #0f1e47 0%, #2a2550 55%, #ff8a4c 120%)"
+    gradient: "linear-gradient(135deg, #0f1e47 0%, #2a2550 55%, rgb(var(--color-accent)) 120%)"
   }
 ];

@@ -35,7 +35,7 @@ export function Button({ className, variant = "primary", asChild = false, ...pro
           className: cn(
             buttonClasses,
             variant === "primary" &&
-              "border-accent bg-accent text-foreground hover:bg-accent/90 hover:shadow-[0_10px_20px_rgba(255,153,50,0.2)]",
+              "border-accent bg-accent text-foreground hover:bg-accent/90 hover:shadow-[0_10px_20px_rgb(var(--color-accent)/0.2)]",
             variant === "ghost" &&
               "border-border bg-transparent text-foreground hover:border-accent/40 hover:bg-surface",
             child.props.className,
@@ -53,7 +53,7 @@ export function Button({ className, variant = "primary", asChild = false, ...pro
       className={cn(
         buttonClasses,
         variant === "primary" &&
-          "border-accent bg-accent text-foreground hover:bg-accent/90 hover:shadow-[0_10px_20px_rgba(255,153,50,0.2)]",
+          "border-accent bg-accent text-foreground hover:bg-accent/90 hover:shadow-[0_10px_20px_rgb(var(--color-accent)/0.2)]",
         variant === "ghost" &&
           "border-border bg-transparent text-foreground hover:border-accent/40 hover:bg-surface",
         className

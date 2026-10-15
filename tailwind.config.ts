@@ -13,7 +13,6 @@ const config: Config = {
         "text-muted": "rgb(var(--color-text-muted) / <alpha-value>)",
         accent: "rgb(var(--color-accent) / <alpha-value>)",
         "accent-strong": "rgb(var(--color-accent-strong) / <alpha-value>)",
-        "accent-ink": "rgb(var(--color-accent-ink) / <alpha-value>)",
         border: "rgb(var(--color-border) / <alpha-value>)"
       },
       fontFamily: {

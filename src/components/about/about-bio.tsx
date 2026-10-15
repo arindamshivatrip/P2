@@ -156,7 +156,7 @@ function JourneyReveal({
                   transition: { delay: reduced ? 0 : 0.08 + index * 0.14, duration: 0.22 }
                 }}
               >
-                {index > 0 ? <span className="mx-1 text-accent-ink">→</span> : null}
+                {index > 0 ? <span className="mx-1 text-accent-strong">→</span> : null}
                 {stop}
               </motion.span>
             ))}

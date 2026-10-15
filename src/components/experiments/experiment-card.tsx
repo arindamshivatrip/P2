@@ -76,9 +76,9 @@ export function ExperimentCard({
           draggable={false}
           tabIndex={-1}
           aria-hidden="true"
-          className="font-body text-label-lg uppercase text-accent-ink transition-colors hover:text-foreground"
+          className="font-body text-label-lg uppercase text-foreground"
         >
-          Open →
+          Open <span className="text-accent-strong">→</span>
         </Link>
       </div>
     </article>

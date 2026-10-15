@@ -10,7 +10,7 @@ export function ExperimentStamp({ label, className }: ExperimentStampProps) {
   return (
     <span
       className={cn(
-        "inline-block -rotate-2 rounded-[0.3rem] border border-accent/65 px-2 py-0.5 font-body text-label-xs uppercase text-accent-ink",
+        "inline-block -rotate-2 rounded-[0.3rem] border border-accent bg-accent/10 px-2 py-0.5 font-body text-label-xs uppercase text-foreground",
         className
       )}
     >

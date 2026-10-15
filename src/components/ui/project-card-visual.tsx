@@ -70,7 +70,7 @@ export function ProjectCardVisual({ className, videoSrc, videoTitle }: ProjectCa
               title={videoTitle}
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0f1e47]/50 via-transparent to-[#ff8a4c]/35" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0f1e47]/50 via-transparent to-accent/35" />
         </>
       ) : null}
     </div>

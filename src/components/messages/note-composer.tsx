@@ -12,13 +12,14 @@ import {
 import { lockBodyScroll } from "@/lib/scroll-lock";
 import { cn } from "@/lib/utils";
 import { DrawingPad, type DrawingPadHandle } from "./drawing-pad";
+import { ACCENT_HEX } from "@/lib/brand";
 import styles from "./messages.module.css";
 
 export type ComposerKind = MessageNote["kind"];
 
 const inks = [
   { value: "#1f1f1f", label: "Ink" },
-  { value: "#ff9932", label: "Orange" },
+  { value: ACCENT_HEX, label: "Orange" },
   { value: "#3d6fd8", label: "Blue" }
 ];
 const brushes = [

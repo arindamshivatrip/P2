@@ -279,14 +279,14 @@ export function WorkDetailShell({
                 href="/contact"
                 className="font-body text-sm text-text-secondary transition-colors hover:text-foreground"
               >
-                Questions about this project? <span className="text-accent-ink">Get in touch</span>
+                Questions about this project? <span className="text-foreground underline decoration-accent underline-offset-[3px]">Get in touch</span>
               </Link>
               {nextProject ? (
                 <Link href={nextProject.href} className="group text-right">
                   <span className="block font-body text-label uppercase text-text-muted">
                     Next project
                   </span>
-                  <span className="mt-1 block font-display text-xl tracking-tight text-foreground transition-colors group-hover:text-accent-ink md:text-2xl">
+                  <span className="mt-1 block font-display text-xl tracking-tight text-foreground transition-colors group-hover:text-accent-strong md:text-2xl">
                     {nextProject.title} →
                   </span>
                 </Link>
