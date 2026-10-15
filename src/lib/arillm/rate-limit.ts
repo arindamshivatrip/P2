@@ -48,14 +48,23 @@ export function getClientIp(req: Request): string {
 }
 
 /**
- * Checks the per-IP and global limits. Skipped when Upstash isn't configured.
+ * Checks the per-IP and global limits. Skipped when Upstash isn't configured
+ * in local dev; in production (including Vercel previews) missing keys block
+ * the chat instead, so a forgotten env var can't mean unlimited spend.
  * Fails closed if Redis errors (outage, or the monthly command quota running
  * out): without these limits there is no cap on model spend, so the chat
  * pauses rather than running unmetered.
  */
 export async function checkRateLimit(ip: string): Promise<RateLimitResult> {
   const active = getLimiters();
-  if (!active) return { ok: true };
+  if (!active) {
+    if (process.env.NODE_ENV !== "production") return { ok: true };
+    console.error("[arillm] UPSTASH_REDIS_REST_URL/TOKEN missing; chat blocked");
+    return {
+      ok: false,
+      message: `I'm taking a short break. Email me at ${CONTACT_EMAIL} and the real me will get back to you.`
+    };
+  }
 
   try {
     // Per-IP first, so one noisy visitor can't burn through the global budget.
