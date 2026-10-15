@@ -43,19 +43,34 @@ function hasPhoneNumber(text: string): boolean {
   return (text.match(PHONE_LIKE) ?? []).some((match) => match.replace(/\D/g, "").length >= 10);
 }
 
+// Hate symbols typed as characters (swastikas, SS-rune lookalikes) and common
+// extremist codes, which the word filter can't see.
+const HATE_SYMBOLS = /[卐卍ϟᛋᛊ࿕-࿘\u{1f5f2}]|\b14\s*\/?\s*88\b|\bsieg\s*heil\b|\bheil\s+hitler\b/iu;
+
 export function quickCheck(fields: string[]): ModerationResult {
   const all = fields.join(" \n ");
-  if (hasBlockedWord(all)) return { ok: false, reason: REJECTED };
+  if (hasBlockedWord(all) || HATE_SYMBOLS.test(all)) return { ok: false, reason: REJECTED };
   if (LINK.test(all)) return { ok: false, reason: "Links can't go on the wall, sorry." };
   if (hasPhoneNumber(all)) return { ok: false, reason: "Leave phone numbers off the wall, please." };
   return { ok: true };
 }
 
+// Hate symbols are named outright: a vaguer "hate" rule let a crude SS-runes
+// doodle through. Describing the drawing first makes the model actually look.
 const INSTRUCTIONS = `You moderate a public guestbook wall on a student's personal portfolio site.
-Visitors post short notes, sometimes with a small hand-drawn doodle.
-Reply with exactly one word: ALLOW or BLOCK.
-BLOCK if the text or the drawing contains any of: sexual content, nudity or genitals (including crude drawings of them), slurs, hate or harassment aimed at anyone, threats or violence, encouragement of self-harm, drugs promotion, spam or advertising, or personal contact details.
-ALLOW everything else, including casual language, mild jokes, criticism of the work, emoji, and silly or messy drawings.`;
+Visitors post short notes, sometimes with a small hand-drawn doodle. Some people deliberately try to sneak offensive content past you as crude doodles, so look at drawings closely.
+
+BLOCK if the text or the drawing contains, or could reasonably be read as, any of:
+- Hate symbols: a swastika in any orientation or style; SS (sig) runes, meaning two jagged lightning-bolt or angular S shapes side by side; Nazi eagles, Totenkopf skulls, Wolfsangel, Celtic-cross white-power symbols, KKK hoods, "88", "14", "1488", or other extremist codes.
+- Sexual content, nudity or genitals, including crude drawings of them.
+- Slurs, hate or harassment aimed at anyone; threats or violence; encouragement of self-harm; drug promotion; spam or advertising; personal contact details.
+
+ALLOW everything else, including casual language, mild jokes, criticism of the work, emoji, and harmless doodles (faces, hearts, animals, scenery, a single lightning bolt, a storm cloud, letters or initials written in a normal rounded hand).
+
+If a drawing has no visible content, ignore it.
+Reply in exactly two lines:
+1. A few words describing what the drawing shows (or "no drawing").
+2. ALLOW or BLOCK.`;
 
 function dataUrlParts(dataUrl: string): { mediaType: string; base64: string } | null {
   const match = /^data:(image\/(?:png|webp|jpeg));base64,([A-Za-z0-9+/=]+)$/.exec(dataUrl);
@@ -81,8 +96,8 @@ export async function aiCheck(text: string, image?: string): Promise<ModerationR
     const result = await generateText({
       model: getModel(),
       system: INSTRUCTIONS,
-      // Room for Gemini's minimal thinking (it counts toward the cap) on the
-      // fallback; the answer itself is one word.
+      // Room for the one-line description, plus Gemini's minimal thinking
+      // (it counts toward the cap) on the fallback.
       maxOutputTokens: 256,
       providerOptions: { google: { thinkingConfig: { thinkingLevel: "minimal" } } },
       timeout: 10_000,
@@ -99,7 +114,10 @@ export async function aiCheck(text: string, image?: string): Promise<ModerationR
       ]
     });
 
-    return /^\s*ALLOW\b/i.test(result.text) ? { ok: true } : { ok: false, reason: REJECTED };
+    // The verdict is the last line; anything else (empty, cut off, both words) blocks.
+    const verdict = result.text.trim().split("\n").pop() ?? "";
+    const allowed = /\bALLOW\b/i.test(verdict) && !/\bBLOCK\b/i.test(verdict);
+    return allowed ? { ok: true } : { ok: false, reason: REJECTED };
   } catch (error) {
     console.error("[messages] moderation call failed", error);
     return { ok: false, reason: UNAVAILABLE };

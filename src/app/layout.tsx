@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { excon, instrumentSerif, neueRegrade } from "@/app/fonts";
@@ -51,6 +52,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground">
         <SiteChrome>{children}</SiteChrome>
+        <Analytics />
       </body>
     </html>
   );

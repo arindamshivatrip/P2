@@ -10,9 +10,9 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/messages"
 });
 
-// Rebuilt at most every 30s (and right after each new note), so a busy wall
-// costs one Redis read per half minute rather than one per visitor.
-export const revalidate = 30;
+// Rebuilt at most every 60s (and right after each new note), so a busy wall
+// costs one Redis read per minute rather than one per visitor.
+export const revalidate = 60;
 
 export default async function MessagesPage() {
   const notes = await listNotes();
