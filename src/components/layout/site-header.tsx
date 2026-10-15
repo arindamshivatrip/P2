@@ -8,6 +8,7 @@ import { ChatLauncher } from "@/components/arillm/chat-launcher";
 import { Container } from "@/components/layout/container";
 import { homeHeader } from "@/data/home";
 import { navItems } from "@/data/site";
+import { lockBodyScroll } from "@/lib/scroll-lock";
 import { cn } from "@/lib/utils";
 
 type HeaderNavLinkProps = {
@@ -46,6 +47,22 @@ export function SiteHeader() {
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
+
+  // The open menu sits over the page, so stop the page behind it scrolling.
+  // Widening past md hides the menu, so close it then too or the lock sticks.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const unlock = lockBodyScroll();
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const onChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false);
+    };
+    desktop.addEventListener("change", onChange);
+    return () => {
+      unlock();
+      desktop.removeEventListener("change", onChange);
+    };
+  }, [menuOpen]);
 
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/80 backdrop-blur">
@@ -117,7 +134,7 @@ export function SiteHeader() {
           {menuOpen ? (
             <motion.div
               key="mobile-menu"
-              className="relative z-30 overflow-hidden border-t border-border/60 bg-background/95 md:hidden"
+              className="relative z-30 overflow-hidden border-t border-border/60 bg-background md:hidden"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}

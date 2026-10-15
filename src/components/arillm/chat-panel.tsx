@@ -18,6 +18,7 @@ import ReactMarkdown, { type Components } from "react-markdown";
 import { useArillm } from "@/components/arillm/chat-provider";
 import { getFollowups } from "@/lib/arillm/followups";
 import { getStarters } from "@/lib/arillm/starters";
+import { lockBodyScroll } from "@/lib/scroll-lock";
 import { cn } from "@/lib/utils";
 
 export const PANEL_WIDTH_CLASS = "lg:w-[380px]";
@@ -160,11 +161,7 @@ export function ChatPanel() {
   // The mobile sheet covers the page, so stop the page behind it scrolling.
   useEffect(() => {
     if (!open || isDesktop) return;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
+    return lockBodyScroll();
   }, [open, isDesktop]);
 
   // Follow the stream unless the visitor has scrolled up to reread.
