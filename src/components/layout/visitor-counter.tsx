@@ -4,6 +4,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import styles from "./visitor-counter.module.css";
 
 const HEARTBEAT_MS = 30_000;
+const MIN_PING_GAP_MS = 10_000;
 const VISITOR_ID_KEY = "ari-visitor-id";
 // one flap = two halves; a digit steps through every number on its way, like a real board
 const FLAP_STEP_MS = 170;
@@ -89,9 +90,14 @@ export function VisitorCounter() {
     // The total is counted once per page load; later pings only keep this
     // visitor in "here now". Stays true until a ping actually returns a total.
     let needTotal = true;
+    let lastPing = 0;
 
     const ping = async () => {
       if (document.visibilityState !== "visible") return;
+      // Rapid tab switching fires visibilitychange in bursts; one ping per 10s is plenty.
+      const now = Date.now();
+      if (!needTotal && now - lastPing < MIN_PING_GAP_MS) return;
+      lastPing = now;
       try {
         const res = await fetch("/api/presence", {
           method: "POST",
