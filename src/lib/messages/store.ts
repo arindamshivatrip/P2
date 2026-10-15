@@ -17,7 +17,7 @@ export function getMessagesRedis(): Redis | null {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   // Upstash defaults every request to `cache: "no-store"`, which makes Next
-  // render /messages on every visit and ignore its 30s revalidate. "default"
+  // render /messages on every visit and ignore its revalidate. "default"
   // lets the page be cached; Upstash calls are POSTs, which Next never stores,
   // so writes and rate limits still always hit Redis.
   redis = url && token ? new Redis({ url, token, cache: "default" }) : null;
