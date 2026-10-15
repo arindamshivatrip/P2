@@ -94,7 +94,7 @@ export function ContactMethods() {
                         className={`-mt-px ml-0.5 inline-flex h-6 w-6 items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                           copied
                             ? "text-foreground/80"
-                            : "text-text-muted/80 hover:bg-surface hover:text-foreground/75"
+                            : "text-text-muted hover:bg-surface hover:text-foreground/75"
                         }`}
                       >
                         <CopyIcon />

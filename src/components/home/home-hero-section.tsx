@@ -21,8 +21,8 @@ export function HomeHeroSection() {
               lines={[
                 <span key="line-1">I&apos;m Arindam.</span>,
                 <span key="line-2">
-                  I <span className="font-serif italic text-accent">design</span> and{" "}
-                  <span className="font-serif italic text-accent">build</span>
+                  I <span className="font-serif italic text-accent-strong">design</span> and{" "}
+                  <span className="font-serif italic text-accent-strong">build</span>
                 </span>,
                 <span key="line-3">systems for people.</span>
               ]}

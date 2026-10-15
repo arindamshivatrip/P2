@@ -156,7 +156,7 @@ function JourneyReveal({
                   transition: { delay: reduced ? 0 : 0.08 + index * 0.14, duration: 0.22 }
                 }}
               >
-                {index > 0 ? <span className="mx-1 text-accent/70">→</span> : null}
+                {index > 0 ? <span className="mx-1 text-accent-ink">→</span> : null}
                 {stop}
               </motion.span>
             ))}
@@ -231,7 +231,7 @@ function ChapterBlank({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduced ? 0.12 : 0.28, ease: EASE }}
-            className="text-[0.9em] text-text-muted/85"
+            className="text-[0.9em] text-text-muted"
           >
             {" "}
             <span aria-hidden="true" className="text-accent/45">

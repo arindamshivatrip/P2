@@ -17,7 +17,7 @@ export function MessagesHero() {
           {after !== undefined ? (
             <>
               {before}
-              <span className="font-serif italic text-accent">{accentWord}</span>
+              <span className="font-serif italic text-accent-strong">{accentWord}</span>
               {after}
             </>
           ) : (

@@ -40,7 +40,7 @@ export function ExperimentCard({
       )}
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="font-body text-label-xs uppercase text-text-muted">
+        <p className="font-body text-label-xs uppercase text-text-secondary">
           {item.metaLine}
         </p>
         <ExperimentStamp label={item.stamp} />
@@ -58,7 +58,7 @@ export function ExperimentCard({
         <Link
           href={item.href}
           draggable={false}
-          className="transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+          className="transition-colors hover:text-accent-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           onFocus={onLinkFocus}
         >
           {item.title}
@@ -68,7 +68,7 @@ export function ExperimentCard({
       <p className="mt-2 font-body text-sm leading-relaxed text-text-secondary">{item.oneLiner}</p>
 
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-        <span className="font-body text-label-xs uppercase text-text-muted">
+        <span className="font-body text-label-xs uppercase text-text-secondary">
           {item.tech.join(" · ")}
         </span>
         <Link
@@ -76,7 +76,7 @@ export function ExperimentCard({
           draggable={false}
           tabIndex={-1}
           aria-hidden="true"
-          className="font-body text-label-lg uppercase text-accent transition-colors hover:text-foreground"
+          className="font-body text-label-lg uppercase text-accent-ink transition-colors hover:text-foreground"
         >
           Open →
         </Link>

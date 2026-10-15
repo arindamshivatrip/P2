@@ -18,7 +18,7 @@ export function ContactHero() {
           {afterThoughtful !== undefined ? (
             <>
               {beforeThoughtful}
-              <span className="font-serif italic text-accent">thoughtful</span>
+              <span className="font-serif italic text-accent-strong">thoughtful</span>
               {afterThoughtful}
             </>
           ) : (

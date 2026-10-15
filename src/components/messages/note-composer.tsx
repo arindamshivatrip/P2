@@ -179,7 +179,7 @@ export function NoteComposer({ kind, onClose, onPosted }: NoteComposerProps) {
               "New sticky"
             ) : (
               <>
-                New <span className="font-serif italic text-accent">polaroid</span>
+                New <span className="font-serif italic text-accent-strong">polaroid</span>
               </>
             )}
           </h2>

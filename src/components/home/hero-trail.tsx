@@ -65,7 +65,7 @@ function FragmentContent({ fragment }: { fragment: HeroTrailFragment }) {
   }
 
   return (
-    <span className="block whitespace-nowrap font-serif text-2xl italic text-accent drop-shadow-sm">
+    <span className="block whitespace-nowrap font-serif text-2xl italic text-accent-strong drop-shadow-sm">
       {fragment.text}
     </span>
   );

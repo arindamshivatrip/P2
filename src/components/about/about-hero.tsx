@@ -27,7 +27,7 @@ export function AboutHero() {
                 lines={[
                   <span key="work">Making it work is one thing.</span>,
                   <span key="matter">
-                    Making it <span className="font-serif italic text-accent">matter</span> is harder.
+                    Making it <span className="font-serif italic text-accent-strong">matter</span> is harder.
                   </span>
                 ]}
               />
