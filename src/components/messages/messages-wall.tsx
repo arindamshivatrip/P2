@@ -88,8 +88,10 @@ export function MessagesWall({ initialNotes }: { initialNotes: MessageNote[] }) 
             </li>
           </ul>
 
-          {/* Floating tool bar, FigJam style: sticks to the bottom of the view while the wall is on screen. */}
-          <div className="sticky bottom-5 z-10 flex justify-center pb-5 md:bottom-6 md:pb-8">
+          {/* Floating tool bar, FigJam style: sticks to the bottom of the view while the wall is on screen.
+              On short screens a card fills most of the view, so it would sit on top of one; there it
+              just rests under the wall instead. */}
+          <div className="sticky bottom-5 z-10 flex justify-center pb-5 md:bottom-6 md:pb-8 [@media(max-height:720px)]:static">
             <div
               role="toolbar"
               aria-label="Add to the wall"

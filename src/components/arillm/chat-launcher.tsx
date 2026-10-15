@@ -47,8 +47,9 @@ export function ChatLauncher({ variant }: ChatLauncherProps) {
       title="Chat with an AI version of Ari (press /)"
       onClick={() => setOpen(!open)}
       className={cn(
-        "group relative inline-flex items-center gap-1.5 pb-1 font-body text-base text-foreground/80 hover:text-foreground",
-        open && "text-foreground"
+        "group relative inline-flex items-center gap-1.5 whitespace-nowrap pb-1 font-body text-base text-foreground/80 hover:text-foreground",
+        // On desktop the open drawer's own "Ask Ari" header sits right beside this, so step aside.
+        open && "text-foreground lg:hidden"
       )}
     >
       <SparkIcon className="h-3.5 w-3.5 text-accent transition-transform duration-300 group-hover:rotate-45" />

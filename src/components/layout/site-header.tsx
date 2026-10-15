@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChatLauncher } from "@/components/arillm/chat-launcher";
+import { useArillm } from "@/components/arillm/chat-provider";
 import { Container } from "@/components/layout/container";
 import { homeHeader } from "@/data/home";
 import { navItems } from "@/data/site";
@@ -15,16 +16,18 @@ type HeaderNavLinkProps = {
   href: string;
   label: string;
   isActive: boolean;
+  className?: string;
 };
 
-function HeaderNavLink({ href, label, isActive }: HeaderNavLinkProps) {
+function HeaderNavLink({ href, label, isActive, className }: HeaderNavLinkProps) {
   return (
     <Link
       href={href}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "relative pb-1 font-body text-base text-foreground/80 hover:text-foreground",
-        isActive && "text-foreground"
+        "relative whitespace-nowrap pb-1 font-body text-base text-foreground/80 hover:text-foreground",
+        isActive && "text-foreground",
+        className
       )}
     >
       <span>{label}</span>
@@ -42,6 +45,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { open: chatOpen } = useArillm();
   const menuDuration = prefersReducedMotion ? 0.01 : 0.3;
 
   useEffect(() => {
@@ -66,14 +70,22 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/80 backdrop-blur">
+      {/* The open chat drawer takes 380px from the page column on desktop, so below xl
+          the header tightens: smaller wordmark, closer nav, and no Home (the wordmark links there). */}
       <Container className="flex h-[4.4rem] items-center justify-between gap-6 md:h-[4.8rem]">
         <Link
           href="/"
-          className="max-w-[60%] truncate font-display text-sm tracking-tight sm:text-base md:max-w-none lg:text-lg"
+          className={cn(
+            "min-w-0 max-w-[60%] truncate font-display text-sm tracking-tight sm:text-base md:max-w-none lg:text-lg",
+            chatOpen && "lg:text-base xl:text-lg"
+          )}
         >
           {homeHeader.wordmark}
         </Link>
-        <nav aria-label="Primary" className="hidden gap-4 md:flex lg:gap-8">
+        <nav
+          aria-label="Primary"
+          className={cn("hidden shrink-0 gap-4 md:flex lg:gap-8", chatOpen && "lg:gap-4 xl:gap-8")}
+        >
           {navItems.map((item) => {
             const isHome = item.href === "/";
             const isActive = isHome ? pathname === "/" : pathname.startsWith(item.href);
@@ -84,6 +96,7 @@ export function SiteHeader() {
                 href={item.href}
                 label={item.label}
                 isActive={isActive}
+                className={isHome && chatOpen ? "lg:hidden xl:block" : undefined}
               />
             );
           })}
