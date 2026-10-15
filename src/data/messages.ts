@@ -11,7 +11,7 @@ export type MessageNote = {
   text: string;
   name: string;
   color: StickyColor;
-  /** Polaroid drawing as a data URL (webp/png, or svg for pinned notes). */
+  /** Polaroid drawing: /api/messages/image/<id> for visitors, an inline svg data URL for pinned notes. */
   image?: string;
   createdAt: number;
   pinned?: boolean;

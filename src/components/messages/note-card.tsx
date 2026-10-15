@@ -50,7 +50,7 @@ export function NoteCard({ note }: { note: MessageNote }) {
     return (
       <figure className={cn(styles.note, styles.paper, styles.polaroid, "relative p-2 pb-3 sm:p-2.5 sm:pb-4")} style={style}>
         <span aria-hidden="true" className={styles.tape} />
-        {/* eslint-disable-next-line @next/next/no-img-element -- data URLs, already tiny */}
+        {/* eslint-disable-next-line @next/next/no-img-element -- small doodles from our own route, or inline svg */}
         <img
           src={note.image}
           alt={note.text ? `Drawing: ${note.text}` : `Drawing by ${note.name}`}

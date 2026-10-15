@@ -11,8 +11,8 @@ const UNAVAILABLE = "Couldn't check that just now. Give it another go in a minut
 // after undoing common character swaps; the model catches everything subtler.
 const BLOCKED_WORDS = [
   "fuck", "fucking", "fucker", "motherfucker", "shit", "bullshit", "cunt", "cock",
-  "dick", "dickhead", "pussy", "bitch", "slut", "whore", "porn", "nude", "nudes",
-  "penis", "vagina", "boobs", "tits", "cum", "rape", "rapist", "nazi", "kys",
+  "dick", "dickhead", "pussy", "bitch", "slut", "whore", "porn", "nudes",
+  "penis", "vagina", "boobs", "tits", "rape", "rapist", "nazi", "kys",
   "faggot", "fag", "retard", "nigger", "nigga", "chink", "spic", "kike", "tranny"
 ];
 const blocked = new Set(BLOCKED_WORDS);
@@ -35,13 +35,19 @@ function hasBlockedWord(text: string): boolean {
 }
 
 const LINK = /(https?:\/\/|www\.|\b[a-z0-9-]+\.(com|net|org|io|xyz|ru|ly|co)\b)/i;
-const PHONE = /(\+?\d[\d\s().-]{8,}\d)/;
+const PHONE_LIKE = /\+?\d[\d\s().-]{8,}\d/g;
+
+// The pattern alone also catches year ranges ("2024 - 2025"), so a match only
+// counts as a phone number when it holds at least 10 digits.
+function hasPhoneNumber(text: string): boolean {
+  return (text.match(PHONE_LIKE) ?? []).some((match) => match.replace(/\D/g, "").length >= 10);
+}
 
 export function quickCheck(fields: string[]): ModerationResult {
   const all = fields.join(" \n ");
   if (hasBlockedWord(all)) return { ok: false, reason: REJECTED };
   if (LINK.test(all)) return { ok: false, reason: "Links can't go on the wall, sorry." };
-  if (PHONE.test(all)) return { ok: false, reason: "Leave phone numbers off the wall, please." };
+  if (hasPhoneNumber(all)) return { ok: false, reason: "Leave phone numbers off the wall, please." };
   return { ok: true };
 }
 
@@ -75,8 +81,10 @@ export async function aiCheck(text: string, image?: string): Promise<ModerationR
     const result = await generateText({
       model: getModel(),
       system: INSTRUCTIONS,
-      maxOutputTokens: 5,
-      temperature: 0,
+      // Room for Gemini's minimal thinking (it counts toward the cap) on the
+      // fallback; the answer itself is one word.
+      maxOutputTokens: 256,
+      providerOptions: { google: { thinkingConfig: { thinkingLevel: "minimal" } } },
       timeout: 10_000,
       messages: [
         {

@@ -74,6 +74,8 @@ export function NoteComposer({ kind, onClose, onPosted }: NoteComposerProps) {
   const [error, setError] = useState<string | null>(null);
   const padRef = useRef<DrawingPadHandle>(null);
   const firstFieldRef = useRef<HTMLTextAreaElement & HTMLInputElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const textLimit = kind === "sticky" ? messageLimits.stickyText : messageLimits.caption;
   const canPost =
@@ -81,14 +83,39 @@ export function NoteComposer({ kind, onClose, onPosted }: NoteComposerProps) {
 
   useEffect(() => lockBodyScroll(), []);
 
+  // Focus the note on open (Close for a polaroid; the pad has no keyboard
+  // input), keep Tab inside the dialog, and hand focus back on close.
   useEffect(() => {
-    if (kind === "sticky") firstFieldRef.current?.focus();
+    const returnFocusTo = document.activeElement as HTMLElement | null;
+    (kind === "sticky" ? firstFieldRef.current : closeRef.current)?.focus();
+    return () => returnFocusTo?.focus?.();
+  }, [kind]);
+
+  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab" || !formRef.current) return;
+      const focusable = Array.from(
+        formRef.current.querySelectorAll<HTMLElement>("button:not(:disabled), input, textarea")
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const current = document.activeElement;
+      if (event.shiftKey && (current === first || !formRef.current.contains(current))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (current === last || !formRef.current.contains(current))) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [kind, onClose]);
+  }, [onClose]);
 
   const onStrokesChange = useCallback((count: number) => setStrokeCount(count), []);
 
@@ -135,6 +162,7 @@ export function NoteComposer({ kind, onClose, onPosted }: NoteComposerProps) {
         onClick={onClose}
       />
       <motion.form
+        ref={formRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="composer-title"
@@ -156,6 +184,7 @@ export function NoteComposer({ kind, onClose, onPosted }: NoteComposerProps) {
             )}
           </h2>
           <button
+            ref={closeRef}
             type="button"
             onClick={onClose}
             className="font-body text-label uppercase text-text-muted hover:text-foreground"

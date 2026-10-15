@@ -38,7 +38,8 @@ export function getModel(): LanguageModel {
   const fallback = createModel(fallbackProvider, process.env.AI_FALLBACK_MODEL);
 
   // If the primary call fails before streaming starts (bad key, outage, rate
-  // limit), send the same request to the fallback instead.
+  // limit), send the same request to the fallback instead. Non-streamed calls
+  // (Messages moderation) get the same treatment.
   return wrapLanguageModel({
     model: primary,
     middleware: {
@@ -49,6 +50,14 @@ export function getModel(): LanguageModel {
         } catch (error) {
           console.error("[arillm] primary model failed, using fallback", error);
           return fallback.doStream(params);
+        }
+      },
+      wrapGenerate: async ({ doGenerate, params }) => {
+        try {
+          return await doGenerate();
+        } catch (error) {
+          console.error("[arillm] primary model failed, using fallback", error);
+          return fallback.doGenerate(params);
         }
       }
     }

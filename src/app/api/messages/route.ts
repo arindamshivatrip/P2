@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { messageLimits, stickyColors, type MessageNote, type StickyColor } from "@/data/messages";
 import { getClientIp } from "@/lib/arillm/rate-limit";
 import { aiCheck, quickCheck } from "@/lib/messages/moderation";
-import { addNote, getMessagesRedis, hideNote } from "@/lib/messages/store";
+import { addNote, getMessagesRedis, hideNote, noteImageUrl } from "@/lib/messages/store";
 
 export const runtime = "nodejs";
 export const maxDuration = 20;
@@ -66,10 +66,30 @@ type PostBody = {
   image?: unknown;
 };
 
-function clean(value: unknown, max: number): string | null {
+// Stickies keep their line breaks, up to this many, so nobody can stretch a
+// card with a column of blank lines.
+const MAX_LINE_BREAKS = 6;
+
+function clean(value: unknown, max: number, { multiline = false } = {}): string | null {
   if (value === undefined || value === null) return "";
   if (typeof value !== "string") return null;
-  const trimmed = value.replace(/\s+/g, " ").trim();
+  let trimmed: string;
+  if (multiline) {
+    const lines = value
+      .replace(/\r\n?/g, "\n")
+      .split("\n")
+      .map((line) => line.replace(/\s+/g, " ").trim())
+      .join("\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim()
+      .split("\n");
+    trimmed =
+      lines.length > MAX_LINE_BREAKS + 1
+        ? [...lines.slice(0, MAX_LINE_BREAKS), lines.slice(MAX_LINE_BREAKS).join(" ").replace(/ {2,}/g, " ").trim()].join("\n")
+        : lines.join("\n");
+  } else {
+    trimmed = value.replace(/\s+/g, " ").trim();
+  }
   return trimmed.length > max ? null : trimmed;
 }
 
@@ -84,7 +104,10 @@ export async function POST(req: Request) {
   const kind = body.kind === "polaroid" ? "polaroid" : body.kind === "sticky" ? "sticky" : null;
   if (!kind) return reject(400, "Invalid note.");
 
-  const text = clean(body.text, kind === "sticky" ? messageLimits.stickyText : messageLimits.caption);
+  const text =
+    kind === "sticky"
+      ? clean(body.text, messageLimits.stickyText, { multiline: true })
+      : clean(body.text, messageLimits.caption);
   const name = clean(body.name, messageLimits.name);
   if (text === null || name === null) return reject(400, "That's a bit long.");
   if (kind === "sticky" && !text) return reject(400, "Write something first.");
@@ -114,18 +137,19 @@ export async function POST(req: Request) {
   const moderation = await aiCheck([text, name && `Signed: ${name}`].filter(Boolean).join("\n"), image);
   if (!moderation.ok) return reject(422, moderation.reason);
 
+  const id = crypto.randomUUID();
   const note: MessageNote = {
-    id: crypto.randomUUID(),
+    id,
     kind,
     text,
     name: name || "anonymous",
     color,
-    image,
+    image: image ? noteImageUrl(id) : undefined,
     createdAt: Date.now()
   };
 
   try {
-    await addNote(note);
+    await addNote(note, image);
   } catch (error) {
     console.error("[messages] failed to save note", error);
     return reject(503, "Couldn't pin that up just now. Try again in a minute.");
