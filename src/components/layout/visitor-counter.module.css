@@ -1,0 +1,96 @@
+.digit {
+  position: relative;
+  display: inline-block;
+  width: 1.05em;
+  height: 1.5em;
+  perspective: 12em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* the hinge line every split-flap tile has */
+.digit::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 1px;
+  background: rgb(var(--color-background) / 0.55);
+  z-index: 3;
+}
+
+.half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  overflow: hidden;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  backface-visibility: hidden;
+}
+
+.top {
+  top: 0;
+  border-radius: 3px 3px 0 0;
+  transform-origin: bottom;
+}
+
+.bottom {
+  bottom: 0;
+  border-radius: 0 0 3px 3px;
+  transform-origin: top;
+}
+
+/* full-height glyph box, clipped by each half */
+.glyph {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top .glyph {
+  top: 0;
+}
+
+.bottom .glyph {
+  bottom: 0;
+}
+
+.flapTop {
+  z-index: 2;
+  animation: flap-top var(--flap-half) ease-in forwards;
+}
+
+.flapBottom {
+  z-index: 2;
+  animation: flap-bottom var(--flap-half) ease-out var(--flap-half) both;
+}
+
+@keyframes flap-top {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes flap-bottom {
+  from {
+    transform: rotateX(90deg);
+  }
+  to {
+    transform: rotateX(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flapTop,
+  .flapBottom {
+    display: none;
+  }
+}

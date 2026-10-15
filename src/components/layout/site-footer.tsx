@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
+import { VisitorCounter } from "@/components/layout/visitor-counter";
 import { footerContent } from "@/data/home";
 
 export function SiteFooter() {
@@ -7,9 +8,12 @@ export function SiteFooter() {
     <footer className="border-t border-border/70 py-12">
       <Container>
         <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <p className="font-body text-label-lg uppercase text-foreground">
-            Designed and coded with ♡ by Arindam
-          </p>
+          <div className="flex flex-col gap-4">
+            <p className="font-body text-label-lg uppercase text-foreground">
+              Designed and coded with ♡ by Arindam
+            </p>
+            <VisitorCounter />
+          </div>
 
           <div className="md:text-right">
             <nav
