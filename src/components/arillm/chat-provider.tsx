@@ -2,6 +2,7 @@
 
 import { useChat, type UseChatHelpers } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
+import type { ProjectLink } from "@/lib/arillm/link-projects";
 import { usePathname } from "next/navigation";
 import {
   createContext,
@@ -23,6 +24,7 @@ type ChatContextValue = UseChatHelpers<UIMessage> & {
   hasOpened: boolean;
   ask: (text: string) => void;
   reset: () => void;
+  projectLinks: ProjectLink[];
 };
 
 const ChatContext = createContext<ChatContextValue | null>(null);
@@ -67,7 +69,13 @@ function isTypingTarget(target: EventTarget | null): boolean {
   );
 }
 
-export function ChatProvider({ children }: { children: ReactNode }) {
+export function ChatProvider({
+  children,
+  projectLinks
+}: {
+  children: ReactNode;
+  projectLinks: ProjectLink[];
+}) {
   const [open, setOpenState] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
   const pathname = usePathname();
@@ -142,8 +150,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }, [chat, setMessages, status, stop]);
 
   const value = useMemo(
-    () => ({ ...chat, open, setOpen, hasOpened, ask, reset }),
-    [chat, open, setOpen, hasOpened, ask, reset]
+    () => ({ ...chat, open, setOpen, hasOpened, ask, reset, projectLinks }),
+    [chat, open, setOpen, hasOpened, ask, reset, projectLinks]
   );
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

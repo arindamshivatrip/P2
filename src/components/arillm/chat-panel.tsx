@@ -17,6 +17,7 @@ import { usePathname } from "next/navigation";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useArillm } from "@/components/arillm/chat-provider";
 import { getFollowups } from "@/lib/arillm/followups";
+import { linkProjects } from "@/lib/arillm/link-projects";
 import { getStarters } from "@/lib/arillm/starters";
 import { lockBodyScroll } from "@/lib/scroll-lock";
 import { cn } from "@/lib/utils";
@@ -125,7 +126,8 @@ export function ChatPanel() {
     stop,
     regenerate,
     reset,
-    ask
+    ask,
+    projectLinks
   } = useArillm();
   const pathname = usePathname();
   const starters = useMemo(() => getStarters(pathname), [pathname]);
@@ -324,7 +326,7 @@ export function ChatPanel() {
                       </li>
                     ) : (
                       <li key={message.id} className="text-foreground/90">
-                        <ReactMarkdown components={markdownComponents}>{text}</ReactMarkdown>
+                        <ReactMarkdown components={markdownComponents}>{linkProjects(text, projectLinks)}</ReactMarkdown>
                       </li>
                     );
                   })}
