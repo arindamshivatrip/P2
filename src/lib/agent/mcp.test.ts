@@ -50,6 +50,7 @@ test("the endpoint initializes and lists read-only tools", async () => {
     clientInfo: { name: "test", version: "0" }
   });
   assert.equal(init.result?.serverInfo?.name, "arindamtripathi.com");
+  assert.match(init.result?.instructions, /^Portfolio of Arindam Tripathi \(Ari\)/);
 
   const { result } = await rpc("tools/list");
   const names = result.tools.map((t: { name: string }) => t.name).sort();

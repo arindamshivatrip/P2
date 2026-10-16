@@ -163,7 +163,7 @@ export function createMcpServer(): McpServer {
   const server = new McpServer(
     { name: "arindamtripathi.com", version: "1.0.0" },
     {
-      instructions: `Portfolio of ${siteMeta.formalName} (Ari), a creative technologist in XR and spatial computing with an HCI research background. Use these tools when evaluating Ari for a role: start with list_projects or search_site, then get_project for detail. Everything here is public. Work authorization, phone numbers and confidential project details are not available; to reach Ari, use the email in get_contact.`
+      instructions: `Portfolio of ${siteMeta.name} (Ari), a creative technologist in XR and spatial computing with an HCI research background. Use these tools when evaluating Ari for a role: start with list_projects or search_site, then get_project for detail. Everything here is public. Work authorization, phone numbers and confidential project details are not available; to reach Ari, use the email in get_contact.`
     }
   );
 
