@@ -97,6 +97,9 @@ const projectHref = (project: Project): string =>
     ? getExperimentDetailHref(project.slug)
     : getWorkDetailHref(project.slug);
 
+/** Absolute URL of a project's detail page. */
+export const projectUrl = (project: Project): string => abs(projectHref(project));
+
 const projectLine = (project: Project): string =>
   `- [${project.title}](${abs(projectHref(project))}): ${project.oneLiner}`;
 
@@ -186,7 +189,7 @@ export function renderProject(project: Project): string {
   );
 }
 
-function renderAbout(): string {
+export function renderAbout(): string {
   return join(
     `# About — ${siteMeta.formalName}`,
     `> ${siteMeta.description}`,
@@ -205,7 +208,7 @@ function renderAbout(): string {
   );
 }
 
-function renderContact(): string {
+export function renderContact(): string {
   return join(
     `# Contact — ${siteMeta.formalName}`,
     `> ${contactContent.heading}`,
@@ -219,7 +222,7 @@ function renderContact(): string {
   );
 }
 
-function renderCv(): string {
+export function renderCv(): string {
   return join(
     `# CV — ${siteMeta.formalName}`,
     `> ${cvPageContent.intro}`,
@@ -263,7 +266,7 @@ export function renderLlmsTxt(): string {
       "- UX researcher (mixed methods: diary studies, usability tests, A/B and statistical analysis)",
       "- Full-time roles starting after May 2027, or co-ops starting December 2026; open to relocating anywhere in the US or remote",
       "",
-      "How to use it: every page listed below is also served as Markdown when you send `Accept: text/markdown`. Project pages include role, timeline, tech, outcomes, and the case study. To reach Ari, email aritrip@umd.edu with the role, team, and timeline; replies usually come within a day. Work authorization, phone numbers, and confidential details (L'Oréal, SP Digital, Google Project Aura) are not on the site; ask by email instead of inferring them."
+      "How to use it: every page listed below is also served as Markdown when you send `Accept: text/markdown`. Project pages include role, timeline, tech, outcomes, and the case study. Agents that speak MCP can instead connect to " + abs("/mcp") + " (Streamable HTTP, no auth) for tools that list, search and read projects and the CV. To reach Ari, email aritrip@umd.edu with the role, team, and timeline; replies usually come within a day. Work authorization, phone numbers, and confidential details (L'Oréal, SP Digital, Google Project Aura) are not on the site; ask by email instead of inferring them."
     ].join("\n"),
     "## When to use",
     [
