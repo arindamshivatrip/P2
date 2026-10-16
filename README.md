@@ -29,6 +29,14 @@ This repository contains a scaffold-only pass for a modular Next.js portfolio fo
   - `/contact`
   - `/cv`
 
+## Agent access
+- `Accept: text/markdown` on any page returns a Markdown view (`src/middleware.ts`, `src/lib/agent/markdown.ts`)
+- `/llms.txt` is a guide to the site for agents
+- `/mcp` is a read-only MCP server (Streamable HTTP, stateless, no auth) with `list_projects`, `get_project`, `search_site`, `get_cv`, `get_about` and `get_contact` (`src/lib/agent/mcp.ts`). Rate-limited per IP through Upstash when it is configured. Try it with:
+  ```bash
+  claude mcp add --transport http ari https://arindamtripathi.com/mcp
+  ```
+
 ## Development
 ```bash
 npm install
